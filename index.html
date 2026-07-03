@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聲現力 Daily Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f8f7f4;color:#2d2d2d;line-height:1.7;padding:16px;font-size:16px}
+.header{text-align:center;padding:16px 0 8px;margin-bottom:14px}
+.header h1{font-size:28px;font-weight:700;color:#1a1a1a;letter-spacing:2px}
+.header .date{font-size:17px;color:#888;margin-top:6px}
+.header .phase-tag{display:inline-block;background:#e8d5b7;color:#6b4c2a;font-size:16px;font-weight:600;padding:4px 14px;border-radius:20px;margin-top:8px}
+.header .day-count{font-size:17px;color:#5b7a5e;font-weight:600;margin-top:6px}
+.tab-bar{display:flex;gap:0;margin-bottom:16px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tab{flex:1;text-align:center;padding:14px 4px;font-size:17px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;color:#999}
+.tab.active{color:#2d2d2d;border-bottom-color:#2d2d2d}
+.tab-content{display:none}.tab-content.active{display:block}
+.section{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.section-title{font-size:18px;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.mission-box{background:linear-gradient(135deg,#2d2d2d 0%,#444 100%);color:#fff;border-radius:12px;padding:18px;text-align:center}
+.mission-week{font-size:16px;color:#ccc;font-weight:600}
+.mission-title{font-size:22px;font-weight:700;margin-top:6px}
+.mission-title[contenteditable]:focus{outline:2px solid #e8d5b7;border-radius:4px}
+.mission-del{font-size:16px;color:#aaa;margin-top:8px}
+.mission-rev{font-size:16px;color:#e8d5b7;font-weight:600;margin-top:6px}
+.progress-bar{height:8px;background:#555;border-radius:4px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;background:#e8d5b7;border-radius:4px;transition:width .3s}
+.progress-label{font-size:16px;color:#aaa;margin-top:6px}
+.today-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid #f0f0f0}
+.today-item:last-child{border-bottom:none}
+.today-num{width:28px;height:28px;background:#2d2d2d;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;margin-top:2px}
+.today-content{flex:1}
+.today-label{font-size:13px;font-weight:600;color:#fff;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:4px}
+.today-label.product{background:#8b6f47}.today-label.create{background:#5b7a5e}.today-label.revenue{background:#9b4d4d}
+.today-text{font-size:17px;font-weight:500}
+.today-text[contenteditable]:focus{outline:2px solid #e8d5b7;border-radius:4px;padding:2px 4px}
+.today-detail{font-size:16px;color:#999;margin-top:2px}
+.check-btn{width:26px;height:26px;border:2px solid #ccc;border-radius:50%;cursor:pointer;flex-shrink:0;margin-top:4px;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff}
+.check-btn.done{background:#5b7a5e;border-color:#5b7a5e;color:#fff}
+.done-text{text-decoration:line-through;color:#bbb}
+.must-row{display:flex;gap:8px;flex-wrap:wrap}
+.must-chip{background:#f0ece4;border-radius:22px;padding:8px 16px;font-size:16px;cursor:pointer;transition:all .2s;user-select:none}
+.must-chip.done-chip{background:#5b7a5e;color:#fff}
+.save-log-btn{display:block;width:100%;background:#2d2d2d;color:#fff;border:none;border-radius:10px;padding:14px;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px}
+.save-log-btn:hover{background:#444}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#5b7a5e;color:#fff;padding:10px 24px;border-radius:20px;font-size:16px;font-weight:600;z-index:999;display:none}
+.post-card{background:#faf9f6;border-radius:10px;padding:14px;margin-bottom:8px;border-left:4px solid #ddd}
+.post-card.threads{border-left-color:#2d2d2d}.post-card.ig{border-left-color:#c13584}.post-card.email{border-left-color:#e8d5b7}.post-card.rest{border-left-color:#ccc;opacity:.5}
+.post-day{font-size:16px;color:#999}
+.post-platform{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-left:8px}
+.post-platform.threads{color:#2d2d2d}.post-platform.ig{color:#c13584}.post-platform.email{color:#8b6f47}
+.post-type{font-size:16px;color:#999;margin-left:6px}
+.post-title{font-size:17px;font-weight:500;margin-top:4px}
+.post-title[contenteditable]:focus{outline:2px solid #e8d5b7;border-radius:4px}
+.post-num{font-size:16px;color:#bbb}
+.post-opening{font-size:16px;color:#888;margin-top:6px;line-height:1.6;display:none}
+.post-card.expanded .post-opening{display:block}
+.expand-btn{font-size:16px;color:#8b6f47;cursor:pointer;margin-top:4px;display:inline-block}
+.block-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5}
+.block-row:last-child{border-bottom:none}
+.block-time{font-size:16px;color:#999;font-weight:600;width:110px;flex-shrink:0}
+.block-name{font-size:18px;font-weight:600}.block-desc{font-size:16px;color:#888}
+.block-row.active{background:#f5f0e6;border-radius:8px;padding:10px 12px;margin:0 -12px}
+.ladder-item{padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:16px;line-height:1.6}
+.ladder-item:last-child{border-bottom:none}
+.ladder-level{font-size:18px;font-weight:700}.ladder-price{color:#8b6f47;font-weight:600;font-size:18px}
+.ladder-status{font-size:16px;color:#999}
+.ladder-focus{background:#f5f0e6;border-radius:8px;padding:12px;margin-top:10px;font-size:16px;color:#6b4c2a;line-height:1.6}
+.guardrail{font-size:16px;color:#666;padding:6px 0;border-bottom:1px solid #f5f5f5}
+.guardrail:last-child{border-bottom:none}
+.cta-item{font-size:16px;color:#666;padding:8px 0;border-bottom:1px solid #f5f5f5;line-height:1.6}
+.cta-item:last-child{border-bottom:none}
+.week-selector{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
+.week-btn{background:#f0ece4;border:none;border-radius:16px;padding:6px 14px;font-size:16px;cursor:pointer;color:#6b4c2a}
+.week-btn.active{background:#2d2d2d;color:#fff}
+.book-card{background:#faf9f6;border-radius:10px;padding:14px;margin-bottom:8px;border-left:4px solid #e8d5b7}
+.book-card.now{border-left-color:#9b4d4d}.book-card.next{border-left-color:#8b6f47}.book-card.later{border-left-color:#ccc}
+.book-pri{font-size:16px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:4px}
+.book-pri.now{background:#fde8e8;color:#9b4d4d}.book-pri.next{background:#fef3cd;color:#856404}.book-pri.later{background:#e2e8f0;color:#4a5568}
+.book-title{font-size:18px;font-weight:600}.book-author{font-size:16px;color:#888}.book-why{font-size:16px;color:#666;margin-top:4px}
+.spark-form{background:#faf9f6;border-radius:10px;padding:16px;margin-bottom:14px}
+.spark-form label{font-size:16px;font-weight:600;display:block;margin-bottom:4px;margin-top:10px}
+.spark-form input,.spark-form textarea,.spark-form select{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:16px;font-family:inherit}
+.spark-form textarea{height:80px;resize:vertical}
+.spark-save{background:#8b6f47;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px}
+.spark-item{background:#fff;border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid #eee}
+.spark-item.used{opacity:.5}
+.spark-book{font-size:16px;color:#8b6f47;font-weight:600}.spark-type{font-size:16px;color:#999}
+.spark-text{font-size:16px;margin-top:4px}.spark-conn{font-size:16px;color:#888;margin-top:2px}
+.spark-use-btn{font-size:16px;color:#5b7a5e;cursor:pointer;margin-top:4px;display:inline-block}
+.method-box{background:#f5f0e6;border-radius:10px;padding:16px;font-size:16px;color:#6b4c2a;line-height:1.8}
+.method-step{margin-bottom:8px}.method-num{font-weight:700;font-size:18px}
+.log-day{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1px solid #eee}
+.log-date{font-size:18px;font-weight:700;color:#2d2d2d}.log-mission{font-size:16px;color:#888;margin-top:2px}
+.log-items{margin-top:8px}.log-item{font-size:16px;padding:2px 0}
+.log-done{color:#5b7a5e}.log-undone{color:#ccc;text-decoration:line-through}
+.log-empty{text-align:center;color:#999;font-size:17px;padding:30px}
+.todo-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:16px}
+.todo-item:last-child{border-bottom:none}
+.todo-check{width:22px;height:22px;border:2px solid #ccc;border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff}
+.todo-check.done{background:#5b7a5e;border-color:#5b7a5e;color:#fff}
+.todo-priority{font-size:16px;font-weight:700;padding:2px 8px;border-radius:4px}
+.todo-priority.p0{background:#fde8e8;color:#c53030}.todo-priority.p1{background:#fef3cd;color:#856404}.todo-priority.p2{background:#e2e8f0;color:#4a5568}
+.edit-hint{text-align:center;font-size:16px;color:#bbb;margin-top:8px;padding:6px}
+.reset-btn{display:block;margin:14px auto;background:none;border:1px solid #ddd;color:#999;font-size:16px;padding:6px 16px;border-radius:20px;cursor:pointer}
+.icp-chip{background:#f0ece4;padding:4px 12px;border-radius:14px;font-size:16px;display:inline-block;margin:3px}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="header">
+  <h1>聲 現 力</h1>
+  <div class="date" id="todayDate"></div>
+  <div class="day-count" id="dayCount"></div>
+  <div class="phase-tag" id="phaseTag"></div>
+</div>
+<div class="tab-bar">
+  <div class="tab active" data-tab="today">今日</div>
+  <div class="tab" data-tab="content">發文</div>
+  <div class="tab" data-tab="reading">閱讀</div>
+  <div class="tab" data-tab="system">系統</div>
+  <div class="tab" data-tab="log">紀錄</div>
+</div>
+
+<div class="tab-content active" id="tab-today">
+  <div class="section">
+    <div class="section-title">🎯 本週主線｜產品與營收</div>
+    <div class="mission-box">
+      <div class="mission-week" id="missionLabel"></div>
+      <div class="mission-title" id="missionTitle" contenteditable="true"></div>
+      <div class="mission-rev" id="missionRev"></div>
+      <div class="mission-del" id="missionDel"></div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLbl"></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">✦ 今天三件事</div>
+    <div id="todayItems"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">🔒 每日必做（不可跳過）</div>
+    <div class="must-row" id="mustDo"></div>
+  </div>
+  <div class="section" style="background:none;box-shadow:none;padding:0">
+    <button class="save-log-btn" onclick="saveLog()">儲存今日紀錄</button>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-content">
+  <div class="section">
+    <div class="section-title">📝 今日發文</div>
+    <div id="todayPost"></div>
+  </div>
+  <div class="section" id="sparkInContent" style="display:none">
+    <div class="section-title">💡 閱讀靈感庫（未使用）</div>
+    <div id="sparkListContent"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📅 本週發文</div>
+    <div class="week-selector" id="weekSelector"></div>
+    <div id="weekPosts"></div>
+    <div class="edit-hint">點標題可編輯｜點展開看開頭三句</div>
+  </div>
+  <div class="section">
+    <div class="section-title">💬 CTA 輪替</div>
+    <div id="ctaList"></div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-reading">
+  <div class="section">
+    <div class="section-title">📖 必讀書單</div>
+    <div id="bookList"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">✏️ 閱讀 → 創作靈感筆記</div>
+    <div class="method-box" style="margin-bottom:14px">
+      <div class="method-step"><span class="method-num">❶ 截句</span> — 讀到有感的段落，截一句話記下來</div>
+      <div class="method-step"><span class="method-num">❷ 連結</span> — 問自己：「這跟我的學員有什麼關係？」</div>
+      <div class="method-step"><span class="method-num">❸ 標記</span> — 這個靈感可以變成 Threads？IG？電子報？</div>
+      <div class="method-step"><span class="method-num">❹ 排入</span> — 存進靈感庫 → 每週檢視 → 排進發文</div>
+    </div>
+    <div class="spark-form">
+      <label>書名</label>
+      <input id="spBook" placeholder="正在讀的書名">
+      <label>截句 / 靈感</label>
+      <textarea id="spInsight" placeholder="讀到什麼讓你有感觸？"></textarea>
+      <label>跟學員的連結</label>
+      <input id="spConn" placeholder="這跟你的學員/客群有什麼關係？">
+      <label>可以變成</label>
+      <select id="spType"><option value="threads">Threads 貼文</option><option value="ig">IG 輪播</option><option value="email">電子報</option><option value="reels">短影音</option></select>
+      <button class="spark-save" onclick="saveSpark()">儲存靈感</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">💡 靈感庫</div>
+    <div id="sparkListReading"></div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-system">
+  <div class="section">
+    <div class="section-title">⏰ 每日時間表</div>
+    <div id="blockList"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">🎓 客群 ICP</div>
+    <div style="font-size:16px;color:#555">
+      <strong style="font-size:18px">灘頭堡：聲音高依賴的個人品牌工作者</strong><br>
+      <div style="margin-top:8px"><span class="icp-chip">Podcast 主持人</span><span class="icp-chip">線上課程講師</span><span class="icp-chip">短影音創作者</span><span class="icp-chip">創業者 / 教練</span></div>
+      <div style="margin-top:10px;color:#888;line-height:1.7">核心痛點：聲音正在影響他賺錢的能力<br>購買動機：推廣自己時更有自信（財富/影響力）</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🪜 產品階梯</div>
+    <div id="ladderList"></div>
+    <div class="ladder-focus">
+      <strong style="font-size:18px">Year 1 策略</strong><br>
+      主攻 L3 核心產品（初階＋進階陪跑營），同時打造厲害的名單磁鐵（L0）和互動式聲音測驗（L1）。<br>
+      <strong>Year 1 營收目標：</strong>3 屆陪跑 × 8 人 × $9,980 + 一對一 ≈ $28-35 萬+
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">⛔ 無效努力剎車</div>
+    <div class="guardrail">⛔ 同一份產出改超過 2 版</div>
+    <div class="guardrail">⛔ 月月做競品分析（一年 1-2 次夠了）</div>
+    <div class="guardrail">⛔ 同時經營超過 2 個社群平台</div>
+    <div class="guardrail">⛔ 建新 Skill（先用好現有的）</div>
+    <div class="guardrail">⛔ 48 小時內答應合作提案</div>
+    <div class="guardrail">⛔ 不自己開 Podcast（去別人的節目當來賓）</div>
+    <div class="guardrail">⛔ 不辦大型線下活動</div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-log">
+  <div class="section">
+    <div class="section-title">📊 完成統計</div>
+    <div style="display:flex;gap:12px;text-align:center" id="logStats"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">📋 每日紀錄</div>
+    <div id="logList"></div>
+  </div>
+</div>
+
+<button class="reset-btn" onclick="if(confirm('確定要重設所有自訂內容嗎？（紀錄不會刪除）')){localStorage.removeItem(SK);localStorage.removeItem(SPK);location.reload()}">重設今日內容</button>
+<div class="edit-hint">所有修改自動儲存，下次打開還在</div>
+
+<script>
+const DAYS_ZH=['週日','週一','週二','週三','週四','週五','週六'];
+const START_DATE=new Date('2026-07-03');
+const SK='vts4',LK='vts4_log',SPK='vts4_sparks';
+
+const TOPICS={1:{type:'立場文',title:'聲音不是天生的，是你從來沒有人教你',opening:'「你一定聽過這句話：『他聲音好好聽，天生的吧。』我以前也這樣以為。直到我學了聲樂、當了十年老師、訓練了上百個人的聲音之後，我發現——聲音根本不是天生的，是沒有人教你怎麼用。」'},2:{type:'立場文',title:'內容很好但沒人聽？問題不在你的腦袋，在你的聲音',opening:'「你有沒有遇過一種人：專業能力很強，一開口你卻想滑手機？不是他講得不好，是他的聲音沒有打開你大腦的『注意力大門』。」'},3:{type:'立場文',title:'我不教「好聽的聲音」，我教「讓人願意掏錢的聲音」',opening:'「好聽的聲音能當主播，但不一定能讓客戶買單。我教的不是怎麼讓聲音好聽，而是怎麼讓你的聲音建立信任、傳遞價值。」'},4:{type:'立場文',title:'買了線上課還是不會用？因為聲音不是知識，是身體記憶',opening:'「我的學員 Mike 跟我說，他之前買過三堂聲音線上課，看完覺得『好像懂了』，一上台還是老樣子。因為聲音訓練不是背公式，是讓你的身體記住一個新的發聲方式。」'},5:{type:'立場文',title:'你的聲音就是你的第二張臉',opening:'「我的學員 Pola 說過一句話：『聲音就是第二張臉。』現在有多少場景是別人「只聽到你、看不到你」的？」'},6:{type:'立場文',title:'台灣沒有人在教「聲音品牌」，所以我決定自己來',opening:'「在美國，Roger Love 幫 Tony Robbins 打造聲音，一堂課收六位數美金。在台灣？沒有人把聲音訓練跟個人品牌連在一起。所以我決定自己做這件事。」'},7:{type:'立場文',title:'「你聲音很好聽」是最沒用的稱讚',opening:'「每次有人跟我說『老師你聲音好好聽』，我都笑笑帶過。因為好聽是最表面的事。」'},8:{type:'立場文',title:'說話不是用喉嚨，是用身體',opening:'「如果我告訴你，你說話沙啞、講久會累，問題根本不在你的喉嚨，你信嗎？你的身體就是一把樂器。」'},9:{type:'立場文',title:'對話感不是講慢一點，是心裡有人',opening:'「很多人被說『你講話像在念稿』，就拼命放慢語速。結果變成——慢慢地念稿。對話感的關鍵不是速度，是你心裡有沒有一個人。」'},10:{type:'立場文',title:'鏡頭前的你，需要多 20% 的能量',opening:'「你有沒有看過自己錄的影片，覺得『怎麼看起來這麼沒精神』？這是因為鏡頭會吃掉你的能量。」'},11:{type:'立場文',title:'聲音訓練的目的不是追求完美，是移除阻礙',opening:'「很多人來找我，第一句話都是：『老師，我想要聲音變好聽。』我都會先問他：『你覺得你現在的聲音怎麼了？』」'},12:{type:'立場文',title:'一人公司最被低估的武器：你的聲音',opening:'「你花了錢拍形象照、請設計師做品牌視覺、學文案寫作。但你有沒有想過，當客戶第一次聽到你的聲音，他對你的印象，有超過一半是你的聲音決定的？」'},13:{type:'痛點文',title:'明明準備很充分，一開口就被當空氣',opening:'「簡報做了三天，數據查了五遍，甚至彩排了兩次。結果上場講不到三分鐘，你看到台下的人開始低頭滑手機。」'},14:{type:'痛點文',title:'每次錄影都要重錄十幾遍，你累的不是嘴巴，是自信',opening:'「打開鏡頭，錄了一遍覺得不行，再錄一遍，又不行，刪掉重來。不是你的內容有問題，是你每次聽到自己的聲音，就覺得『不像我想要的那個樣子』。」'},15:{type:'痛點文',title:'你的學員很多，但轉介紹很少——問題可能出在你的聲音',opening:'「課上完學員都說好，但很少有人主動幫你推薦。沒有聲音辨識度，就沒有記憶點；沒有記憶點，就沒有轉介紹。」'},16:{type:'痛點文',title:'講了一整天課，隔天聲音就沙啞——你不是天生嗓子弱',opening:'「我的學員心慧是國中老師，她跟我說她的同事幾乎每個人都有聲帶問題。十年教書下來，嗓子壞掉好像是標配。但真的是這樣嗎？」'},17:{type:'痛點文',title:'線上會議開到一半，你發現沒人在聽你說話',opening:'「你在線上會議分享提案，講到一半發現——對面的人在打字、鏡頭關了三個。不是你講得太爛，是線上會議只剩聲音這一個通道。」'},18:{type:'痛點文',title:'你很會寫，但一開口就不像「那個人」',opening:'「你的文章寫得犀利又溫暖。結果第一次直播，留言區出現：『跟我想像的不一樣欸。』」'},19:{type:'痛點文',title:'為什麼你的 Podcast 數據一直起不來',opening:'「你研究了一堆 Podcast 經營攻略，數據還是上不去。大部分聽眾在前 30 秒就決定要不要聽下去。」'},20:{type:'痛點文',title:'銷講的時候很緊張，聲音會抖——越想控制越抖',opening:'「你站上台，準備開口的那一秒，喉嚨突然鎖住了。這不是你心理素質差，是你的神經系統啟動了保護機制。」'},21:{type:'痛點文',title:'你學了很多表達技巧，但上台還是像在「演」',opening:'「你看了很多表達課的影片，學了重音、停頓、抑揚頓挫。上台一用，朋友說：『你今天怎麼怪怪的？』」'},22:{type:'痛點文',title:'「我的聲音很難聽」——你可能從來沒聽過自己真正的聲音',opening:'「你聽自己的錄音會覺得：『這不是我的聲音吧？好難聽。』你平常聽到的自己的聲音，其實是假的。」'},23:{type:'故事文',title:'音樂劇系畢業的我，第一次站上講台差點哭出來',opening:'「我是音樂劇系畢業的，大家都覺得我一定很會說話。結果我第一次站上國中講台，聲音抖到不行，學生在底下完全不理我。」'},24:{type:'故事文',title:'我在國中教了十年，教會我一件事：再好的內容，包裝不對就是垃圾',opening:'「國中生是全世界最殘忍的聽眾。你的課講得好不好，不用看評鑑，看他們的眼神就知道。」'},25:{type:'故事文',title:'我的學員被同事說「聲音像鯊魚」，她聽完哭了',opening:'「Pola 跟我說，有一次同事形容她的聲音『像鯊魚一樣有攻擊性』。她回家聽了自己的錄音，發現真的很尖、很急。」'},26:{type:'故事文',title:'離開教職的前一天，我問自己：聲音這件事，真的值得我賭上一切嗎',opening:'「2026 年 7 月，我正式離開了待了十年的教職。交出辭呈那天，我坐在車裡發了很久的呆。」'},27:{type:'故事文',title:'他買了三堂線上課都沒用，最後在我的陪跑營裡第一次聽到變化',opening:'「Mike 是一個非常忙的企業主，他跟我說他買過三堂聲音線上課。看完了嗎？看完了。有用嗎？他搖搖頭。」'},28:{type:'故事文',title:'心慧要離開教職去開自己的工作室，她說：「我不想再用喉嚨硬撐了」',opening:'「心慧是國中老師，教了好幾年。她來找我的原因是她的同事一個接一個聲帶出問題。」'},29:{type:'故事文',title:'致中說：「你的課不只是聲音課，是讓我重新認識自己的課」',opening:'「致中是企業講師，他本來覺得自己的表達能力應該算不錯了。上完八週之後，他說：『我以前以為我在表達，但其實我只是在說。』」'},30:{type:'故事文',title:'Emma 跟我說：「我本來只是想學聲音，沒想到整個人都變了」',opening:'「Emma 報名的時候就是想學怎麼讓聲音好一點。八週結束她說：『以前我很怕被注意到，現在我覺得被聽到是一件很舒服的事。』」'},31:{type:'成果展示',title:'第一週 vs 第八週：同一段自我介紹，聲音差距大到學員自己不敢相信',opening:'「結業那天，我讓每個學員重聽自己第一週錄的自我介紹。教室裡安靜了三秒，然後有人笑出來、有人眼眶紅了。」'},32:{type:'成果展示',title:'八週之後，Pola 開始用真實的聲音在做短影音了',opening:'「八週前，Pola 連在公司開會都盡量不說話。現在她每天在 IG 更新短影音，用自己的聲音。」'},33:{type:'成果展示',title:'學員回饋：「一對一的時候 Jessie 講了一句話，我整個聲音就打開了」',opening:'「Pola 跟我說，八週課程裡對她衝擊最大的，不是團體課的理論，是一對一諮詢的那 30 分鐘。」'},34:{type:'成果展示',title:'全班六個人，每個人進步的方向都不一樣——這才是小班制的意義',opening:'「第一梯六個學員，同樣的課程，每個人需要調整的地方完全不同。這就是為什麼我堅持小班制。」'}};
+
+const WEEK_PLANS=[
+{label:'W1',theme:'你的聲音不是天生的',days:[{day:'週一',platform:'threads',type:'立場文',topicId:1},{day:'週二',platform:'threads',type:'痛點文',topicId:22},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'為什麼你的專業很強，但開口就沒人聽？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【你真的認識自己的聲音嗎？】骨導 vs 空氣導'},{day:'週四',platform:'threads',type:'故事文',topicId:23},{day:'週五',platform:'threads',type:'立場文',topicId:12}]},
+{label:'W2',theme:'你的表達問題不在內容',days:[{day:'週一',platform:'threads',type:'立場文',topicId:2},{day:'週二',platform:'threads',type:'痛點文',topicId:13},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'我花了十年才學會：再好的內容，包裝不對就是垃圾'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【同樣是專家，為什麼他一開口你就想聽？】'},{day:'週四',platform:'threads',type:'故事文',topicId:27},{day:'週五',platform:'threads',type:'立場文',topicId:4}]},
+{label:'W3',theme:'聲音影響你的錢和機會',days:[{day:'週一',platform:'threads',type:'立場文',topicId:3},{day:'週二',platform:'threads',type:'痛點文',topicId:18},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'Roger Love 怎麼把聲音變成一門年收千萬的生意'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【文字人格 vs 聲音人格：你的品牌有裂縫嗎？】'},{day:'週四',platform:'threads',type:'故事文',topicId:25},{day:'週五',platform:'threads',type:'痛點文',topicId:15}]},
+{label:'W4',theme:'聲音可以改變，而且比你想的快',days:[{day:'週一',platform:'threads',type:'立場文',topicId:11},{day:'週二',platform:'threads',type:'痛點文',topicId:14},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'從不敢開口到日更短影音——Pola 的八週聲音日記'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【為什麼你錄影總要重來十遍？】'},{day:'週四',platform:'threads',type:'故事文',topicId:30},{day:'週五',platform:'threads',type:'成果展示',topicId:31}]},
+{label:'W5',theme:'你的聲音決定別人對你的第一印象',days:[{day:'週一',platform:'threads',type:'立場文',topicId:5},{day:'週二',platform:'threads',type:'痛點文',topicId:16},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'你的聲帶在求救——講師最常忽略的三個身體信號'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【講了一整天課就沙啞？方法錯了】'},{day:'週四',platform:'threads',type:'故事文',topicId:24},{day:'週五',platform:'threads',type:'成果展示',topicId:32}]},
+{label:'W6',theme:'為什麼你的品牌需要聲音',days:[{day:'週一',platform:'threads',type:'立場文',topicId:6},{day:'週二',platform:'threads',type:'痛點文',topicId:17},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'線上會議只剩聲音這一個通道，你準備好了嗎？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【台灣 vs 國外：聲音表達教練差在哪？】'},{day:'週四',platform:'threads',type:'故事文',topicId:26},{day:'週五',platform:'threads',type:'成果展示',topicId:33}]},
+{label:'W7',theme:'聲音是可以學的技能',days:[{day:'週一',platform:'threads',type:'立場文',topicId:7},{day:'週二',platform:'threads',type:'痛點文',topicId:19},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'Podcast 前 30 秒決定一切——你的聲音留住人了嗎？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【你的 Podcast 數據上不去？問題不在主題】'},{day:'週四',platform:'threads',type:'故事文',topicId:28},{day:'週五',platform:'threads',type:'成果展示',topicId:34}]},
+{label:'W8',theme:'身體就是你的樂器',days:[{day:'週一',platform:'threads',type:'立場文',topicId:8},{day:'週二',platform:'threads',type:'痛點文',topicId:20},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'上台前喉嚨鎖住？不是心理素質差，是神經系統在保護你'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【銷講時聲音會抖？讓神經系統冷靜下來】'},{day:'週四',platform:'threads',type:'故事文',topicId:29},{day:'週五',platform:'threads',type:'立場文',topicId:9}]}
+];
+
+const CTAS=['想知道你的聲音正在幫你還是害你？留言「檢測」私訊給你一份聲音自我檢測表','追蹤 @voicetoshine，每週一到五更新聲音表達的真話','我每週二寄一封信，聊聲音怎麼影響你的收入和機會 → 連結在自介','免費加入我的 LINE@ → 領取「護嗓急救包」，講一整天也不啞'];
+
+const BLOCKS=[
+{time:'08:00',name:'起床 + 暖嗓',desc:'晨間儀式',type:'life'},
+{time:'09:00-10:00',name:'深度工作 ①',desc:'產品/建設主線',type:'work'},
+{time:'10:10-11:10',name:'深度工作 ②',desc:'主線（續）或創作',type:'work'},
+{time:'11:20-12:20',name:'深度工作 ③',desc:'創作 / 發文',type:'work'},
+{time:'12:20-14:00',name:'午餐 + 休息',desc:'真休息，不想工作的事',type:'rest'},
+{time:'14:00-15:00',name:'輕量工作',desc:'回覆留言 / 行政 / 營收行動',type:'work'},
+{time:'15:00 之後',name:'閱讀 + 進修',desc:'讀書 / 記靈感 / 放空',type:'life'}
+];
+
+const MUST_ITEMS=['暖嗓 + 練聲 15min','回覆所有留言私訊','記錄 1 個素材靈感'];
+
+const LADDER=[
+{level:'L0 免費',name:'護嗓急救包 + 聲音人格測驗（名單磁鐵）',price:'免費',status:'Year 1 重點打造',focus:true},
+{level:'L1 低價',name:'互動式聲音影響力闖關測驗（8 力挑戰）',price:'$490-990',status:'規劃中',focus:false},
+{level:'L3 核心（初階）',name:'個人品牌聲音影響力陪跑 — 初階 8 週',price:'$9,980',status:'Year 1 主力營收',focus:true},
+{level:'L3 核心（進階）',name:'個人品牌聲音影響力陪跑 — 進階',price:'待定',status:'初階穩定後開設',focus:false},
+{level:'L4 最高價',name:'一對一聲音影響力陪跑',price:'$38,000',status:'限量接案',focus:true}
+];
+
+const PHASES=[
+{name:'Phase 1：銷售漏斗基礎',revenue:'漏斗上線 + 每日發文',weeks:[
+  {title:'每日發文 + Signature Behavior',del:'7 篇 Threads + Signature Behavior 確定',days:7},
+  {title:'網站遷移到新平台',del:'新網站上線 + Cloudways 取消',days:7}]},
+{name:'Phase 2：名單收集 + 被動收入',revenue:'名單 100+ / 回放上架',weeks:[
+  {title:'電子報 + Lead Magnet 上線',del:'Lead Magnet + 歡迎信自動化',days:7},
+  {title:'LINE@ + 第一梯回放上架',del:'LINE@ 收人 + Skool 回放可購買',days:7}]},
+{name:'Phase 3：核心產品招生準備',revenue:'招生頁 + 免費講座上線',weeks:[
+  {title:'二期招生頁完成',del:'招生頁上線（含學員案例）',days:14},
+  {title:'8 力概覽免費講座',del:'YouTube 講座 + 導流招生頁',days:14}]},
+{name:'Phase 4：招生 → 營收',revenue:'8 人 × $9,980 = $79,840',weeks:[
+  {title:'二期招生行銷執行',del:'報名人數達標',days:28}]}
+];
+
+const REVENUE_ACTIONS={
+0:'發一篇 Threads + 觀察互動數據',1:'推進網站遷移進度',
+2:'推廣 Lead Magnet + 收集 email',3:'LINE@ 流程測試 + 回放定價確認',
+4:'招生頁文案撰寫 / 案例整理',5:'招生頁文案撰寫 / 案例整理',
+6:'免費講座錄製 / 導流設定',7:'免費講座錄製 / 導流設定',
+8:'發銷售內容 + 跟進潛在學員',9:'發銷售內容 + 跟進潛在學員',
+10:'發銷售內容 + 跟進潛在學員',11:'發銷售內容 + 跟進潛在學員'
+};
+
+const BOOKS=[
+{pri:'now',title:'一人公司 (Company of One)',author:'Paul Jarvis',why:'你的商業模式核心 — 質疑成長、小而美、一人就能賺錢',cat:'創業'},
+{pri:'now',title:'Set Your Voice Free',author:'Roger Love',why:'全球最知名聲音教練的方法論，你的直接競品研究 + 教學參考',cat:'聲音'},
+{pri:'now',title:'Building a StoryBrand',author:'Donald Miller',why:'招生頁文案必備 — 用故事框架讓客戶秒懂你在賣什麼',cat:'行銷'},
+{pri:'next',title:'The Right to Speak',author:'Patsy Rodenburg',why:'聲音與存在感的經典 — Rodenburg 三圈理論，課程進階素材',cat:'聲音'},
+{pri:'next',title:'DotCom Secrets',author:'Russell Brunson',why:'銷售漏斗設計聖經 — Lead Magnet、Email 序列、價值階梯',cat:'創業'},
+{pri:'next',title:'The Vocal Athlete',author:'Wendy LeBorgne',why:'聲音科學實證 — 用運動員思維訓練聲音，課程 8 力的學術支撐',cat:'聲音'},
+{pri:'later',title:'Freeing the Natural Voice',author:'Kristin Linklater',why:'聲音釋放方法經典 — 身體與聲音的連結，進階教學法',cat:'聲音'},
+{pri:'later',title:'師父 (The E-Myth Revisited)',author:'Michael Gerber',why:'系統化你的事業 — 從自僱者變成企業主的思維轉換',cat:'創業'},
+{pri:'later',title:'深度工作力 (Deep Work)',author:'Cal Newport',why:'每天 4 小時高效工作的科學方法',cat:'生產力'},
+{pri:'later',title:'This is Marketing',author:'Seth Godin',why:'行銷本質 — 不是大聲喊，是找到你的最小可行受眾',cat:'行銷'}
+];
+
+const TODOS={
+p0:['開始每日發文（Threads）','網站遷移（Cloudways → 新平台）','二期招生頁'],
+p1:['電子報系統 + Lead Magnet 製作','互動式聲音測驗遊戲（L1 產品）','第一梯回放上架 Skool','確定 Signature Behavior'],
+p2:['8 力概覽免費講座（40-60 min）','一對一陪跑方案定案（$38,000）','LINE@ 歡迎流程設定','進階陪跑營課程設計']
+};
+
+function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}');}catch(e){return {};}}
+function loadArr(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return [];}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+let S=load(SK),logs=loadArr(LK),sparks=loadArr(SPK);
+
+const today=new Date(),dow=today.getDay();
+const dateStr=`${today.getFullYear()} 年 ${today.getMonth()+1} 月 ${today.getDate()} 日 ${DAYS_ZH[dow]}`;
+document.getElementById('todayDate').textContent=dateStr;
+const diffDays=Math.max(0,Math.floor((today-START_DATE)/86400000));
+document.getElementById('dayCount').textContent=`全職聲音教練 Day ${diffDays+1}`;
+
+let cum=0,pIdx=0,wIdx=0,dayInW=1;
+outer:for(let p=0;p<PHASES.length;p++){for(let w=0;w<PHASES[p].weeks.length;w++){if(diffDays<cum+PHASES[p].weeks[w].days){pIdx=p;wIdx=w;dayInW=diffDays-cum+1;break outer;}cum+=PHASES[p].weeks[w].days;}}
+const ph=PHASES[pIdx],wk=ph.weeks[wIdx];
+document.getElementById('phaseTag').textContent=ph.name;
+document.getElementById('missionLabel').textContent=ph.name;
+document.getElementById('missionTitle').textContent=S.mt||wk.title;
+document.getElementById('missionRev').textContent='營收里程碑：'+ph.revenue;
+document.getElementById('missionDel').textContent='交付物：'+wk.del;
+const pct=Math.min(100,Math.round((dayInW/wk.days)*100));
+document.getElementById('progressFill').style.width=pct+'%';
+document.getElementById('progressLbl').textContent=`${dayInW} / ${wk.days} 天`;
+document.getElementById('missionTitle').addEventListener('blur',function(){S.mt=this.textContent;save(SK,S);});
+
+const contentWeekIdx=Math.min(Math.floor(diffDays/7),WEEK_PLANS.length-1);
+const weekNum=Math.min(diffDays/7|0,11);
+const dk=today.toISOString().slice(0,10);
+const isOff=(dow===0||dow===6);
+
+if(!S.t3||S.t3.d!==dk){
+  const wp=WEEK_PLANS[contentWeekIdx];const tdz=DAYS_ZH[dow];
+  const tps=wp?wp.days.filter(d=>d.day===tdz):[];
+  const mp=tps.find(p=>p.platform==='threads')||tps[0];
+  let i2t='休息日',i2d='週六日不工作';
+  if(!isOff&&mp){const t=mp.topicId?TOPICS[mp.topicId]:null;i2t=`${mp.type}：${t?t.title:mp.title}`;i2d='深度工作 ③ 11:20-12:20';}
+  const revAct=REVENUE_ACTIONS[weekNum]||'跟進潛在學員';
+  S.t3={d:dk,items:[
+    {label:'product',lt:'產品建設',text:isOff?'休息日':wk.title,detail:isOff?'週六日不工作':'深度工作 ①② 09:00-11:10',done:false},
+    {label:'create',lt:'創作',text:isOff?'休息日':i2t,detail:i2d,done:false},
+    {label:'revenue',lt:'營收行動',text:isOff?'休息日':revAct,detail:isOff?'週六日不工作':'14:00-15:00 輕量工作',done:false}
+  ]};save(SK,S);
+}
+
+function renderT3(){
+  const el=document.getElementById('todayItems');el.innerHTML='';
+  S.t3.items.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='today-item';
+    d.innerHTML=`<div class="today-num">${i+1}</div><div class="today-content"><span class="today-label ${it.label}">${it.lt}</span><div class="today-text${it.done?' done-text':''}" contenteditable="true" data-i="${i}">${it.text}</div><div class="today-detail">${it.detail}</div></div><div class="check-btn${it.done?' done':''}" data-i="${i}">${it.done?'✓':''}</div>`;
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.check-btn').forEach(b=>b.onclick=function(){const i=+this.dataset.i;S.t3.items[i].done=!S.t3.items[i].done;save(SK,S);renderT3();});
+  el.querySelectorAll('.today-text').forEach(t=>t.onblur=function(){S.t3.items[+this.dataset.i].text=this.textContent;save(SK,S);});
+}
+renderT3();
+
+if(!S.md||S.md.d!==dk){S.md={d:dk,items:MUST_ITEMS.map(t=>({t,done:false}))};save(SK,S);}
+function renderMust(){
+  const el=document.getElementById('mustDo');el.innerHTML='';
+  S.md.items.forEach((it,i)=>{
+    const c=document.createElement('div');c.className='must-chip'+(it.done?' done-chip':'');
+    c.textContent=(it.done?'✓ ':'')+it.t;
+    c.onclick=()=>{S.md.items[i].done=!S.md.items[i].done;save(SK,S);renderMust();};
+    el.appendChild(c);
+  });
+}
+renderMust();
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
+function saveLog(){
+  const existing=logs.findIndex(l=>l.date===dk);
+  const entry={date:dk,mission:S.mt||wk.title,phase:ph.name,items:S.t3.items.map(i=>({text:i.lt+': '+i.text,done:i.done})),mustDo:S.md.items.map(i=>({text:i.t,done:i.done})),savedAt:new Date().toLocaleTimeString('zh-TW')};
+  if(existing>=0)logs[existing]=entry;else logs.push(entry);
+  save(LK,logs);showToast('已儲存今日紀錄 ✓');renderLog();
+}
+
+let viewWeek=contentWeekIdx;
+function renderContent(){
+  const tp=document.getElementById('todayPost');
+  if(isOff){tp.innerHTML='<div style="text-align:center;color:#999;font-size:18px;padding:14px">週六日不工作</div>';}
+  else{
+    const wp=WEEK_PLANS[contentWeekIdx];const tdz=DAYS_ZH[dow];
+    const posts=wp?wp.days.filter(d=>d.day===tdz):[];
+    if(!posts.length){tp.innerHTML='<div style="text-align:center;color:#999;font-size:18px;padding:14px">今天沒有排定發文</div>';}
+    else{tp.innerHTML=posts.map(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:'';return`<div class="post-card ${p.platform}"><span class="post-platform ${p.platform}">${p.platform.toUpperCase()}</span><span class="post-type">${p.type}</span>${p.topicId?`<span class="post-num">#${p.topicId}</span>`:''}<div class="post-title">${title}</div>${opening?`<div style="font-size:16px;color:#888;margin-top:6px;line-height:1.6">${opening}</div>`:''}</div>`;}).join('');}
+  }
+  const unusedSparks=sparks.filter(s=>!s.used);
+  const sic=document.getElementById('sparkInContent');
+  if(unusedSparks.length){sic.style.display='block';document.getElementById('sparkListContent').innerHTML=unusedSparks.slice(0,3).map(s=>`<div class="spark-item"><span class="spark-book">${s.book}</span> <span class="spark-type">${s.type}</span><div class="spark-text">${s.insight}</div><div class="spark-conn">${s.connection}</div></div>`).join('');}else{sic.style.display='none';}
+  const ws=document.getElementById('weekSelector');
+  ws.innerHTML=WEEK_PLANS.map((w,i)=>`<div class="week-btn${i===viewWeek?' active':''}" data-w="${i}">${w.label}${i===contentWeekIdx?' 👈':''}</div>`).join('');
+  ws.querySelectorAll('.week-btn').forEach(b=>b.onclick=function(){viewWeek=+this.dataset.w;renderContent();});
+  const wp2=document.getElementById('weekPosts');const plan=WEEK_PLANS[viewWeek];
+  wp2.innerHTML=`<div style="font-size:18px;color:#8b6f47;margin-bottom:10px;font-weight:600">主軸：${plan.theme}</div>`;
+  plan.days.forEach(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:'';
+    wp2.innerHTML+=`<div class="post-card ${p.platform}"><span class="post-day">${p.day}</span><span class="post-platform ${p.platform}">${p.platform.toUpperCase()}</span><span class="post-type">${p.type}</span>${p.topicId?`<span class="post-num">#${p.topicId}</span>`:''}<div class="post-title" contenteditable="true">${title}</div>${opening?`<div class="expand-btn" onclick="this.parentElement.classList.toggle('expanded')">▸ 展開開頭三句</div><div class="post-opening">${opening}</div>`:''}</div>`;
+  });
+  document.getElementById('ctaList').innerHTML=CTAS.map((c,i)=>`<div class="cta-item"><strong>CTA ${i+1}:</strong> ${c}</div>`).join('');
+}
+renderContent();
+
+function renderBlocks(){
+  const el=document.getElementById('blockList');const hr=today.getHours();el.innerHTML='';
+  BLOCKS.forEach(b=>{const parts=b.time.match(/(\d+)/g);const sH=parseInt(parts[0]);const eH=parts.length>1?parseInt(parts[1]):sH+1;const isNow=hr>=sH&&hr<eH;
+    el.innerHTML+=`<div class="block-row${isNow?' active':''}"><div class="block-time">${b.time}</div><div style="flex:1"><div class="block-name">${b.name}</div><div class="block-desc">${b.desc}</div></div></div>`;});
+}
+renderBlocks();
+
+document.getElementById('ladderList').innerHTML=LADDER.map(l=>
+  `<div class="ladder-item" style="${l.focus?'background:#faf5ed;border-radius:8px;padding:10px 12px;margin:0 -12px;':''}"><span class="ladder-level">${l.level}</span> — ${l.name}<br><span class="ladder-price">${l.price}</span> <span class="ladder-status">| ${l.status}</span></div>`
+).join('');
+
+const priLabel={now:'現在就讀',next:'第二輪',later:'第三輪'};
+document.getElementById('bookList').innerHTML=BOOKS.map(b=>
+  `<div class="book-card ${b.pri}"><span class="book-pri ${b.pri}">${priLabel[b.pri]}</span> <span style="font-size:16px;color:#999">${b.cat}</span><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-why">${b.why}</div></div>`
+).join('');
+
+function saveSpark(){
+  const book=document.getElementById('spBook').value.trim(),insight=document.getElementById('spInsight').value.trim(),conn=document.getElementById('spConn').value.trim(),type=document.getElementById('spType').value;
+  if(!book||!insight){showToast('請填書名和靈感');return;}
+  sparks.unshift({id:Date.now(),book,insight,connection:conn,type,used:false,date:dk});
+  save(SPK,sparks);document.getElementById('spBook').value='';document.getElementById('spInsight').value='';document.getElementById('spConn').value='';
+  showToast('靈感已儲存 ✓');renderSparks();renderContent();
+}
+function renderSparks(){
+  const el=document.getElementById('sparkListReading');
+  if(!sparks.length){el.innerHTML='<div style="text-align:center;color:#999;font-size:16px;padding:20px">還沒有靈感筆記，讀書時隨手記一筆吧</div>';return;}
+  el.innerHTML=sparks.map(s=>
+    `<div class="spark-item${s.used?' used':''}"><span class="spark-book">${s.book}</span> <span class="spark-type">${s.type}</span> <span style="font-size:16px;color:#bbb">${s.date}</span><div class="spark-text">${s.insight}</div>${s.connection?`<div class="spark-conn">→ ${s.connection}</div>`:''}<div class="spark-use-btn" onclick="toggleSpark(${s.id})">${s.used?'↩ 標為未用':'✓ 已寫成文章'}</div></div>`
+  ).join('');
+}
+function toggleSpark(id){const s=sparks.find(x=>x.id===id);if(s){s.used=!s.used;save(SPK,sparks);renderSparks();renderContent();}}
+renderSparks();
+
+if(!S.td)S.td={};
+
+function renderLog(){
+  const sorted=[...logs].sort((a,b)=>b.date.localeCompare(a.date));
+  const statsEl=document.getElementById('logStats');
+  const totalDays=sorted.length;
+  const totalDone=sorted.reduce((sum,l)=>sum+l.items.filter(i=>i.done).length+l.mustDo.filter(i=>i.done).length,0);
+  const totalItems=sorted.reduce((sum,l)=>sum+l.items.length+l.mustDo.length,0);
+  const rate=totalItems?Math.round(totalDone/totalItems*100):0;
+  statsEl.innerHTML=`<div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${totalDays}</div><div style="font-size:16px;color:#888">天紀錄</div></div><div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${totalDone}</div><div style="font-size:16px;color:#888">項完成</div></div><div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${rate}%</div><div style="font-size:16px;color:#888">完成率</div></div>`;
+  const el=document.getElementById('logList');
+  if(!sorted.length){el.innerHTML='<div class="log-empty">還沒有紀錄，今天做完事按「儲存今日紀錄」開始累積</div>';return;}
+  el.innerHTML=sorted.map(l=>{const allItems=[...l.items,...l.mustDo];const doneCount=allItems.filter(i=>i.done).length;
+    return`<div class="log-day"><div class="log-date">${l.date} <span style="font-size:16px;color:#5b7a5e;font-weight:600">${doneCount}/${allItems.length}</span></div><div class="log-mission" style="font-size:16px">${l.phase} — ${l.mission}</div><div class="log-items">${allItems.map(i=>`<div class="log-item ${i.done?'log-done':'log-undone'}">${i.done?'✓':'✗'} ${i.text}</div>`).join('')}</div></div>`;
+  }).join('');
+}
+renderLog();
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.onclick=function(){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-'+this.dataset.tab).classList.add('active');
+  };
+});
+</script>
+</body>
+</html>
