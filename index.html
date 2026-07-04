@@ -71,6 +71,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .guardrail:last-child{border-bottom:none}
 .cta-item{font-size:16px;color:#666;padding:8px 0;border-bottom:1px solid #f5f5f5;line-height:1.6}
 .cta-item:last-child{border-bottom:none}
+.sys-flow{background:#f5f0e6;border-radius:10px;padding:16px;font-size:16px;color:#6b4c2a;line-height:1.8;margin-bottom:14px}
+.sys-flow-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.sys-flow-step:last-child{margin-bottom:0}
+.sys-freq{background:#2d2d2d;color:#fff;font-size:16px;font-weight:700;padding:4px 12px;border-radius:16px;flex-shrink:0;white-space:nowrap}
+.sys-freq.weekly{background:#8b6f47}.sys-freq.biweekly{background:#5b7a5e}
+.sys-detail{flex:1}
+.sys-detail strong{font-size:17px}
+.sys-arrow{text-align:center;font-size:20px;color:#ccc;margin:4px 0}
+.sig-box{background:linear-gradient(135deg,#2d2d2d 0%,#444 100%);color:#fff;border-radius:12px;padding:18px;margin-bottom:14px}
+.sig-title{font-size:22px;font-weight:700;text-align:center;margin-bottom:6px}
+.sig-sub{font-size:16px;color:#e8d5b7;text-align:center;margin-bottom:12px}
+.sig-point{font-size:16px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.1);line-height:1.6}
+.sig-point:last-child{border-bottom:none}
+.sig-hooks{margin-top:12px}
+.sig-hook{font-size:16px;color:#ccc;padding:4px 0;line-height:1.6;font-style:italic}
+.compare-table{width:100%;border-collapse:collapse;font-size:16px;margin-top:10px}
+.compare-table th{background:#f0ece4;padding:10px;text-align:left;font-weight:700;border-bottom:2px solid #ddd}
+.compare-table td{padding:10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-highlight{background:#f5f0e6;font-weight:600}
+.sys-checklist{margin-top:8px}
+.sys-check-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:16px;color:#555}
+.sys-check-num{background:#e8d5b7;color:#6b4c2a;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px}
 .week-selector{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
 .week-btn{background:#f0ece4;border:none;border-radius:16px;padding:6px 14px;font-size:16px;cursor:pointer;color:#6b4c2a}
 .week-btn.active{background:#2d2d2d;color:#fff}
@@ -163,6 +186,83 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div id="weekPosts"></div>
     <div class="edit-hint">點標題可編輯｜點展開看開頭三句</div>
   </div>
+  <div class="section">
+    <div class="section-title">⚡ 最省力發文系統</div>
+    <div style="font-size:17px;font-weight:600;color:#8b6f47;margin-bottom:10px">一週花不到 2 小時搞定所有平台</div>
+    <div class="sys-flow">
+      <div class="sys-flow-step">
+        <span class="sys-freq">每天</span>
+        <div class="sys-detail">
+          <strong>Threads = 你的實驗室（5 min）</strong>
+          <div class="sys-checklist">
+            <div class="sys-check-item"><span class="sys-check-num">1</span>備忘錄記一段 150-200 字的觀察</div>
+            <div class="sys-check-item"><span class="sys-check-num">2</span>丟 AI 取標題</div>
+            <div class="sys-check-item"><span class="sys-check-num">3</span>發 Threads</div>
+            <div class="sys-check-item"><span class="sys-check-num">4</span>同一篇直接貼 FB（複製貼上）</div>
+          </div>
+        </div>
+      </div>
+      <div class="sys-arrow">↓</div>
+      <div class="sys-flow-step">
+        <span class="sys-freq weekly">每週</span>
+        <div class="sys-detail">
+          <strong>電子報 = 重複利用最好的那篇（30 min）</strong>
+          <div class="sys-checklist">
+            <div class="sys-check-item"><span class="sys-check-num">1</span>看這週 5 篇哪篇互動最高</div>
+            <div class="sys-check-item"><span class="sys-check-num">2</span>擴寫成 500-800 字 email（加故事＋立場＋CTA）</div>
+            <div class="sys-check-item"><span class="sys-check-num">3</span>寄出</div>
+          </div>
+        </div>
+      </div>
+      <div class="sys-arrow">↓</div>
+      <div class="sys-flow-step">
+        <span class="sys-freq biweekly">每兩週</span>
+        <div class="sys-detail">
+          <strong>IG = 只放驗證過的內容（45 min）</strong>
+          <div class="sys-checklist">
+            <div class="sys-check-item"><span class="sys-check-num">1</span>挑互動前 2 名的 Threads</div>
+            <div class="sys-check-item"><span class="sys-check-num">2</span>一篇 → ig-carousel-writer 做輪播</div>
+            <div class="sys-check-item"><span class="sys-check-num">3</span>一篇 → reels-script-writer 寫腳本，錄 Reels</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#faf9f6;border-radius:10px;padding:14px;font-size:16px;color:#555;line-height:1.7">
+      <strong style="color:#2d2d2d">一週總耗時：</strong>每日 5 min × 5 天 = 25 min + 每週 30 min = <strong style="color:#9b4d4d">約 55 分鐘</strong>。隔週加 45 min 做 IG。<br>
+      <strong style="color:#2d2d2d">核心原則：</strong>Threads 先發驗證 → 有流量才搬去 IG/Email。IG 不是實驗室，是展示櫃。
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔥 Signature Behavior</div>
+    <div class="sig-box">
+      <div class="sig-title">每天暖嗓 10 分鐘</div>
+      <div class="sig-sub">所有文章不管講什麼，最後都繞回這句話</div>
+      <div class="sig-point"><strong>只有你在推。</strong> 台灣沒人在社群系統性推「專業人士的暖嗓 SOP」。你的學員已經在講各自的暖嗓 SOP 了。</div>
+      <div class="sig-point"><strong>直接連到所有產品。</strong> 暖嗓需要呼吸（W1 穩定力）、河豚發聲（W3 共鳴力）、SOVT 吸管（W5）、哼鳴——課程所有技巧都是暖嗓的子工具。</div>
+      <div class="sig-point"><strong>連到財富/影響力面。</strong> 不是養生，是專業準備。「你上台前會對稿，但你有暖嗓嗎？」</div>
+      <div class="sig-point"><strong>可以無限延伸。</strong> 像啟樺用「讀 paper」延伸到書店、筆記、休息。</div>
+      <div class="sig-hooks">
+        <div style="font-size:16px;color:#e8d5b7;font-weight:600;margin-bottom:6px">延伸選題靈感：</div>
+        <div class="sig-hook">「我今天講座前的 3 分鐘暖嗓做了什麼」</div>
+        <div class="sig-hook">「在高鐵上怎麼無聲暖嗓」</div>
+        <div class="sig-hook">「吃完麻辣鍋隔天開會前的暖嗓急救」</div>
+        <div class="sig-hook">「90% 的講師直接上台硬講——第三個小時聲音就垮了」</div>
+        <div class="sig-hook">「連歌手上台前都要暖嗓，你憑什麼覺得你不用？」</div>
+        <div class="sig-hook">「一杯咖啡 vs 每天暖嗓 10 分鐘——哪個真的讓你開會更清醒？」</div>
+      </div>
+    </div>
+    <div style="font-size:17px;font-weight:600;color:#666;margin-bottom:8px">「呼吸」vs「暖嗓」的差別</div>
+    <table class="compare-table">
+      <tr><th></th><th>每天練呼吸 30 分鐘</th><th class="compare-highlight">開口前暖嗓 3 分鐘</th></tr>
+      <tr><td style="font-weight:600">誰也在講</td><td>瑜伽、冥想、呼吸教練全在講</td><td class="compare-highlight">沒人在講</td></tr>
+      <tr><td style="font-weight:600">痛點面向</td><td>健康/放鬆</td><td class="compare-highlight">影響力/專業表現</td></tr>
+      <tr><td style="font-weight:600">門檻</td><td>30 分鐘太長</td><td class="compare-highlight">3 分鐘，沒藉口不做</td></tr>
+      <tr><td style="font-weight:600">連到產品</td><td>只連 Week 1</td><td class="compare-highlight">連到全部 8 週技巧</td></tr>
+      <tr><td style="font-weight:600">行動觸發</td><td>「有空再練」</td><td class="compare-highlight">「每次開口前」= 每天至少 1 次</td></tr>
+    </table>
+  </div>
+
   <div class="section">
     <div class="section-title">💬 CTA 輪替</div>
     <div id="ctaList"></div>
