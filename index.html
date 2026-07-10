@@ -32,7 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .today-num{width:28px;height:28px;background:#2d2d2d;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;margin-top:2px}
 .today-content{flex:1}
 .today-label{font-size:13px;font-weight:600;color:#fff;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:4px}
-.today-label.product{background:#8b6f47}.today-label.create{background:#5b7a5e}.today-label.revenue{background:#9b4d4d}
+.today-label.product{background:#8b6f47}.today-label.create{background:#5b7a5e}.today-label.revenue{background:#9b4d4d}.today-label.system{background:#4a5568}.today-label.learn{background:#6b5b95}.today-label.voice{background:#2f6f73}
 .today-text{font-size:17px;font-weight:500}
 .today-text[contenteditable]:focus{outline:2px solid #e8d5b7;border-radius:4px;padding:2px 4px}
 .today-detail{font-size:16px;color:#999;margin-top:2px}
@@ -42,6 +42,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .must-row{display:flex;gap:8px;flex-wrap:wrap}
 .must-chip{background:#f0ece4;border-radius:22px;padding:8px 16px;font-size:16px;cursor:pointer;transition:all .2s;user-select:none}
 .must-chip.done-chip{background:#5b7a5e;color:#fff}
+.must-note{font-size:16px;color:#777;line-height:1.7;margin-top:10px;background:#faf9f6;border-radius:10px;padding:12px}
 .save-log-btn{display:block;width:100%;background:#2d2d2d;color:#fff;border:none;border-radius:10px;padding:14px;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px}
 .save-log-btn:hover{background:#444}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#5b7a5e;color:#fff;padding:10px 24px;border-radius:20px;font-size:16px;font-weight:600;z-index:999;display:none}
@@ -86,11 +87,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .sig-point:last-child{border-bottom:none}
 .sig-hooks{margin-top:12px}
 .sig-hook{font-size:16px;color:#ccc;padding:4px 0;line-height:1.6;font-style:italic}
-.compare-table{width:100%;border-collapse:collapse;font-size:16px;margin-top:10px}
-.compare-table th{background:#f0ece4;padding:10px;text-align:left;font-weight:700;border-bottom:2px solid #ddd}
-.compare-table td{padding:10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-highlight{background:#f5f0e6;font-weight:600}
 .sys-checklist{margin-top:8px}
 .sys-check-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:16px;color:#555}
 .sys-check-num{background:#e8d5b7;color:#6b4c2a;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px}
@@ -102,11 +98,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .book-pri{font-size:16px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:4px}
 .book-pri.now{background:#fde8e8;color:#9b4d4d}.book-pri.next{background:#fef3cd;color:#856404}.book-pri.later{background:#e2e8f0;color:#4a5568}
 .book-title{font-size:18px;font-weight:600}.book-author{font-size:16px;color:#888}.book-why{font-size:16px;color:#666;margin-top:4px}
+.resource-note{font-size:16px;color:#777;background:#faf9f6;border-radius:10px;padding:12px;margin-bottom:12px;line-height:1.7}
+.resource-link{font-size:16px;color:#5b7a5e;text-decoration:none;font-weight:600;display:inline-block;margin-top:6px}
+.resource-link:hover{text-decoration:underline}
 .spark-form{background:#faf9f6;border-radius:10px;padding:16px;margin-bottom:14px}
 .spark-form label{font-size:16px;font-weight:600;display:block;margin-bottom:4px;margin-top:10px}
 .spark-form input,.spark-form textarea,.spark-form select{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:16px;font-family:inherit}
 .spark-form textarea{height:80px;resize:vertical}
 .spark-save{background:#8b6f47;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px}
+.spark-save.secondary{background:#5b7a5e}
+.thread-actions{display:flex;gap:8px;flex-wrap:wrap}
+.thread-output{min-height:230px;margin-top:12px;line-height:1.7}
+.thread-rec{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.asset-chip{font-size:15px;font-weight:700;color:#5b7a5e;background:#eef5ef;border-radius:999px;padding:3px 9px}
+.thread-meta{font-size:15px;color:#999;margin-top:4px}
 .spark-item{background:#fff;border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid #eee}
 .spark-item.used{opacity:.5}
 .spark-book{font-size:16px;color:#8b6f47;font-weight:600}.spark-type{font-size:16px;color:#999}
@@ -128,6 +133,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .edit-hint{text-align:center;font-size:16px;color:#bbb;margin-top:8px;padding:6px}
 .reset-btn{display:block;margin:14px auto;background:none;border:1px solid #ddd;color:#999;font-size:16px;padding:6px 16px;border-radius:20px;cursor:pointer}
 .icp-chip{background:#f0ece4;padding:4px 12px;border-radius:14px;font-size:16px;display:inline-block;margin:3px}
+.strategy-box{background:#faf9f6;border-radius:10px;padding:14px;margin-top:10px;font-size:16px;color:#555;line-height:1.7}
+.strategy-head{font-size:17px;font-weight:700;color:#2d2d2d;margin-bottom:6px}
+.strategy-list{margin-left:20px;color:#666}.strategy-list li{margin-bottom:4px}
+.line-pill{display:inline-block;background:#2d2d2d;color:#fff;border-radius:18px;padding:5px 12px;font-size:16px;font-weight:700;margin:3px 3px 6px 0}
+.no-chip{background:#f7e8e8;color:#9b4d4d;padding:4px 10px;border-radius:14px;font-size:16px;display:inline-block;margin:3px}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pain-card{background:#faf9f6;border-radius:10px;padding:12px;border-left:4px solid #8b6f47;font-size:16px;color:#666;line-height:1.6}
+.pain-title{font-size:17px;font-weight:700;color:#2d2d2d;margin-bottom:4px}
+.price-note{background:#f5f0e6;border-radius:10px;padding:12px;margin-top:10px;font-size:16px;color:#6b4c2a;line-height:1.7}
+.course-week{padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:16px;color:#666}.course-week:last-child{border-bottom:none}
 </style>
 </head>
 <body>
@@ -141,7 +156,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="tab-bar">
   <div class="tab active" data-tab="today">今日</div>
   <div class="tab" data-tab="content">發文</div>
-  <div class="tab" data-tab="reading">閱讀</div>
+  <div class="tab" data-tab="reading">專業</div>
   <div class="tab" data-tab="system">系統</div>
   <div class="tab" data-tab="log">紀錄</div>
 </div>
@@ -159,12 +174,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
   <div class="section">
-    <div class="section-title">✦ 今天三件事</div>
+    <div class="section-title">✦ 今日四小時工作</div>
     <div id="todayItems"></div>
   </div>
   <div class="section">
-    <div class="section-title">🔒 每日必做（不可跳過）</div>
+    <div class="section-title">🔒 每日必做（4 小時內外分清楚）</div>
     <div class="must-row" id="mustDo"></div>
+    <div class="must-note">4 小時內：2 小時主線工作 + 1 小時專業進修轉素材 + 1 小時練聲。工作外：早上暖嗓、冥想、早餐聽樊登。主線工作每天一到五不同，但都要服務二期招生、名單、案例或高意願跟進。</div>
   </div>
   <div class="section" style="background:none;box-shadow:none;padding:0">
     <button class="save-log-btn" onclick="saveLog()">儲存今日紀錄</button>
@@ -175,6 +191,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   <div class="section">
     <div class="section-title">📝 今日發文</div>
     <div id="todayPost"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">🧪 Threads 週冠軍 → 後續素材</div>
+    <div class="resource-note">穩定版：先貼本週互動最高的 Threads。真正自動抓取需要 Threads API + Meta 授權；這裡先把轉素材流程固定住。</div>
+    <div class="spark-form">
+      <label>Threads 連結（可選）</label>
+      <input id="thUrl" placeholder="https://www.threads.com/@jessiebyme/post/...">
+      <label>Threads 全文</label>
+      <textarea id="thText" placeholder="貼上這週互動最高的 Threads 全文"></textarea>
+      <label>互動數</label>
+      <input id="thMetric" placeholder="例如：讚 120 / 回覆 18 / 轉發 7 / 瀏覽 5,000">
+      <label>我的真實故事（一句話素材）</label>
+      <input id="thStory" placeholder="例如：我以前講課到第三節就開始聲音掉，才發現不是意志力問題">
+      <label>結尾 CTA</label>
+      <select id="thCta"></select>
+      <div class="thread-actions">
+        <button class="spark-save" onclick="generateThreadPrompt()">產生素材判斷 + 指令</button>
+        <button class="spark-save secondary" onclick="saveThreadAsset()">儲存到素材庫</button>
+        <button class="spark-save secondary" onclick="copyThreadPrompt()">複製指令</button>
+      </div>
+      <textarea id="thOutput" class="thread-output" placeholder="這裡會產生 Email / 輪播 / 短影音指令"></textarea>
+    </div>
+    <div class="section-title" style="margin-top:14px">📦 Threads 素材庫</div>
+    <div id="threadAssetList"></div>
   </div>
   <div class="section" id="sparkInContent" style="display:none">
     <div class="section-title">💡 閱讀靈感庫（未使用）</div>
@@ -236,31 +276,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
   <div class="section">
     <div class="section-title">🔥 Signature Behavior</div>
     <div class="sig-box">
-      <div class="sig-title">每天暖嗓 10 分鐘</div>
+      <div class="sig-title">開口前暖嗓 10 分鐘</div>
       <div class="sig-sub">所有文章不管講什麼，最後都繞回這句話</div>
       <div class="sig-point"><strong>只有你在推。</strong> 台灣沒人在社群系統性推「專業人士的暖嗓 SOP」。你的學員已經在講各自的暖嗓 SOP 了。</div>
-      <div class="sig-point"><strong>直接連到所有產品。</strong> 暖嗓需要呼吸（W1 穩定力）、河豚發聲（W3 共鳴力）、SOVT 吸管（W5）、哼鳴——課程所有技巧都是暖嗓的子工具。</div>
+      <div class="sig-point"><strong>直接連到所有產品。</strong> 暖嗓需要 SOVT、哼鳴、共鳴、咬字、句尾穩定——課程所有技巧都能變成開口前的準備流程。</div>
       <div class="sig-point"><strong>連到財富/影響力面。</strong> 不是養生，是專業準備。「你上台前會對稿，但你有暖嗓嗎？」</div>
       <div class="sig-point"><strong>可以無限延伸。</strong> 像啟樺用「讀 paper」延伸到書店、筆記、休息。</div>
       <div class="sig-hooks">
         <div style="font-size:16px;color:#e8d5b7;font-weight:600;margin-bottom:6px">延伸選題靈感：</div>
-        <div class="sig-hook">「我今天講座前的 3 分鐘暖嗓做了什麼」</div>
+        <div class="sig-hook">「我今天講座前的 10 分鐘暖嗓做了什麼」</div>
         <div class="sig-hook">「在高鐵上怎麼無聲暖嗓」</div>
         <div class="sig-hook">「吃完麻辣鍋隔天開會前的暖嗓急救」</div>
         <div class="sig-hook">「90% 的講師直接上台硬講——第三個小時聲音就垮了」</div>
         <div class="sig-hook">「連歌手上台前都要暖嗓，你憑什麼覺得你不用？」</div>
-        <div class="sig-hook">「一杯咖啡 vs 每天暖嗓 10 分鐘——哪個真的讓你開會更清醒？」</div>
+        <div class="sig-hook">「一杯咖啡 vs 開口前暖嗓 10 分鐘——哪個真的讓你開會更穩？」</div>
       </div>
     </div>
-    <div style="font-size:17px;font-weight:600;color:#666;margin-bottom:8px">「呼吸」vs「暖嗓」的差別</div>
-    <table class="compare-table">
-      <tr><th></th><th>每天練呼吸 30 分鐘</th><th class="compare-highlight">開口前暖嗓 3 分鐘</th></tr>
-      <tr><td style="font-weight:600">誰也在講</td><td>瑜伽、冥想、呼吸教練全在講</td><td class="compare-highlight">沒人在講</td></tr>
-      <tr><td style="font-weight:600">痛點面向</td><td>健康/放鬆</td><td class="compare-highlight">影響力/專業表現</td></tr>
-      <tr><td style="font-weight:600">門檻</td><td>30 分鐘太長</td><td class="compare-highlight">3 分鐘，沒藉口不做</td></tr>
-      <tr><td style="font-weight:600">連到產品</td><td>只連 Week 1</td><td class="compare-highlight">連到全部 8 週技巧</td></tr>
-      <tr><td style="font-weight:600">行動觸發</td><td>「有空再練」</td><td class="compare-highlight">「每次開口前」= 每天至少 1 次</td></tr>
-    </table>
+    <div style="font-size:17px;font-weight:600;color:#666;margin-bottom:8px">開口前暖嗓 10 分鐘細項</div>
+    <div class="method-box">
+      <div class="method-step"><span class="method-num">1 min</span> — 身體鬆開：肩頸、下巴、舌根放掉，確認不是夾喉嚨開口。</div>
+      <div class="method-step"><span class="method-num">2 min</span> — SOVT：吸管發聲或唇顫音，讓聲帶先用低摩擦方式啟動。</div>
+      <div class="method-step"><span class="method-num">2 min</span> — 哼鳴：用 m / ng 找到臉部震動，讓聲音往前，不壓在喉嚨。</div>
+      <div class="method-step"><span class="method-num">2 min</span> — 共鳴打開：河豚發聲或短母音滑音，從小聲到正常說話音量。</div>
+      <div class="method-step"><span class="method-num">2 min</span> — 咬字與句尾：讀 3 句今天會用到的講課 / Podcast / 會議句子，練清楚、穩、句尾不掉。</div>
+      <div class="method-step"><span class="method-num">1 min</span> — 場景預備：用今天要面對的對象說一次開場句，讓聲音進入專業狀態。</div>
+    </div>
   </div>
 
   <div class="section">
@@ -271,11 +311,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
 <div class="tab-content" id="tab-reading">
   <div class="section">
-    <div class="section-title">📖 必讀書單</div>
-    <div id="bookList"></div>
+    <div class="section-title">🎙️ 聲音區｜每日練聲與聲音表達進修</div>
+    <div class="resource-note">這一區只服務兩件事：讓你的示範能力更穩，讓你的課程例子更有國際和華語參照。每天最多選 1 個資源，轉成 1 句素材、1 個練聲菜單或 1 個課程例子。</div>
+    <div id="voiceResourceList"></div>
   </div>
   <div class="section">
-    <div class="section-title">✏️ 閱讀 → 創作靈感筆記</div>
+    <div class="section-title">🧭 顧客、產品區｜把專業變成報名理由</div>
+    <div class="resource-note">這一區不是補商業焦慮，是把顧客痛點、產品階梯、銷售頁和培養訊息變清楚。讀完一定要產出一句銷售頁、三個訪談問題或一段培養訊息。</div>
+    <div id="productResourceList"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">✏️ 專業進修 → 創作靈感筆記</div>
     <div class="method-box" style="margin-bottom:14px">
       <div class="method-step"><span class="method-num">❶ 截句</span> — 讀到有感的段落，截一句話記下來</div>
       <div class="method-step"><span class="method-num">❷ 連結</span> — 問自己：「這跟我的學員有什麼關係？」</div>
@@ -302,24 +348,130 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
 <div class="tab-content" id="tab-system">
   <div class="section">
-    <div class="section-title">⏰ 每日時間表</div>
+    <div class="section-title">🎯 單一灘頭堡｜先看這個</div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head" style="font-size:20px">已經在收費，或 3 個月內要收費的講師型創作者。</div>
+      <div>不要再打「創作者、教練、講師、主管、老師、公務員、Podcast、短影音」全部。你的真正客群不是想把聲音變好的人，而是聲音會影響收入、專業信任、能不能把自己推出去的人。</div>
+      <div style="margin-top:8px"><span class="line-pill">對外名稱：講師型創作者</span><span class="line-pill">內部定義：用聲音賣專業的人</span></div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">硬條件</div>
+      <ol class="strategy-list">
+        <li>已經有課程、講座、顧問、教練、工作坊、Podcast、直播、短影音口播任一場景。</li>
+        <li>每月至少有 2 次以上公開說話或錄音輸出。</li>
+        <li>聲音問題會影響專業形象、成交、自信或續航。</li>
+        <li>願意為自己的專業形象投資，不是只想保養喉嚨。</li>
+        <li>年齡大約 28-45，女性偏多，但對外不寫死性別。</li>
+      </ol>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">非灘頭堡</div>
+      <span class="no-chip">一般老師</span><span class="no-chip">一般主管</span><span class="no-chip">公務員</span><span class="no-chip">純興趣聲音愛好者</span><span class="no-chip">單純想變好聽的人</span>
+      <div style="margin-top:8px;color:#888">這些人可以買，但不要拿來設計主產品。</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🧭 策略總結｜市場、痛點、產品</div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head">市場主張</div>
+      <div style="font-size:20px;font-weight:700;color:#2d2d2d">讓你的聲音撐得住你的專業。</div>
+      <div style="margin-top:8px">不要直接賣 voice coach / charisma / public speaking，也不要主打科學發聲。台灣這個品類還沒成熟，要賣具體場景：講課不燒聲、Podcast 後段不掉、上鏡聲音跟形象一致、聽起來穩清楚有信任感。</div>
+    </div>
+    <div class="pain-grid" style="margin-top:10px">
+      <div class="pain-card"><div class="pain-title">聲音撐不住專業輸出</div>講久會累、啞、痰、咳，Podcast 後段失控，講座後半段聲音掉。</div>
+      <div class="pain-card"><div class="pain-title">聲音形象不匹配</div>虛、飄、幼、沒力量、不夠穩、不夠有信任感。</div>
+      <div class="pain-card"><div class="pain-title">不敢公開輸出</div>聲音一出來就不像自己想成為的那個人。</div>
+      <div class="pain-card"><div class="pain-title">買過課但不會練</div>聲音訓練不是看懂，是要有人聽出你哪裡沒做到。</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">⏰ 每日四小時時間表</div>
     <div id="blockList"></div>
   </div>
   <div class="section">
     <div class="section-title">🎓 客群 ICP</div>
     <div style="font-size:16px;color:#555">
-      <strong style="font-size:18px">灘頭堡：聲音高依賴的個人品牌工作者</strong><br>
-      <div style="margin-top:8px"><span class="icp-chip">Podcast 主持人</span><span class="icp-chip">線上課程講師</span><span class="icp-chip">短影音創作者</span><span class="icp-chip">創業者 / 教練</span></div>
-      <div style="margin-top:10px;color:#888;line-height:1.7">核心痛點：聲音正在影響他賺錢的能力<br>購買動機：推廣自己時更有自信（財富/影響力）</div>
+      <strong style="font-size:18px">灘頭堡：已經在收費，或 3 個月內要收費的講師型創作者</strong><br>
+      <div style="margin-top:8px"><span class="line-pill">對外名稱：講師型創作者</span><span class="line-pill">內部定義：用聲音賣專業的人</span></div>
+      <div style="margin-top:8px"><span class="icp-chip">課程</span><span class="icp-chip">講座</span><span class="icp-chip">顧問</span><span class="icp-chip">教練</span><span class="icp-chip">工作坊</span><span class="icp-chip">Podcast</span><span class="icp-chip">直播</span><span class="icp-chip">短影音口播</span></div>
+      <div class="strategy-box">
+        <div class="strategy-head">硬條件</div>
+        <ol class="strategy-list">
+          <li>已經有課程、講座、顧問、教練、工作坊、Podcast、直播、短影音口播任一場景。</li>
+          <li>每月至少有 2 次以上公開說話或錄音輸出。</li>
+          <li>聲音問題會影響專業形象、成交、自信或續航。</li>
+          <li>願意為自己的專業形象投資，不是只想保養喉嚨。</li>
+          <li>年齡大約 28-45，女性偏多，但對外不寫死性別。</li>
+        </ol>
+      </div>
+      <div class="strategy-box">
+        <div class="strategy-head">非灘頭堡</div>
+        <span class="no-chip">一般老師</span><span class="no-chip">一般主管</span><span class="no-chip">公務員</span><span class="no-chip">純興趣聲音愛好者</span><span class="no-chip">單純想變好聽的人</span>
+        <div style="margin-top:8px;color:#888">這些人可以買，但不要拿來設計主產品。</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🎯 市場主張</div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head" style="font-size:20px">讓你的聲音撐得住你的專業。</div>
+      <div>台灣市場不要直接賣「voice coach / charisma / public speaking」，也不要主打「科學發聲」。這個品類還沒成熟，太抽象。</div>
+      <div style="margin-top:8px">文案要賣：講課不燒聲、錄 Podcast 不到後段就掉、上鏡時聲音跟形象一致、聽起來穩清楚有信任感、不靠播音腔，也不變得假掰。</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🧩 訪談結論</div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head">最接近核心市場</div>
+      Leah、J 編、Pola、致中最接近你的核心市場：講座、Podcast、講課、個人品牌、職業講師，聲音直接連到交付品質、專業信任、公開輸出和推薦。
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">有價值但不是同一條 B2C 主線</div>
+      Mike 有錢但聲音對他多半是加分項；Karen 和心慧更適合教師 / 公部門 / B2B 工作坊；Emma 是低急迫學習者，會稱讚但不一定最快轉換。
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🔥 核心痛點</div>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-title">聲音撐不住專業輸出</div>講久會累、啞、痰、咳，Podcast 後段失控，講座後半段聲音掉。</div>
+      <div class="pain-card"><div class="pain-title">聽起來不像想呈現的專業形象</div>虛、飄、幼、沒力量、不夠穩、不夠有信任感。</div>
+      <div class="pain-card"><div class="pain-title">不敢公開輸出</div>不是不會拍短影音，是聲音一出來就不像自己想成為的那個人。</div>
+      <div class="pain-card"><div class="pain-title">買過課但不會練</div>預錄課便宜，但缺回饋；聲音訓練不是看懂，是要有人聽出你哪裡沒做到。</div>
+      <div class="pain-card"><div class="pain-title">練習有羞恥感和摩擦力</div>影片作業太重，純聲音作業更可行；小組練習可以，但不要逼人在全班前表演。</div>
     </div>
   </div>
   <div class="section">
     <div class="section-title">🪜 產品階梯</div>
     <div id="ladderList"></div>
+    <div class="price-note">
+      <strong>價格判斷：</strong>2026 年 4 月全體受僱員工經常性薪資中位數為 NT$39,348。NT$16,800 已經超過中位月薪 4 成，所以不能打一般大眾，要打「聲音會回收成收入和信任的人」。<br>
+      <a class="resource-link" href="https://www.dgbas.gov.tw/News_Content.aspx?n=3602&s=236356" target="_blank">主計總處薪資統計，2026-06-12</a>
+    </div>
     <div class="ladder-focus">
       <strong style="font-size:18px">Year 1 策略</strong><br>
-      主攻 L3 核心產品（初階＋進階陪跑營），同時打造厲害的名單磁鐵（L0）和互動式聲音測驗（L1）。<br>
-      <strong>Year 1 營收目標：</strong>3 屆陪跑 × 8 人 × $9,980 + 一對一 ≈ $28-35 萬+
+      Year 1 只守五層：聲音續航健檢、4 週基礎班、8 週主產品、校友場景工作坊、1:1 VIP。場景工作坊只做校友續購，不拿來吸冷流量。<br>
+      <strong>近期營收目標：</strong>8 週主產品 8-12 人 + 1-2 位 VIP / 一對一升級。
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🧱 課程拆分</div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head">4 週「專業用聲基礎班」</div>
+      <div class="course-week">W1 聲音健檢與用聲地圖：你是哪一種耗聲模式</div>
+      <div class="course-week">W2 呼吸與支撐：不要靠喉嚨硬撐</div>
+      <div class="course-week">W3 共鳴與聲音質感：穩、亮、自然，不做播音腔</div>
+      <div class="course-week">W4 3 分鐘實戰錄音：講課 / Podcast / 短影音擇一，做 before/after</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">8 週「講師型創作者聲音影響力實戰營」</div>
+      <div class="course-week">W1 診斷：聲音和專業形象落差</div>
+      <div class="course-week">W2 續航：暖嗓、收嗓、20 分鐘用聲策略</div>
+      <div class="course-week">W3 支撐：氣息、句尾、長句穩定</div>
+      <div class="course-week">W4 質感：共鳴、清晰度、自然專業聲</div>
+      <div class="course-week">W5 影響力：語速、停頓、重音、權威與親和</div>
+      <div class="course-week">W6 場景一：講課 / 顧問 / 工作坊</div>
+      <div class="course-week">W7 場景二：Podcast / 短影音 / 直播</div>
+      <div class="course-week">W8 成果週：before/after 展示 + 個人練習計畫</div>
     </div>
   </div>
   <div class="section">
@@ -351,7 +503,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <script>
 const DAYS_ZH=['週日','週一','週二','週三','週四','週五','週六'];
 const START_DATE=new Date('2026-07-03');
-const SK='vts4',LK='vts4_log',SPK='vts4_sparks';
+const SK='vts11',LK='vts7_log',SPK='vts7_sparks',TPK='vts_threads';
 
 const TOPICS={1:{type:'立場文',title:'聲音不是天生的，是你從來沒有人教你',opening:'「你一定聽過這句話：『他聲音好好聽，天生的吧。』我以前也這樣以為。直到我學了聲樂、當了十年老師、訓練了上百個人的聲音之後，我發現——聲音根本不是天生的，是沒有人教你怎麼用。」'},2:{type:'立場文',title:'內容很好但沒人聽？問題不在你的腦袋，在你的聲音',opening:'「你有沒有遇過一種人：專業能力很強，一開口你卻想滑手機？不是他講得不好，是他的聲音沒有打開你大腦的『注意力大門』。」'},3:{type:'立場文',title:'我不教「好聽的聲音」，我教「讓人願意掏錢的聲音」',opening:'「好聽的聲音能當主播，但不一定能讓客戶買單。我教的不是怎麼讓聲音好聽，而是怎麼讓你的聲音建立信任、傳遞價值。」'},4:{type:'立場文',title:'買了線上課還是不會用？因為聲音不是知識，是身體記憶',opening:'「我的學員 Mike 跟我說，他之前買過三堂聲音線上課，看完覺得『好像懂了』，一上台還是老樣子。因為聲音訓練不是背公式，是讓你的身體記住一個新的發聲方式。」'},5:{type:'立場文',title:'你的聲音就是你的第二張臉',opening:'「我的學員 Pola 說過一句話：『聲音就是第二張臉。』現在有多少場景是別人「只聽到你、看不到你」的？」'},6:{type:'立場文',title:'台灣沒有人在教「聲音品牌」，所以我決定自己來',opening:'「在美國，Roger Love 幫 Tony Robbins 打造聲音，一堂課收六位數美金。在台灣？沒有人把聲音訓練跟個人品牌連在一起。所以我決定自己做這件事。」'},7:{type:'立場文',title:'「你聲音很好聽」是最沒用的稱讚',opening:'「每次有人跟我說『老師你聲音好好聽』，我都笑笑帶過。因為好聽是最表面的事。」'},8:{type:'立場文',title:'說話不是用喉嚨，是用身體',opening:'「如果我告訴你，你說話沙啞、講久會累，問題根本不在你的喉嚨，你信嗎？你的身體就是一把樂器。」'},9:{type:'立場文',title:'對話感不是講慢一點，是心裡有人',opening:'「很多人被說『你講話像在念稿』，就拼命放慢語速。結果變成——慢慢地念稿。對話感的關鍵不是速度，是你心裡有沒有一個人。」'},10:{type:'立場文',title:'鏡頭前的你，需要多 20% 的能量',opening:'「你有沒有看過自己錄的影片，覺得『怎麼看起來這麼沒精神』？這是因為鏡頭會吃掉你的能量。」'},11:{type:'立場文',title:'聲音訓練的目的不是追求完美，是移除阻礙',opening:'「很多人來找我，第一句話都是：『老師，我想要聲音變好聽。』我都會先問他：『你覺得你現在的聲音怎麼了？』」'},12:{type:'立場文',title:'一人公司最被低估的武器：你的聲音',opening:'「你花了錢拍形象照、請設計師做品牌視覺、學文案寫作。但你有沒有想過，當客戶第一次聽到你的聲音，他對你的印象，有超過一半是你的聲音決定的？」'},13:{type:'痛點文',title:'明明準備很充分，一開口就被當空氣',opening:'「簡報做了三天，數據查了五遍，甚至彩排了兩次。結果上場講不到三分鐘，你看到台下的人開始低頭滑手機。」'},14:{type:'痛點文',title:'每次錄影都要重錄十幾遍，你累的不是嘴巴，是自信',opening:'「打開鏡頭，錄了一遍覺得不行，再錄一遍，又不行，刪掉重來。不是你的內容有問題，是你每次聽到自己的聲音，就覺得『不像我想要的那個樣子』。」'},15:{type:'痛點文',title:'你的學員很多，但轉介紹很少——問題可能出在你的聲音',opening:'「課上完學員都說好，但很少有人主動幫你推薦。沒有聲音辨識度，就沒有記憶點；沒有記憶點，就沒有轉介紹。」'},16:{type:'痛點文',title:'講了一整天課，隔天聲音就沙啞——你不是天生嗓子弱',opening:'「我的學員心慧是國中老師，她跟我說她的同事幾乎每個人都有聲帶問題。十年教書下來，嗓子壞掉好像是標配。但真的是這樣嗎？」'},17:{type:'痛點文',title:'線上會議開到一半，你發現沒人在聽你說話',opening:'「你在線上會議分享提案，講到一半發現——對面的人在打字、鏡頭關了三個。不是你講得太爛，是線上會議只剩聲音這一個通道。」'},18:{type:'痛點文',title:'你很會寫，但一開口就不像「那個人」',opening:'「你的文章寫得犀利又溫暖。結果第一次直播，留言區出現：『跟我想像的不一樣欸。』」'},19:{type:'痛點文',title:'為什麼你的 Podcast 數據一直起不來',opening:'「你研究了一堆 Podcast 經營攻略，數據還是上不去。大部分聽眾在前 30 秒就決定要不要聽下去。」'},20:{type:'痛點文',title:'銷講的時候很緊張，聲音會抖——越想控制越抖',opening:'「你站上台，準備開口的那一秒，喉嚨突然鎖住了。這不是你心理素質差，是你的神經系統啟動了保護機制。」'},21:{type:'痛點文',title:'你學了很多表達技巧，但上台還是像在「演」',opening:'「你看了很多表達課的影片，學了重音、停頓、抑揚頓挫。上台一用，朋友說：『你今天怎麼怪怪的？』」'},22:{type:'痛點文',title:'「我的聲音很難聽」——你可能從來沒聽過自己真正的聲音',opening:'「你聽自己的錄音會覺得：『這不是我的聲音吧？好難聽。』你平常聽到的自己的聲音，其實是假的。」'},23:{type:'故事文',title:'音樂劇系畢業的我，第一次站上講台差點哭出來',opening:'「我是音樂劇系畢業的，大家都覺得我一定很會說話。結果我第一次站上國中講台，聲音抖到不行，學生在底下完全不理我。」'},24:{type:'故事文',title:'我在國中教了十年，教會我一件事：再好的內容，包裝不對就是垃圾',opening:'「國中生是全世界最殘忍的聽眾。你的課講得好不好，不用看評鑑，看他們的眼神就知道。」'},25:{type:'故事文',title:'我的學員被同事說「聲音像鯊魚」，她聽完哭了',opening:'「Pola 跟我說，有一次同事形容她的聲音『像鯊魚一樣有攻擊性』。她回家聽了自己的錄音，發現真的很尖、很急。」'},26:{type:'故事文',title:'離開教職的前一天，我問自己：聲音這件事，真的值得我賭上一切嗎',opening:'「2026 年 7 月，我正式離開了待了十年的教職。交出辭呈那天，我坐在車裡發了很久的呆。」'},27:{type:'故事文',title:'他買了三堂線上課都沒用，最後在我的陪跑營裡第一次聽到變化',opening:'「Mike 是一個非常忙的企業主，他跟我說他買過三堂聲音線上課。看完了嗎？看完了。有用嗎？他搖搖頭。」'},28:{type:'故事文',title:'心慧要離開教職去開自己的工作室，她說：「我不想再用喉嚨硬撐了」',opening:'「心慧是國中老師，教了好幾年。她來找我的原因是她的同事一個接一個聲帶出問題。」'},29:{type:'故事文',title:'致中說：「你的課不只是聲音課，是讓我重新認識自己的課」',opening:'「致中是企業講師，他本來覺得自己的表達能力應該算不錯了。上完八週之後，他說：『我以前以為我在表達，但其實我只是在說。』」'},30:{type:'故事文',title:'Emma 跟我說：「我本來只是想學聲音，沒想到整個人都變了」',opening:'「Emma 報名的時候就是想學怎麼讓聲音好一點。八週結束她說：『以前我很怕被注意到，現在我覺得被聽到是一件很舒服的事。』」'},31:{type:'成果展示',title:'第一週 vs 第八週：同一段自我介紹，聲音差距大到學員自己不敢相信',opening:'「結業那天，我讓每個學員重聽自己第一週錄的自我介紹。教室裡安靜了三秒，然後有人笑出來、有人眼眶紅了。」'},32:{type:'成果展示',title:'八週之後，Pola 開始用真實的聲音在做短影音了',opening:'「八週前，Pola 連在公司開會都盡量不說話。現在她每天在 IG 更新短影音，用自己的聲音。」'},33:{type:'成果展示',title:'學員回饋：「一對一的時候 Jessie 講了一句話，我整個聲音就打開了」',opening:'「Pola 跟我說，八週課程裡對她衝擊最大的，不是團體課的理論，是一對一諮詢的那 30 分鐘。」'},34:{type:'成果展示',title:'全班六個人，每個人進步的方向都不一樣——這才是小班制的意義',opening:'「第一梯六個學員，同樣的課程，每個人需要調整的地方完全不同。這就是為什麼我堅持小班制。」'}};
 
@@ -366,74 +518,96 @@ const WEEK_PLANS=[
 {label:'W8',theme:'身體就是你的樂器',days:[{day:'週一',platform:'threads',type:'立場文',topicId:8},{day:'週二',platform:'threads',type:'痛點文',topicId:20},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'上台前喉嚨鎖住？不是心理素質差，是神經系統在保護你'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【銷講時聲音會抖？讓神經系統冷靜下來】'},{day:'週四',platform:'threads',type:'故事文',topicId:29},{day:'週五',platform:'threads',type:'立場文',topicId:9}]}
 ];
 
-const CTAS=['想知道你的聲音正在幫你還是害你？留言「檢測」私訊給你一份聲音自我檢測表','追蹤 @voicetoshine，每週一到五更新聲音表達的真話','我每週二寄一封信，聊聲音怎麼影響你的收入和機會 → 連結在自介','免費加入我的 LINE@ → 領取「護嗓急救包」，講一整天也不啞'];
+const CTAS=['想知道你的聲音撐不撐得住你的專業？留言「健檢」私訊給你一份聲音續航自檢表','追蹤 @voicetoshine，每週一到五更新講師型創作者的聲音表達真話','我每週二寄一封信，聊聲音怎麼影響你的收入、信任和公開輸出 → 連結在自介','加入 LINE@ → 領取「講師型創作者聲音自檢表」'];
 
 const BLOCKS=[
-{time:'08:00',name:'起床 + 暖嗓',desc:'晨間儀式',type:'life'},
-{time:'09:00-10:00',name:'深度工作 ①',desc:'產品/建設主線',type:'work'},
-{time:'10:10-11:10',name:'深度工作 ②',desc:'主線（續）或創作',type:'work'},
-{time:'11:20-12:20',name:'深度工作 ③',desc:'創作 / 發文',type:'work'},
-{time:'12:20-14:00',name:'午餐 + 休息',desc:'真休息，不想工作的事',type:'rest'},
-{time:'14:00-15:00',name:'輕量工作',desc:'回覆留言 / 行政 / 營收行動',type:'work'},
-{time:'15:00 之後',name:'閱讀 + 進修',desc:'讀書 / 記靈感 / 放空',type:'life'}
+{time:'08:00-09:00',name:'起床 + 開機儀式',desc:'早上暖嗓、冥想、早餐聽樊登，不碰工作訊息',type:'life'},
+{time:'09:00-10:00',name:'主線工作 ①',desc:'一到五依策略排：銷售頁 / 聲音續航自檢 / 案例 / 關係維護 / PDCA',type:'work'},
+{time:'10:00-10:10',name:'休息',desc:'離開螢幕，喝水、走動、閉眼',type:'rest'},
+{time:'10:10-11:10',name:'主線工作 ②',desc:'把主線變成可被市場看見的輸出或營收行動',type:'work'},
+{time:'11:10-11:20',name:'休息',desc:'不要切去做別的工作',type:'rest'},
+{time:'11:20-12:20',name:'專業進修 + 轉素材',desc:'聲音區 / 顧客、產品區擇一，產出 1 則素材',type:'work'},
+{time:'12:20-12:30',name:'上午收尾',desc:'記錄完成狀態，準備午餐',type:'work'},
+{time:'12:30-14:00',name:'午餐 + 真休息',desc:'不處理工作、不想策略',type:'rest'},
+{time:'14:00-15:00',name:'每日練聲 1 小時',desc:'可改到晚上；SOVT / 共鳴 / 咬字 / 課程示範素材',type:'work'},
+{time:'22:00 之後',name:'停止工作',desc:'保留體力，明天才有戰鬥力',type:'rest'}
 ];
 
-const MUST_ITEMS=['暖嗓 + 練聲 15min','回覆所有留言私訊','記錄 1 個素材靈感'];
+const MUST_ITEMS=['早上｜暖嗓 + 冥想 + 早餐聽樊登','工作內｜完成今日 2 小時主線','工作內｜專業進修 1h 並轉 1 則素材','工作內｜練聲 1h'];
 
 const LADDER=[
-{level:'L0 免費',name:'護嗓急救包 + 聲音人格測驗（名單磁鐵）',price:'免費',status:'Year 1 重點打造',focus:true},
-{level:'L1 低價',name:'互動式聲音影響力闖關測驗（8 力挑戰）',price:'$490-990',status:'規劃中',focus:false},
-{level:'L3 核心（初階）',name:'個人品牌聲音影響力陪跑 — 初階 8 週',price:'$9,980',status:'Year 1 主力營收',focus:true},
-{level:'L3 核心（進階）',name:'個人品牌聲音影響力陪跑 — 進階',price:'待定',status:'初階穩定後開設',focus:false},
-{level:'L4 最高價',name:'一對一聲音影響力陪跑',price:'$38,000',status:'限量接案',focus:true}
+{level:'入門',name:'90 分鐘「聲音續航健檢」',price:'NT$990-1,200',status:'找出痛點，篩出真的想改的人',focus:true},
+{level:'初階',name:'4 週「專業用聲基礎班」',price:'早鳥 NT$6,800 / 原價 NT$8,800',status:'解決燒聲、虛、氣不穩、句尾掉',focus:true},
+{level:'主產品',name:'8 週「講師型創作者聲音影響力實戰營」',price:'早鳥 NT$13,800 / 原價 NT$16,800',status:'做出 before/after 和真實應用成果',focus:true},
+{level:'進階',name:'場景工作坊：短影音、Podcast、講師台風、直播',price:'單堂 NT$2,800 / 三堂 NT$7,200',status:'校友續購，不拿來吸冷流量',focus:false},
+{level:'高階',name:'1:1 VIP 聲音改造',price:'NT$36,000-60,000',status:'給要錄課、上台、發表、重大曝光的人',focus:true}
 ];
 
 const PHASES=[
-{name:'Phase 1：銷售漏斗基礎',revenue:'漏斗上線 + 每日發文',weeks:[
-  {title:'每日發文 + Signature Behavior',del:'7 篇 Threads + Signature Behavior 確定',days:7},
-  {title:'網站遷移到新平台',del:'新網站上線 + Cloudways 取消',days:7}]},
-{name:'Phase 2：名單收集 + 被動收入',revenue:'名單 100+ / 回放上架',weeks:[
-  {title:'電子報 + Lead Magnet 上線',del:'Lead Magnet + 歡迎信自動化',days:7},
-  {title:'LINE@ + 第一梯回放上架',del:'LINE@ 收人 + Skool 回放可購買',days:7}]},
-{name:'Phase 3：核心產品招生準備',revenue:'招生頁 + 免費講座上線',weeks:[
-  {title:'二期招生頁完成',del:'招生頁上線（含學員案例）',days:14},
-  {title:'8 力概覽免費講座',del:'YouTube 講座 + 導流招生頁',days:14}]},
-{name:'Phase 4：招生 → 營收',revenue:'8 人 × $9,980 = $79,840',weeks:[
-  {title:'二期招生行銷執行',del:'報名人數達標',days:28}]}
+{name:'Phase 1：主產品招生頁先上線',revenue:'8 週主產品可收單 + 3 個講師型創作者案例',weeks:[
+  {title:'8 週招生頁骨架完成',del:'主標 / 痛點 / 方案 / FAQ / 案例草稿',days:7},
+  {title:'招生頁上線 + 報名流程測試',del:'表單 / 付款 / 諮詢入口都能用',days:7}]},
+{name:'Phase 2：聲音續航健檢 + 私域培養',revenue:'健檢名單 30 人 + 7 天培養序列',weeks:[
+  {title:'聲音續航自檢表最小可用版',del:'自檢表 / 領取頁 / 90 分鐘健檢入口',days:7},
+  {title:'LINE / Email 歡迎流程',del:'7 則短訊息 + 2 個 8 週主產品 CTA',days:7}]},
+{name:'Phase 3：案例授權 + 高意願跟進',revenue:'諮詢 5 場 / VIP 試賣 1 位 / 自檢表轉發入口啟動',weeks:[
+  {title:'舊學員案例授權與轉發入口',del:'3 個 before/after 案例 + 關係維護訊息 + 聲音自檢表入口',days:7},
+  {title:'VIP / 一對一半公開試賣',del:'邀請 3 位適合舊學員或高意願客戶',days:7}]},
+{name:'Phase 4：招生衝刺',revenue:'8 週主產品 8-12 人',weeks:[
+  {title:'8 週主產品招生內容與跟進',del:'每日 Threads + 每週 Email + DM 跟進',days:21}]}
 ];
 
 const REVENUE_ACTIONS={
-0:'發一篇 Threads + 觀察互動數據',1:'推進網站遷移進度',
-2:'推廣 Lead Magnet + 收集 email',3:'LINE@ 流程測試 + 回放定價確認',
-4:'招生頁文案撰寫 / 案例整理',5:'招生頁文案撰寫 / 案例整理',
-6:'免費講座錄製 / 導流設定',7:'免費講座錄製 / 導流設定',
-8:'發銷售內容 + 跟進潛在學員',9:'發銷售內容 + 跟進潛在學員',
-10:'發銷售內容 + 跟進潛在學員',11:'發銷售內容 + 跟進潛在學員'
+0:'關心 1 位舊學員並整理案例線索',1:'銷售頁 CTA / 報名流程測試',
+2:'推廣聲音續航自檢表 + 收集 email / LINE',3:'7 天培養序列寫 1 則',
+4:'整理 1 個學員 before/after 案例',5:'發 1 則案例授權或關係維護訊息',
+6:'邀請 1 位高意願客戶做聲音健檢',7:'邀請 1 位適合舊學員聊 VIP',
+8:'發銷售內容 + DM 跟進 3 人',9:'發銷售內容 + DM 跟進 3 人',
+10:'發銷售內容 + DM 跟進 3 人',11:'發銷售內容 + DM 跟進 3 人'
 };
 
-const BOOKS=[
-{pri:'now',title:'一人公司 (Company of One)',author:'Paul Jarvis',why:'你的商業模式核心 — 質疑成長、小而美、一人就能賺錢',cat:'創業'},
-{pri:'now',title:'Set Your Voice Free',author:'Roger Love',why:'全球最知名聲音教練的方法論，你的直接競品研究 + 教學參考',cat:'聲音'},
-{pri:'now',title:'Building a StoryBrand',author:'Donald Miller',why:'招生頁文案必備 — 用故事框架讓客戶秒懂你在賣什麼',cat:'行銷'},
-{pri:'next',title:'The Right to Speak',author:'Patsy Rodenburg',why:'聲音與存在感的經典 — Rodenburg 三圈理論，課程進階素材',cat:'聲音'},
-{pri:'next',title:'DotCom Secrets',author:'Russell Brunson',why:'銷售漏斗設計聖經 — Lead Magnet、Email 序列、價值階梯',cat:'創業'},
-{pri:'next',title:'The Vocal Athlete',author:'Wendy LeBorgne',why:'聲音科學實證 — 用運動員思維訓練聲音，課程 8 力的學術支撐',cat:'聲音'},
-{pri:'later',title:'Freeing the Natural Voice',author:'Kristin Linklater',why:'聲音釋放方法經典 — 身體與聲音的連結，進階教學法',cat:'聲音'},
-{pri:'later',title:'師父 (The E-Myth Revisited)',author:'Michael Gerber',why:'系統化你的事業 — 從自僱者變成企業主的思維轉換',cat:'創業'},
-{pri:'later',title:'深度工作力 (Deep Work)',author:'Cal Newport',why:'每天 4 小時高效工作的科學方法',cat:'生產力'},
-{pri:'later',title:'This is Marketing',author:'Seth Godin',why:'行銷本質 — 不是大聲喊，是找到你的最小可行受眾',cat:'行銷'}
+const WEEKDAY_STRATEGY={
+1:{name:'週一｜主線收斂 + 銷售頁',main1:'定本週唯一主線，寫銷售頁一個區塊',main2:'發一篇立場文，讓市場知道你反對什麼 / 支持什麼',asset:'銷售頁新增 1 區塊 + 1 則立場文'},
+2:{name:'週二｜聲音續航自檢 + 培養訊息',main1:'做聲音續航自檢表最小可用版，入口指向 90 分鐘聲音續航健檢',main2:'寫一則 LINE / Email 培養訊息，順手改成痛點文',asset:'聲音續航自檢表 + 1 則培養訊息'},
+3:{name:'週三｜學員案例素材',main1:'整理一位舊學員 before/after：原本痛點、關鍵轉變、可引用句',main2:'把案例改成故事文，補進銷售頁案例區',asset:'1 個學員案例 + 1 則故事文'},
+4:{name:'週四｜案例與關係維護',main1:'整理一位舊學員 before/after：原本痛點、關鍵轉變、可引用句',main2:'關心 1-2 位舊學員近況，取得同意使用匿名案例；回覆熱絡才提供自檢表轉發入口',asset:'1 個匿名案例 + 1-2 則關係維護訊息'},
+5:{name:'週五｜PDCA + 只修一個資產',main1:'看本週數據：發文、名單、DM、銷售頁進度，做 20 分鐘 PDCA',main2:'只修一個最卡的資產，排下週一第一件事',asset:'PDCA 紀錄 + 下週一第一件事'}
+};
+
+const VOICE_RESOURCES=[
+{pri:'now',title:'Set Your Voice Free / Speaking Training',author:'Roger Love',why:'看他怎麼把歌唱技術翻成 speaking、銷售、舞台影響力；適合你拆成「開口前暖嗓」與銷講聲音案例。',source:'影片 / 課程 / 書',url:'https://rogerlove.com/'},
+{pri:'now',title:'Find Your Voice / Gravitas',author:'Caroline Goyder',why:'跟你的客群最像：Podcast、主持、職場自信、專業人士表達；可轉成「聲音自信不是心理雞湯，是身體 + 呼吸 + 連結」。',source:'書 / TEDx / 課程',url:'https://carolinegoyder.com/books/'},
+{pri:'now',title:'The Voice Book',author:'Kate DeVore & Starr Cookman',why:'給講師、老師、專業說話者的嗓音保護與訓練；適合補你的聲音續航健檢與長時間用聲策略。',source:'書',url:'https://www.chicagoreviewpress.com/devore--kate-contributor-190242.php'},
+{pri:'next',title:'Vocal Awareness',author:'Arthur Samuel Joseph',why:'觀察他怎麼把聲音包成領導力、存在感、daily workout；可拆你的 7 分鐘暖嗓 / 聲音儀式。',source:'影片 / 課程 / 書',url:'https://www.vocalawareness.com/'},
+{pri:'next',title:'The Right to Speak / Second Circle',author:'Patsy Rodenburg',why:'聲音、存在感、舞台能量的經典；適合你把「被聽見」教成身體狀態，不只技巧。',source:'書 / 課程',url:'https://patsyrodenburg.co.uk/about/'},
+{pri:'next',title:'Freeing the Natural Voice',author:'Kristin Linklater',why:'身體釋放與自然聲音路線；適合補你「聲音不是硬做，是解除阻礙」的教學語言。',source:'書 / 工作坊',url:'https://www.linklatervoice.com/linklater-voice/kristin-s-books/22-freeing-the-natural-voice-imagery-and-art-in-the-practice-of-voice-and-text'},
+{pri:'later',title:'The Contemporary Singer / Vocal Workouts',author:'Anne Peckham',why:'科學化流行聲樂與練習 circuit；適合你設計 15 分鐘 / 30 分鐘分級練聲菜單。',source:'書 / 練習',url:'https://berkleepress.com/berklee-authors/anne-peckham/'},
+{pri:'later',title:'播音主持創作基礎',author:'中國傳媒大學 MOOC',why:'大陸學院派有聲語言訓練；適合補華語語音、稿件轉有聲表達、朗讀與情感調動。',source:'影片課',url:'https://www.icourse163.org/course/CUC-1462067162'},
+{pri:'later',title:'21 天掌握當眾講話訣竅',author:'殷亞敏',why:'大陸商務 / 公開講話語境強，可觀察「膽、聲、情、識」怎麼被包成易懂訓練。',source:'書 / 演講',url:'https://weread.qq.com/web/search/books?author=%E6%AE%B7%E4%BA%9A%E6%95%8F'},
+{pri:'later',title:'如何練就好聲音 / 聲音的價值',author:'涂夢珊',why:'女性聲音魅力、配音、個人成長包裝，適合反向研究：哪些可借鏡，哪些不要變成泛魅力學。',source:'書 / 短影音',url:'https://www.douyin.com/user/MS4wLjABAAAAfoSEkcH9-upHQwtA91P8k-WvpxEBoaaMoGAfHewLlpo'}
+];
+
+const PRODUCT_RESOURCES=[
+{pri:'now',title:'Building a StoryBrand',author:'Donald Miller',why:'招生頁文案必備。讀完只做一件事：改主標、副標、三個痛點和 CTA。',source:'銷售頁'},
+{pri:'now',title:'The Mom Test',author:'Rob Fitzpatrick',why:'訪談舊學員和高意願名單時避免問出假答案。讀完產出 3 個訪談問題。',source:'顧客訪談'},
+{pri:'now',title:'Company of One',author:'Paul Jarvis',why:'提醒你一人公司不要貪多 SKU。讀完檢查本週有沒有做太多非主線事。',source:'商業模式'},
+{pri:'next',title:'DotCom Secrets',author:'Russell Brunson',why:'用來設計聲音續航自檢、培養序列、8 週主產品入口。讀完產出 1 則 LINE / Email。',source:'漏斗'},
+{pri:'next',title:'This is Marketing',author:'Seth Godin',why:'幫你守住最小可行受眾，不要每個人都想救。讀完改 1 句 ICP 描述。',source:'定位'},
+{pri:'later',title:'Obviously Awesome',author:'April Dunford',why:'當你又開始懷疑定位時用。讀完只修「我跟語言治療 / 口才課不同在哪」這一句。',source:'定位'},
+{pri:'later',title:'Deploy Empathy',author:'Michele Hansen',why:'把訪談變成產品語言，不是聊開心。讀完產出 5 個客戶原話分類。',source:'顧客研究'}
 ];
 
 const TODOS={
-p0:['開始每日發文（Threads）','網站遷移（Cloudways → 新平台）','二期招生頁'],
-p1:['電子報系統 + Lead Magnet 製作','互動式聲音測驗遊戲（L1 產品）','第一梯回放上架 Skool','確定 Signature Behavior'],
-p2:['8 力概覽免費講座（40-60 min）','一對一陪跑方案定案（$38,000）','LINE@ 歡迎流程設定','進階陪跑營課程設計']
+p0:['8 週主產品招生頁可收單','聲音續航自檢表最小可用版','3 個講師型創作者 before/after 案例','案例授權 + 高意願名單追蹤表'],
+p1:['7 天 LINE / Email 培養序列','每週 5 則 Threads + 1 則 Email','90 分鐘健檢邀請名單','每日專業進修素材庫'],
+p2:['網站搬家或降費','第一梯回放整理','互動式聲音測驗遊戲','競品分析下次更新']
 };
 
 function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}');}catch(e){return {};}}
 function loadArr(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return [];}}
 function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
-let S=load(SK),logs=loadArr(LK),sparks=loadArr(SPK);
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+let S=load(SK),logs=loadArr(LK),sparks=loadArr(SPK),threadAssets=loadArr(TPK);
 
 const today=new Date(),dow=today.getDay();
 const dateStr=`${today.getFullYear()} 年 ${today.getMonth()+1} 月 ${today.getDate()} 日 ${DAYS_ZH[dow]}`;
@@ -460,16 +634,12 @@ const dk=today.toISOString().slice(0,10);
 const isOff=(dow===0||dow===6);
 
 if(!S.t3||S.t3.d!==dk){
-  const wp=WEEK_PLANS[contentWeekIdx];const tdz=DAYS_ZH[dow];
-  const tps=wp?wp.days.filter(d=>d.day===tdz):[];
-  const mp=tps.find(p=>p.platform==='threads')||tps[0];
-  let i2t='休息日',i2d='週六日不工作';
-  if(!isOff&&mp){const t=mp.topicId?TOPICS[mp.topicId]:null;i2t=`${mp.type}：${t?t.title:mp.title}`;i2d='深度工作 ③ 11:20-12:20';}
-  const revAct=REVENUE_ACTIONS[weekNum]||'跟進潛在學員';
+  const dayPlan=WEEKDAY_STRATEGY[dow]||{name:'週末｜休息',main1:'休息日',main2:'休息日',asset:'休息'};
   S.t3={d:dk,items:[
-    {label:'product',lt:'產品建設',text:isOff?'休息日':wk.title,detail:isOff?'週六日不工作':'深度工作 ①② 09:00-11:10',done:false},
-    {label:'create',lt:'創作',text:isOff?'休息日':i2t,detail:i2d,done:false},
-    {label:'revenue',lt:'營收行動',text:isOff?'休息日':revAct,detail:isOff?'週六日不工作':'14:00-15:00 輕量工作',done:false}
+    {label:'product',lt:'主線工作 ①',text:isOff?'休息日':dayPlan.main1,detail:isOff?'週六日不工作':'09:00-10:00，做出可被看見的資產',done:false},
+    {label:'create',lt:'主線工作 ②',text:isOff?'休息日':dayPlan.main2,detail:isOff?'週六日不工作':'10:10-11:10，把主線變成內容或營收行動',done:false},
+    {label:'learn',lt:'專業進修',text:isOff?'休息日':'專業進修 1 小時：聲音區 / 顧客、產品區擇一，轉成 1 則素材 / 課程例子 / 銷售頁句子',detail:isOff?'週六日不工作':'11:20-12:20，輸入後必須輸出',done:false},
+    {label:'voice',lt:'每日練聲',text:isOff?'休息日':'練聲 1 小時，可下午或晚上完成',detail:isOff?'週六日不工作':'14:00-15:00 預設；SOVT / 共鳴 / 咬字 / 示範素材',done:false}
   ]};save(SK,S);
 }
 
@@ -530,6 +700,90 @@ function renderContent(){
 }
 renderContent();
 
+function populateThreadCta(){
+  const sel=document.getElementById('thCta');
+  if(!sel)return;
+  sel.innerHTML=CTAS.map((c,i)=>`<option value="${esc(c)}">CTA ${i+1}｜${esc(c.slice(0,36))}${c.length>36?'...':''}</option>`).join('');
+}
+function getThreadFormData(){
+  return {
+    url:(document.getElementById('thUrl')?.value||'').trim(),
+    text:(document.getElementById('thText')?.value||'').trim(),
+    metric:(document.getElementById('thMetric')?.value||'').trim(),
+    story:(document.getElementById('thStory')?.value||'').trim(),
+    cta:document.getElementById('thCta')?.value||CTAS[0]
+  };
+}
+function analyzeThread(text){
+  const t=String(text||'');
+  const rec=[{type:'Email',reason:'互動最高的 Threads 先變成長信任資產，適合 500-800 字電子報。'}];
+  if(/步驟|清單|方法|三個|3 個|3個|五個|5 個|5個|差別|為什麼|如何|怎麼|不要|第一|第二/.test(t)){
+    rec.push({type:'IG 輪播',reason:'有方法、差別、清單或反直覺觀點，可拆成 5-8 張圖卡。'});
+  }
+  if(/我|以前|後來|那天|學員|老師|講座|Podcast|錄影|直播|案例|故事|你有沒有|是不是|其實|不是|一定/.test(t)){
+    rec.push({type:'短影音',reason:'有場景、故事或強 hook，可拍 30-60 秒口播。'});
+  }
+  return rec;
+}
+function buildThreadPrompt(data){
+  const recText=analyzeThread(data.text).map(r=>`- ${r.type}：${r.reason}`).join('\n');
+  const sourceLine=data.url?`Threads 連結：${data.url}\n`:'';
+  const emailPrompt=`這是我這週互動最高的 Threads 貼文：\n${sourceLine}${data.text}\n\n互動數：${data.metric||'未填'}\n\n請擴寫成 500-800 字電子報：\n1. 保持我 Threads 的口語知性語感\n2. 加一段我的真實故事：${data.story||'[一句話給我素材]'}\n3. 加一個明確立場（我反對什麼／支持什麼）\n4. 結尾 CTA 用這個：${data.cta||CTAS[0]}\n5. 不管主題是什麼，最後繞回「每天暖嗓 10 分鐘」`;
+  const carouselPrompt=`請把這則 Threads 改成 5-8 張 IG 輪播圖卡：\n1. 第一張只放最強 Hook，不要解釋\n2. 中間拆成「痛點 → 反直覺觀點 → 例子 → 做法」\n3. 每張只放一個重點，語氣維持口語知性，不要變成教科書\n4. 加入我的真實故事：${data.story||'[一句話給我素材]'}\n5. 最後一張 CTA 用：${data.cta||CTAS[0]}\n6. 不管主題是什麼，最後繞回「每天暖嗓 10 分鐘」\n\nThreads 原文：\n${data.text}`;
+  const reelsPrompt=`請把這則 Threads 改成 30-60 秒短影音口播腳本：\n1. 前 3 秒用一句強 Hook\n2. 中段用「錯誤觀念 → 我的立場 → 一個例子」\n3. 給我逐字稿 + 畫面建議\n4. 語氣像我平常 Threads，不要廣告感\n5. 結尾 CTA 用：${data.cta||CTAS[0]}\n6. 不管主題是什麼，最後繞回「每天暖嗓 10 分鐘」\n\nThreads 原文：\n${data.text}`;
+  return `【素材判斷】\n${recText}\n\n【Email 指令】\n${emailPrompt}\n\n【IG 輪播指令】\n${carouselPrompt}\n\n【短影音指令】\n${reelsPrompt}`;
+}
+function generateThreadPrompt(){
+  const data=getThreadFormData();
+  if(!data.text){showToast('請先貼 Threads 全文');return '';}
+  const prompt=buildThreadPrompt(data);
+  document.getElementById('thOutput').value=prompt;
+  return prompt;
+}
+function saveThreadAsset(){
+  const data=getThreadFormData();
+  if(!data.text){showToast('請先貼 Threads 全文');return;}
+  const prompt=generateThreadPrompt();
+  threadAssets.unshift({...data,id:Date.now(),date:dk,recs:analyzeThread(data.text).map(r=>r.type),prompt});
+  save(TPK,threadAssets);
+  renderThreadAssets();
+  showToast('已存進 Threads 素材庫 ✓');
+}
+async function copyThreadPrompt(){
+  const out=document.getElementById('thOutput');
+  const prompt=out.value||generateThreadPrompt();
+  if(!prompt)return;
+  try{await navigator.clipboard.writeText(prompt);showToast('已複製指令 ✓');}
+  catch(e){out.focus();out.select();showToast('請手動複製選取文字');}
+}
+function loadThreadAsset(id){
+  const a=threadAssets.find(x=>x.id===id);
+  if(!a)return;
+  document.getElementById('thUrl').value=a.url||'';
+  document.getElementById('thText').value=a.text||'';
+  document.getElementById('thMetric').value=a.metric||'';
+  document.getElementById('thStory').value=a.story||'';
+  document.getElementById('thCta').value=a.cta||CTAS[0];
+  document.getElementById('thOutput').value=a.prompt||buildThreadPrompt(a);
+  showToast('已載入素材');
+}
+function deleteThreadAsset(id){
+  if(!confirm('確定刪除這則 Threads 素材嗎？'))return;
+  threadAssets=threadAssets.filter(x=>x.id!==id);
+  save(TPK,threadAssets);
+  renderThreadAssets();
+}
+function renderThreadAssets(){
+  const el=document.getElementById('threadAssetList');
+  if(!el)return;
+  if(!threadAssets.length){el.innerHTML='<div style="text-align:center;color:#999;font-size:16px;padding:20px">還沒有 Threads 素材。每週挑互動最高的一則貼上來，讓它變成 Email / 輪播 / 短影音。</div>';return;}
+  el.innerHTML=threadAssets.map(a=>
+    `<div class="spark-item"><span class="spark-book">${esc(a.date)}</span> <span class="spark-type">${esc(a.metric||'未填互動數')}</span><div class="spark-text">${esc(a.text).slice(0,140)}${a.text.length>140?'...':''}</div>${a.story?`<div class="spark-conn">故事：${esc(a.story)}</div>`:''}<div class="thread-rec">${(a.recs||[]).map(r=>`<span class="asset-chip">${esc(r)}</span>`).join('')}</div><div class="thread-meta">${a.url?`<a class="resource-link" href="${esc(a.url)}" target="_blank">打開 Threads</a> · `:''}<span class="spark-use-btn" onclick="loadThreadAsset(${a.id})">載入指令</span> · <span class="spark-use-btn" onclick="deleteThreadAsset(${a.id})">刪除</span></div></div>`
+  ).join('');
+}
+populateThreadCta();
+renderThreadAssets();
+
 function renderBlocks(){
   const el=document.getElementById('blockList');const hr=today.getHours();el.innerHTML='';
   BLOCKS.forEach(b=>{const parts=b.time.match(/(\d+)/g);const sH=parseInt(parts[0]);const eH=parts.length>1?parseInt(parts[1]):sH+1;const isNow=hr>=sH&&hr<eH;
@@ -541,10 +795,14 @@ document.getElementById('ladderList').innerHTML=LADDER.map(l=>
   `<div class="ladder-item" style="${l.focus?'background:#faf5ed;border-radius:8px;padding:10px 12px;margin:0 -12px;':''}"><span class="ladder-level">${l.level}</span> — ${l.name}<br><span class="ladder-price">${l.price}</span> <span class="ladder-status">| ${l.status}</span></div>`
 ).join('');
 
-const priLabel={now:'現在就讀',next:'第二輪',later:'第三輪'};
-document.getElementById('bookList').innerHTML=BOOKS.map(b=>
-  `<div class="book-card ${b.pri}"><span class="book-pri ${b.pri}">${priLabel[b.pri]}</span> <span style="font-size:16px;color:#999">${b.cat}</span><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-why">${b.why}</div></div>`
-).join('');
+const priLabel={now:'現在就用',next:'第二輪',later:'第三輪'};
+function renderResourceList(id,items){
+  document.getElementById(id).innerHTML=items.map(b=>
+    `<div class="book-card ${b.pri}"><span class="book-pri ${b.pri}">${priLabel[b.pri]}</span> <span style="font-size:16px;color:#999">${b.source}</span><div class="book-title">${b.title}</div><div class="book-author">${b.author}</div><div class="book-why">${b.why}</div>${b.url?`<a class="resource-link" href="${b.url}" target="_blank">打開資源</a>`:''}</div>`
+  ).join('');
+}
+renderResourceList('voiceResourceList',VOICE_RESOURCES);
+renderResourceList('productResourceList',PRODUCT_RESOURCES);
 
 function saveSpark(){
   const book=document.getElementById('spBook').value.trim(),insight=document.getElementById('spInsight').value.trim(),conn=document.getElementById('spConn').value.trim(),type=document.getElementById('spType').value;
