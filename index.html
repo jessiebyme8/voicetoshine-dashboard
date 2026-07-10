@@ -7,6 +7,18 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f8f7f4;color:#2d2d2d;line-height:1.7;padding:16px;font-size:16px}
+body.auth-locked{overflow:hidden}
+.auth-screen{position:fixed;inset:0;z-index:2000;background:#f8f7f4;display:flex;align-items:center;justify-content:center;padding:24px}
+.auth-screen.hidden{display:none}
+.auth-card{width:min(420px,100%);background:#fff;border-radius:14px;padding:28px;box-shadow:0 4px 24px rgba(45,45,45,.12);text-align:center}
+.auth-title{font-size:26px;font-weight:700;color:#1a1a1a;letter-spacing:2px;margin-bottom:8px}
+.auth-sub{font-size:16px;color:#777;margin-bottom:18px}
+.auth-input{width:100%;border:1px solid #ddd;border-radius:10px;padding:13px 14px;font-size:17px;font-family:inherit;margin-bottom:12px}
+.auth-input:focus{outline:2px solid #e8d5b7;border-color:#d8c09c}
+.auth-button{width:100%;background:#2d2d2d;color:#fff;border:none;border-radius:10px;padding:13px;font-size:17px;font-weight:700;cursor:pointer}
+.auth-button:hover{background:#444}
+.auth-error{min-height:24px;color:#c53030;font-size:15px;margin-top:10px}
+.auth-note{font-size:14px;color:#999;line-height:1.6;margin-top:8px}
 .header{text-align:center;padding:16px 0 8px;margin-bottom:14px}
 .header h1{font-size:28px;font-weight:700;color:#1a1a1a;letter-spacing:2px}
 .header .date{font-size:17px;color:#888;margin-top:6px}
@@ -165,7 +177,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 .paid-free-label{font-size:17px;font-weight:700;margin-bottom:6px}
 </style>
 </head>
-<body>
+<body class="auth-locked">
+<div class="auth-screen" id="authScreen" aria-live="polite">
+  <form class="auth-card" id="authForm">
+    <div class="auth-title">聲現力主控板</div>
+    <div class="auth-sub">請輸入登入密碼</div>
+    <input class="auth-input" id="authPassword" type="password" autocomplete="current-password" placeholder="登入密碼">
+    <button class="auth-button" type="submit">登入</button>
+    <div class="auth-error" id="authError"></div>
+    <div class="auth-note">這是 GitHub Pages 前端登入門，請勿分享網址與密碼。</div>
+  </form>
+</div>
 <div class="toast" id="toast"></div>
 <div class="header">
   <h1>聲 現 力</h1>
@@ -475,6 +497,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div class="export-row">
   <button class="export-btn" onclick="exportData()">📥 匯出所有資料</button>
   <button class="export-btn" onclick="document.getElementById('importFile').click()">📤 匯入資料</button>
+  <button class="export-btn" onclick="logoutDashboard()">登出</button>
   <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
 </div>
 <button class="reset-btn" onclick="if(confirm('確定要重設所有自訂內容嗎？（紀錄不會刪除）')){localStorage.removeItem(SK);localStorage.removeItem(SPK);location.reload()}">重設今日內容</button>
@@ -490,6 +513,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 const DAYS_ZH=['週日','週一','週二','週三','週四','週五','週六'];
 const START_DATE=new Date('2026-07-03');
 const SK='vts11',LK='vts7_log',SPK='vts7_sparks',TPK='vts_threads';
+const AUTH_HASH='e86ecb7618899bf31711ec8b0d06033557ffee0757e7d1d78d6c7a3cb55b5836';
+const AUTH_KEY='vts_auth_ok';
+
+async function sha256Text(text){
+  if(!window.crypto?.subtle)throw new Error('Web Crypto unavailable');
+  const data=new TextEncoder().encode(text);
+  const hash=await crypto.subtle.digest('SHA-256',data);
+  return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function unlockDashboard(){
+  document.body.classList.remove('auth-locked');
+  document.getElementById('authScreen')?.classList.add('hidden');
+}
+function logoutDashboard(){
+  sessionStorage.removeItem(AUTH_KEY);
+  location.reload();
+}
+function setupAuth(){
+  if(sessionStorage.getItem(AUTH_KEY)==='1'){unlockDashboard();return;}
+  const form=document.getElementById('authForm');
+  const input=document.getElementById('authPassword');
+  const err=document.getElementById('authError');
+  input?.focus();
+  form?.addEventListener('submit',async e=>{
+    e.preventDefault();
+    err.textContent='';
+    try{
+      const hash=await sha256Text(input.value);
+      if(hash===AUTH_HASH){
+        sessionStorage.setItem(AUTH_KEY,'1');
+        input.value='';
+        unlockDashboard();
+      }else{
+        input.value='';
+        err.textContent='密碼不正確，請再試一次';
+        input.focus();
+      }
+    }catch(error){
+      err.textContent='這個瀏覽器不支援安全密碼檢查，請改用 https 網址開啟。';
+    }
+  });
+}
+setupAuth();
 
 const TOPICS={1:{type:'立場文',title:'聲音不是天生的，是你從來沒有人教你',opening:'「你一定聽過這句話：『他聲音好好聽，天生的吧。』我以前也這樣以為。直到我學了聲樂、當了十年老師、訓練了上百個人的聲音之後，我發現——聲音根本不是天生的，是沒有人教你怎麼用。」'},2:{type:'立場文',title:'內容很好但沒人聽？問題不在你的腦袋，在你的聲音',opening:'「你有沒有遇過一種人：專業能力很強，一開口你卻想滑手機？不是他講得不好，是他的聲音沒有打開你大腦的『注意力大門』。」'},3:{type:'立場文',title:'我不教「好聽的聲音」，我教「讓人願意掏錢的聲音」',opening:'「好聽的聲音能當主播，但不一定能讓客戶買單。我教的不是怎麼讓聲音好聽，而是怎麼讓你的聲音建立信任、傳遞價值。」'},4:{type:'立場文',title:'買了線上課還是不會用？因為聲音不是知識，是身體記憶',opening:'「我的學員 Mike 跟我說，他之前買過三堂聲音線上課，看完覺得『好像懂了』，一上台還是老樣子。因為聲音訓練不是背公式，是讓你的身體記住一個新的發聲方式。」'},5:{type:'立場文',title:'你的聲音就是你的第二張臉',opening:'「我的學員 Pola 說過一句話：『聲音就是第二張臉。』現在有多少場景是別人「只聽到你、看不到你」的？」'},6:{type:'立場文',title:'台灣沒有人在教「聲音品牌」，所以我決定自己來',opening:'「在美國，Roger Love 幫 Tony Robbins 打造聲音，一堂課收六位數美金。在台灣？沒有人把聲音訓練跟個人品牌連在一起。所以我決定自己做這件事。」'},7:{type:'立場文',title:'「你聲音很好聽」是最沒用的稱讚',opening:'「每次有人跟我說『老師你聲音好好聽』，我都笑笑帶過。因為好聽是最表面的事。」'},8:{type:'立場文',title:'說話不是用喉嚨，是用身體',opening:'「如果我告訴你，你說話沙啞、講久會累，問題根本不在你的喉嚨，你信嗎？你的身體就是一把樂器。」'},9:{type:'立場文',title:'對話感不是講慢一點，是心裡有人',opening:'「很多人被說『你講話像在念稿』，就拼命放慢語速。結果變成——慢慢地念稿。對話感的關鍵不是速度，是你心裡有沒有一個人。」'},10:{type:'立場文',title:'鏡頭前的你，需要多 20% 的能量',opening:'「你有沒有看過自己錄的影片，覺得『怎麼看起來這麼沒精神』？這是因為鏡頭會吃掉你的能量。」'},11:{type:'立場文',title:'聲音訓練的目的不是追求完美，是移除阻礙',opening:'「很多人來找我，第一句話都是：『老師，我想要聲音變好聽。』我都會先問他：『你覺得你現在的聲音怎麼了？』」'},12:{type:'立場文',title:'一人公司最被低估的武器：你的聲音',opening:'「你花了錢拍形象照、請設計師做品牌視覺、學文案寫作。但你有沒有想過，當客戶第一次聽到你的聲音，他對你的印象，有超過一半是你的聲音決定的？」'},13:{type:'痛點文',title:'明明準備很充分，一開口就被當空氣',opening:'「簡報做了三天，數據查了五遍，甚至彩排了兩次。結果上場講不到三分鐘，你看到台下的人開始低頭滑手機。」'},14:{type:'痛點文',title:'每次錄影都要重錄十幾遍，你累的不是嘴巴，是自信',opening:'「打開鏡頭，錄了一遍覺得不行，再錄一遍，又不行，刪掉重來。不是你的內容有問題，是你每次聽到自己的聲音，就覺得『不像我想要的那個樣子』。」'},15:{type:'痛點文',title:'你的學員很多，但轉介紹很少——問題可能出在你的聲音',opening:'「課上完學員都說好，但很少有人主動幫你推薦。沒有聲音辨識度，就沒有記憶點；沒有記憶點，就沒有轉介紹。」'},16:{type:'痛點文',title:'講了一整天課，隔天聲音就沙啞——你不是天生嗓子弱',opening:'「我的學員心慧是國中老師，她跟我說她的同事幾乎每個人都有聲帶問題。十年教書下來，嗓子壞掉好像是標配。但真的是這樣嗎？」'},17:{type:'痛點文',title:'線上會議開到一半，你發現沒人在聽你說話',opening:'「你在線上會議分享提案，講到一半發現——對面的人在打字、鏡頭關了三個。不是你講得太爛，是線上會議只剩聲音這一個通道。」'},18:{type:'痛點文',title:'你很會寫，但一開口就不像「那個人」',opening:'「你的文章寫得犀利又溫暖。結果第一次直播，留言區出現：『跟我想像的不一樣欸。』」'},19:{type:'痛點文',title:'為什麼你的 Podcast 數據一直起不來',opening:'「你研究了一堆 Podcast 經營攻略，數據還是上不去。大部分聽眾在前 30 秒就決定要不要聽下去。」'},20:{type:'痛點文',title:'銷講的時候很緊張，聲音會抖——越想控制越抖',opening:'「你站上台，準備開口的那一秒，喉嚨突然鎖住了。這不是你心理素質差，是你的神經系統啟動了保護機制。」'},21:{type:'痛點文',title:'你學了很多表達技巧，但上台還是像在「演」',opening:'「你看了很多表達課的影片，學了重音、停頓、抑揚頓挫。上台一用，朋友說：『你今天怎麼怪怪的？』」'},22:{type:'痛點文',title:'「我的聲音很難聽」——你可能從來沒聽過自己真正的聲音',opening:'「你聽自己的錄音會覺得：『這不是我的聲音吧？好難聽。』你平常聽到的自己的聲音，其實是假的。」'},23:{type:'故事文',title:'音樂劇系畢業的我，第一次站上講台差點哭出來',opening:'「我是音樂劇系畢業的，大家都覺得我一定很會說話。結果我第一次站上國中講台，聲音抖到不行，學生在底下完全不理我。」'},24:{type:'故事文',title:'我在國中教了十年，教會我一件事：再好的內容，包裝不對就是垃圾',opening:'「國中生是全世界最殘忍的聽眾。你的課講得好不好，不用看評鑑，看他們的眼神就知道。」'},25:{type:'故事文',title:'我的學員被同事說「聲音像鯊魚」，她聽完哭了',opening:'「Pola 跟我說，有一次同事形容她的聲音『像鯊魚一樣有攻擊性』。她回家聽了自己的錄音，發現真的很尖、很急。」'},26:{type:'故事文',title:'離開教職的前一天，我問自己：聲音這件事，真的值得我賭上一切嗎',opening:'「2026 年 7 月，我正式離開了待了十年的教職。交出辭呈那天，我坐在車裡發了很久的呆。」'},27:{type:'故事文',title:'他買了三堂線上課都沒用，最後在我的陪跑營裡第一次聽到變化',opening:'「Mike 是一個非常忙的企業主，他跟我說他買過三堂聲音線上課。看完了嗎？看完了。有用嗎？他搖搖頭。」'},28:{type:'故事文',title:'心慧要離開教職去開自己的工作室，她說：「我不想再用喉嚨硬撐了」',opening:'「心慧是國中老師，教了好幾年。她來找我的原因是她的同事一個接一個聲帶出問題。」'},29:{type:'故事文',title:'致中說：「你的課不只是聲音課，是讓我重新認識自己的課」',opening:'「致中是企業講師，他本來覺得自己的表達能力應該算不錯了。上完八週之後，他說：『我以前以為我在表達，但其實我只是在說。』」'},30:{type:'故事文',title:'Emma 跟我說：「我本來只是想學聲音，沒想到整個人都變了」',opening:'「Emma 報名的時候就是想學怎麼讓聲音好一點。八週結束她說：『以前我很怕被注意到，現在我覺得被聽到是一件很舒服的事。』」'},31:{type:'成果展示',title:'第一週 vs 第八週：同一段自我介紹，聲音差距大到學員自己不敢相信',opening:'「結業那天，我讓每個學員重聽自己第一週錄的自我介紹。教室裡安靜了三秒，然後有人笑出來、有人眼眶紅了。」'},32:{type:'成果展示',title:'八週之後，Pola 開始用真實的聲音在做短影音了',opening:'「八週前，Pola 連在公司開會都盡量不說話。現在她每天在 IG 更新短影音，用自己的聲音。」'},33:{type:'成果展示',title:'學員回饋：「一對一的時候 Jessie 講了一句話，我整個聲音就打開了」',opening:'「Pola 跟我說，八週課程裡對她衝擊最大的，不是團體課的理論，是一對一諮詢的那 30 分鐘。」'},34:{type:'成果展示',title:'全班六個人，每個人進步的方向都不一樣——這才是小班制的意義',opening:'「第一梯六個學員，同樣的課程，每個人需要調整的地方完全不同。這就是為什麼我堅持小班制。」'}};
 
