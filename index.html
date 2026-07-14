@@ -140,6 +140,13 @@ body.auth-locked{overflow:hidden}
 .todo-item:last-child{border-bottom:none}
 .todo-check{width:22px;height:22px;border:2px solid #ccc;border-radius:4px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff}
 .todo-check.done{background:#5b7a5e;border-color:#5b7a5e;color:#fff}
+.todo-add{display:flex;gap:8px;margin-bottom:8px}
+.todo-input{flex:1;min-width:0;border:1px solid #ddd;border-radius:9px;padding:10px 12px;font-size:16px;font-family:inherit}
+.todo-input:focus{outline:2px solid #e8d5b7;border-color:#d8c09c}
+.todo-add-btn{border:0;border-radius:9px;background:#2d2d2d;color:#fff;padding:10px 16px;font-size:16px;font-weight:700;cursor:pointer;white-space:nowrap}
+.todo-text{flex:1;line-height:1.5;word-break:break-word}.todo-text.done-text{text-decoration:line-through;color:#aaa}
+.todo-delete{border:0;background:none;color:#bbb;font-size:20px;line-height:1;cursor:pointer;padding:2px 4px}.todo-delete:hover{color:#9b4d4d}
+.todo-empty{font-size:15px;color:#aaa;padding:8px 0}
 .todo-priority{font-size:16px;font-weight:700;padding:2px 8px;border-radius:4px}
 .todo-priority.p0{background:#fde8e8;color:#c53030}.todo-priority.p1{background:#fef3cd;color:#856404}.todo-priority.p2{background:#e2e8f0;color:#4a5568}
 .edit-hint{text-align:center;font-size:16px;color:#bbb;margin-top:8px;padding:6px}
@@ -227,9 +234,9 @@ body.auth-locked{overflow:hidden}
   <div class="section">
     <div class="section-title">🎯 定位驗證任務｜先做這件事</div>
     <div class="method-box">
-      <div class="method-step"><strong>把招生頁第一屏暫時改成：</strong><br>每週都要長時間講課、諮詢或說明專業，卻愈講愈累、聲音愈來愈沒力嗎？四週建立比較省力、穩定的專業用聲基本功。</div>
-      <div class="method-step"><strong>傳給 5 位已付費學員，只問一句：</strong><br>「這句像不像你當初願意花錢解決的問題？」</div>
-      <div class="method-step"><strong>不要做：</strong>不要重新訪談整套定位，不要問「你覺得我這樣寫好嗎」，只驗證這句有沒有打中付費理由。</div>
+      <div class="method-step"><strong>單一驗證句：</strong><br>我幫已經在賣課的個人品牌講師，建立「講得省力 → 說得專業 → 鏡頭前穩定輸出」的聲音表達系統。</div>
+      <div class="method-step"><strong>先驗證身份辨識：</strong><br>發一篇定位文，只計算「已經有付費課程，並透過個人品牌招生」的人是否主動回應。</div>
+      <div class="method-step"><strong>不要做：</strong>不再把創作者、顧問、教練、主管、教師、Podcast 並列在第一句；職業可以不同，對外身份統一是「正在賣課的個人品牌講師」。</div>
     </div>
   </div>
   <div class="section">
@@ -244,6 +251,15 @@ body.auth-locked{overflow:hidden}
     <div class="section-title">🔒 每日固定事項</div>
     <div class="must-row" id="mustDo"></div>
     <div class="must-note">工作外：早上暖嗓 10 分鐘、冥想、早餐聽樊登。<br>工作內：3 小時招生主線（創作＋名單＋銷售資產）。<br>工作內：1 小時練聲 + 進修，至少轉出一句素材。</div>
+  </div>
+  <div class="section">
+    <div class="section-title">🗒️ 今日雜事待辦</div>
+    <div class="resource-note">臨時雜事放這裡，不要混進三小時招生主線。勾選與內容會自動保存在這個瀏覽器。</div>
+    <div class="todo-add">
+      <input class="todo-input" id="miscTodoInput" type="text" maxlength="120" placeholder="輸入今天要處理的雜事">
+      <button class="todo-add-btn" id="miscTodoAdd" type="button">加入</button>
+    </div>
+    <div id="miscTodoList"></div>
   </div>
   <div class="section">
     <div class="section-title">📌 每日 3 小時主線要做的事</div>
@@ -428,52 +444,62 @@ body.auth-locked{overflow:hidden}
   <div class="section">
     <div class="section-title">🎯 客群計劃｜第一期先打這裡</div>
     <div class="strategy-box" style="margin-top:0">
-      <div class="strategy-head" style="font-size:20px">品牌母市場可以寬；第一期招生灘頭堡要窄。</div>
-      <div>「靠聲音交付專業的人」可以保留為品牌長期定位，但第一期不能同時打老師、主管、顧問、Podcast、短影音。底層都跟聲音有關，付費的急迫理由卻不同。</div>
-      <div style="margin-top:8px"><span class="line-pill">品牌母市場：幫靠聲音交付專業的人，建立聲音表達系統</span></div>
+      <div class="strategy-head" style="font-size:20px">先刪掉客戶不會用的語言</div>
+      <div>「靠聲音交付專業」是內部分類，不是客戶會用來介紹自己的身份。「有經營個人品牌的講師」已能辨識，但只經營品牌、還沒有賣課，金錢痛點仍然不夠強。</div>
+      <div style="margin-top:8px"><span class="line-pill">客群身份必須同時具備：個人品牌 + 已經賣課</span></div>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">第一期真正灘頭堡</div>
-      <div class="strategy-head" style="font-size:19px">每週至少一次需要連續說話 30 分鐘以上，並已經因講久疲勞、沙啞、聲音虛弱或不穩，影響專業交付的知識型工作者。</div>
-      <div style="margin-top:8px"><strong>對外口語版：</strong>給每週都要長時間講課、諮詢或說明專業，卻愈講愈累、聲音愈來愈沒力的你。</div>
-      <div style="margin-top:8px"><span class="line-pill">共同購買工作：我必須持續說話完成工作，但現在的聲音撐不住我的工作量與專業要求</span></div>
+      <div class="strategy-head">最終單一灘頭堡</div>
+      <div class="strategy-head" style="font-size:22px">已經在賣課的個人品牌講師</div>
+      <div style="margin-top:8px"><strong>為什麼是這群人：</strong>他有明確身份、有付費產品、有招生與授課場景，聲音會直接影響課程體驗、專業信任與個人品牌形象；也符合你自己經營品牌、招生與開線上課的實戰經驗。</div>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">可以列的典型職業，但不要拆成三個 ICP</div>
-      <div class="icp-chip">教師與講師</div>
-      <div class="icp-chip">顧問與教練</div>
-      <div class="icp-chip">需要長時間簡報、培訓或說明方案的專業工作者</div>
-      <div style="margin-top:10px;color:#888">職業只是例子。你真正篩選的是「長時間用聲 + 已有疲勞或工作後果 + 願意為專業交付投資」。</div>
+      <div class="strategy-head">內部篩選條件</div>
+      <ul class="strategy-list">
+        <li>有自己的付費課程或工作坊。</li>
+        <li>透過 IG、Threads、Email 等個人品牌管道招生。</li>
+        <li>本人需要直播授課、實體講課或錄製專業內容。</li>
+        <li>聲音會影響課程體驗、專業信任與品牌形象。</li>
+      </ul>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">第一波招生只打一個主痛點</div>
-      <div class="pain-grid">
-        <div class="pain-card"><div class="pain-title">主痛點</div>講久容易累，聲音撐不到工作結束。</div>
-        <div class="pain-card"><div class="pain-title">第二層結果</div>練習更穩定、省力的專業用聲基本功。</div>
-        <div class="pain-card"><div class="pain-title">附帶價值</div>聲音更清楚、穩定，也更符合自己的專業。</div>
-      </div>
-      <div class="price-note">鏡頭不自然、Podcast、短影音反覆重錄先不要放在第一主標。這些人仍可報名，但不是第一波廣告與內容主要瞄準的人。</div>
+      <div class="strategy-head">對外核心定位</div>
+      <div class="strategy-head" style="font-size:20px">幫已經在賣課的個人品牌講師，建立「講得省力 → 說得專業 → 鏡頭前穩定輸出」的聲音表達系統。</div>
+      <div class="price-note"><strong>品牌利益句：</strong>讓你的聲音，撐得起課程內容、個人品牌與你的專業定價。<br><strong>邊界：</strong>這是連結商業價值，不是「保證提升收入」。</div>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">第一波先放到外圍</div>
-      <div class="no-chip">純短影音創作者</div>
-      <div class="no-chip">純 Podcast 興趣者</div>
-      <div class="no-chip">偶爾才需要簡報的上班族</div>
-      <div class="no-chip">只想讓聲音好聽的人</div>
-      <div class="no-chip">沒有疲勞或明確工作後果的人</div>
-      <div style="margin-top:10px;color:#888">不是永遠不做，而是目前購買急迫性較低。鏡頭與麥克風需求，等進階實戰室開放候補再集中處理。</div>
+      <div class="strategy-head">不放進第一句定位</div>
+      <div class="no-chip">還沒有課程的準講師</div>
+      <div class="no-chip">只經營自媒體、沒有付費產品的人</div>
+      <div class="no-chip">純企業內部講師</div>
+      <div class="no-chip">學校體制內教師</div>
+      <div class="no-chip">Podcast 主持人</div>
+      <div class="no-chip">主管</div>
+      <div class="no-chip">一般創作者</div>
+      <div style="margin-top:10px;color:#888">不是永遠不收，而是不在招生首頁並列多種身份。職業可以不同，對外身份必須統一是「正在賣課的個人品牌講師」。</div>
     </div>
-    <div class="decision-line"><strong>一句判斷：</strong>定位縮窄不是拒絕其他人報名，而是所有招生內容先集中攻打一個最痛、最容易付費的理由：聲音撐不住長時間專業交付。</div>
+    <div class="strategy-box">
+      <div class="strategy-head">讓客戶一眼認出自己</div>
+      <div><strong>身份描寫：</strong>如果你已經有自己的付費課程，平常透過 IG、Threads 或 Email 經營個人品牌，並且需要親自直播授課、開工作坊或錄製專業內容，這套訓練就是為你設計的。</div>
+      <div style="margin-top:10px"><strong>痛點描寫：</strong>你的文字很有觀點，課程內容也很專業；但一開口容易虛、趕、沒重點，講到後半段開始累，鏡頭前的你沒有文字裡那麼有份量。</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">線上與線下的處理原則</div>
+      <div><strong>第一波內容主打線上直播課。</strong>你自己經營個人品牌、自己招生、開線上直播團體課，也需要持續在鏡頭前輸出，這是你最能示範的場景。</div>
+      <div style="margin-top:8px"><span class="line-pill">第一波溝通：專為正在販售線上直播課的個人品牌講師設計</span></div>
+      <div style="margin-top:8px;color:#888">核心定位不寫死「只收線上講師」，實體工作坊講師仍可報名；等累積足夠實體案例後，再擴大實體場景溝通。</div>
+    </div>
+    <div class="decision-line"><strong>一句判斷：</strong>單一灘頭堡就定為「已經在賣課的個人品牌講師」；不再把顧問、教練、主管、教師、Podcast 並列進對外定位。</div>
   </div>
   <div class="section">
     <div class="section-title">🔥 核心痛點</div>
     <div class="pain-grid">
-      <div class="pain-card"><div class="pain-title">第一主痛點：講久容易累</div>講課、諮詢、培訓或連續說明後沙啞、喉嚨緊、聲音變虛。他想要的是工作做完後，聲音還撐得住。</div>
-      <div class="pain-card"><div class="pain-title">直接後果：專業交付受影響</div>不是單純聲音不好聽，而是講到後半段沒力、說明品質下降、學員或客戶開始分心，影響信任與續航。</div>
-      <div class="pain-card"><div class="pain-title">真正想買：省力穩定的基本功</div>他需要的不是更多表達技巧，而是知道怎麼暖嗓、支撐、共鳴、咬字，讓長時間說話更穩、更省力。</div>
-      <div class="pain-card"><div class="pain-title">附帶價值：更像專業的自己</div>當聲音比較穩、清楚、有續航，就會更符合他想呈現的專業形象；這是加分，不是第一主標。</div>
+      <div class="pain-card"><div class="pain-title">第一主痛點：聲音撐不起專業定價</div>文字很有觀點、課程也有內容，但一開口容易虛、趕、沒重點，專業價值在授課與鏡頭前被打折。</div>
+      <div class="pain-card"><div class="pain-title">收入場景：每次開課都是付費交付</div>聲音會影響學員體驗、專業信任、品牌形象與下一次被選擇的機會；但不對外保證提升收入。</div>
+      <div class="pain-card"><div class="pain-title">可聽見的症狀：虛、趕、累、不穩</div>講到後半段開始沒力、句尾掉、聲音變虛，鏡頭前的人沒有文字裡那麼有份量。這些是問題證據，不是品牌最終利益。</div>
+      <div class="pain-card"><div class="pain-title">真正想買：可重複的專業輸出</div>他需要一套能用在直播課、工作坊與錄製內容的聲音系統：講得省力、說得專業、鏡頭前穩定輸出。</div>
     </div>
-    <div class="price-note"><strong>你的差異：</strong>先賣長時間專業用聲的基本功，再讓學員進階到鏡頭、麥克風、銷講、Podcast 等真實場景。不要第一期就把所有場景都塞進主訴。</div>
+    <div class="price-note"><strong>你的差異：</strong>不是泛用的聲音魅力課，而是讓已經在賣課的個人品牌講師，直接拿自己的課程內容練習，讓聲音撐得起課程、品牌與專業定價。</div>
   </div>
   <div class="section">
     <div class="section-title">💰 產品階梯</div>
@@ -725,7 +751,7 @@ const PRIORITIES=[
 ];
 
 const LADDER=[
-{level:'免費入口',name:'專業聲音自檢表 / 聲音魅力啟動包',price:'免費',status:'讓靠聲音交付專業的人辨認自己的問題',focus:true},
+{level:'免費入口',name:'個人品牌講師聲音自檢表 / 聲音魅力啟動包',price:'免費',status:'讓已經在賣課的個人品牌講師，辨認聲音是否撐得起課程與專業定價',focus:true},
 {level:'培養',name:'Email / LINE 培養序列',price:'免費',status:'用痛點、案例與立場建立信任，全部導向長青講座',focus:true},
 {level:'銷售事件',name:'專業用聲訓練路線說明會',price:'免費觀看',status:'說明產品路徑、適合對象、交付、價格與選課方式；不做完整教學',focus:true},
 {level:'10 月主推',name:'4 週「專業用聲基本功」',price:'早鳥 NT$6,800 / 原價 NT$8,800',status:'15 人開班、內部目標 18–20 人、24 人上限；隨機 4–5 人團練＋每週 60 秒錄音回饋',focus:true},
@@ -878,10 +904,31 @@ function renderMust(){
 }
 renderMust();
 
+/* ===== 今日雜事待辦 ===== */
+if(!S.td||typeof S.td!=='object')S.td={};
+if(!Array.isArray(S.td[dk]))S.td[dk]=[];
+function renderMiscTodos(){
+  const el=document.getElementById('miscTodoList');
+  const items=S.td[dk];
+  if(!items.length){el.innerHTML='<div class="todo-empty">今天還沒有雜事待辦</div>';return;}
+  el.innerHTML=items.map((it,i)=>`<div class="todo-item"><button class="todo-check${it.done?' done':''}" type="button" data-action="toggle" data-i="${i}" aria-label="${it.done?'取消完成':'標記完成'}">${it.done?'✓':''}</button><div class="todo-text${it.done?' done-text':''}">${esc(it.text)}</div><button class="todo-delete" type="button" data-action="delete" data-i="${i}" aria-label="刪除待辦">×</button></div>`).join('');
+  el.querySelectorAll('[data-action="toggle"]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;S.td[dk][i].done=!S.td[dk][i].done;save(SK,S);renderMiscTodos();});
+  el.querySelectorAll('[data-action="delete"]').forEach(b=>b.onclick=()=>{S.td[dk].splice(+b.dataset.i,1);save(SK,S);renderMiscTodos();});
+}
+function addMiscTodo(){
+  const input=document.getElementById('miscTodoInput');
+  const text=input.value.trim();
+  if(!text){showToast('請先輸入待辦事項');input.focus();return;}
+  S.td[dk].push({text,done:false});save(SK,S);input.value='';renderMiscTodos();input.focus();
+}
+document.getElementById('miscTodoAdd').onclick=addMiscTodo;
+document.getElementById('miscTodoInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addMiscTodo();}});
+renderMiscTodos();
+
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
 function saveLog(){
   const existing=logs.findIndex(l=>l.date===dk);
-  const entry={date:dk,mission:S.mt||wk.title,phase:ph.name,items:S.t3.items.map(i=>({text:i.lt+': '+i.text,done:i.done})),mustDo:S.md.items.map(i=>({text:i.t,done:i.done})),savedAt:new Date().toLocaleTimeString('zh-TW')};
+  const entry={date:dk,mission:S.mt||wk.title,phase:ph.name,items:S.t3.items.map(i=>({text:i.lt+': '+i.text,done:i.done})),mustDo:S.md.items.map(i=>({text:i.t,done:i.done})),misc:S.td[dk].map(i=>({text:'雜事：'+i.text,done:i.done})),savedAt:new Date().toLocaleTimeString('zh-TW')};
   if(existing>=0)logs[existing]=entry;else logs.push(entry);
   save(LK,logs);showToast('已儲存今日紀錄 ✓');renderLog();
 }
@@ -957,19 +1004,17 @@ function renderSparks(){
 function toggleSpark(id){const s=sparks.find(x=>x.id===id);if(s){s.used=!s.used;save(SPK,sparks);renderSparks();renderContent();}}
 renderSparks();
 
-if(!S.td)S.td={};
-
 function renderLog(){
   const sorted=[...logs].sort((a,b)=>b.date.localeCompare(a.date));
   const statsEl=document.getElementById('logStats');
   const totalDays=sorted.length;
-  const totalDone=sorted.reduce((sum,l)=>sum+l.items.filter(i=>i.done).length+l.mustDo.filter(i=>i.done).length,0);
-  const totalItems=sorted.reduce((sum,l)=>sum+l.items.length+l.mustDo.length,0);
+  const totalDone=sorted.reduce((sum,l)=>sum+l.items.filter(i=>i.done).length+l.mustDo.filter(i=>i.done).length+(l.misc||[]).filter(i=>i.done).length,0);
+  const totalItems=sorted.reduce((sum,l)=>sum+l.items.length+l.mustDo.length+(l.misc||[]).length,0);
   const rate=totalItems?Math.round(totalDone/totalItems*100):0;
   statsEl.innerHTML=`<div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${totalDays}</div><div style="font-size:16px;color:#888">天紀錄</div></div><div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${totalDone}</div><div style="font-size:16px;color:#888">項完成</div></div><div style="flex:1"><div style="font-size:28px;font-weight:700;color:#8b6f47">${rate}%</div><div style="font-size:16px;color:#888">完成率</div></div>`;
   const el=document.getElementById('logList');
   if(!sorted.length){el.innerHTML='<div class="log-empty">還沒有紀錄，今天做完事按「儲存今日紀錄」開始累積</div>';return;}
-  el.innerHTML=sorted.map(l=>{const allItems=[...l.items,...l.mustDo];const doneCount=allItems.filter(i=>i.done).length;
+  el.innerHTML=sorted.map(l=>{const allItems=[...l.items,...l.mustDo,...(l.misc||[])];const doneCount=allItems.filter(i=>i.done).length;
     return`<div class="log-day"><div class="log-date">${l.date} <span style="font-size:16px;color:#5b7a5e;font-weight:600">${doneCount}/${allItems.length}</span></div><div class="log-mission" style="font-size:16px">${l.phase} — ${l.mission}</div><div class="log-items">${allItems.map(i=>`<div class="log-item ${i.done?'log-done':'log-undone'}">${i.done?'✓':'✗'} ${i.text}</div>`).join('')}</div></div>`;
   }).join('');
 }
