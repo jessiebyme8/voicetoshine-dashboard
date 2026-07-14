@@ -244,17 +244,26 @@ body.auth-locked{overflow:hidden}
     <div id="todayStrategy"></div>
   </div>
   <div class="section">
+    <div class="section-title">⏳ 加班版最小主線</div>
+    <div id="overtimePlan"></div>
+  </div>
+  <div class="section">
     <div class="section-title">✦ 今日 3 小時招生主線</div>
     <div id="todayItems"></div>
   </div>
   <div class="section">
     <div class="section-title">🔒 每日固定事項</div>
     <div class="must-row" id="mustDo"></div>
-    <div class="must-note">工作外：早上暖嗓 10 分鐘、冥想、早餐聽樊登。<br>工作內：3 小時招生主線（創作＋名單＋銷售資產）。<br>工作內：1 小時練聲 + 進修，至少轉出一句素材。</div>
+    <div class="must-note">工作外：早上暖嗓 10 分鐘、冥想、早餐聽樊登。<br>完整工作日：3 小時招生主線 + 1 小時練聲進修。<br>加班日：只做 P0 銷售資產、P1 對外內容、P2 高意願對話、P3 聲音維持；完成 P0 + P1 就算合格。</div>
   </div>
   <div class="section">
     <div class="section-title">🗒️ 今日雜事待辦</div>
-    <div class="resource-note">臨時雜事放這裡，不要混進三小時招生主線。勾選與內容會自動保存在這個瀏覽器。</div>
+    <div class="resource-note">臨時雜事放這裡，不要混進招生主線。加班日只能從這裡挑 0–1 件，不能拿來補週一、週二沒做的進度。</div>
+    <div class="method-box" style="margin-bottom:14px">
+      <div class="method-step"><strong>不是明天主線：</strong>補週一週二全部進度、先做 IG 輪播 / Reels、整理完整報告模板、重新大改主控板、長時間進修。</div>
+      <div class="method-step"><strong>可以放待辦但要限時：</strong>空服員面試聲音健檢回覆與收款安排，最多 20 分鐘；它是短期現金流，不可以吃掉銷售講座與報名流程。</div>
+      <div class="method-step"><strong>延後處理：</strong>圖卡美化、完整電子報擴寫、案例大整理、進階課程設計，等週五 PDCA 後再排。</div>
+    </div>
     <div class="todo-add">
       <input class="todo-input" id="miscTodoInput" type="text" maxlength="120" placeholder="輸入今天要處理的雜事">
       <button class="todo-add-btn" id="miscTodoAdd" type="button">加入</button>
@@ -736,7 +745,7 @@ const BLOCKS=[
 {time:'22:00 之後',name:'停止工作',desc:'保留體力，明天才有戰鬥力',type:'rest'}
 ];
 
-const MUST_ITEMS=['早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登','工作內｜3 小時招生主線（創作＋名單＋銷售資產）','工作內｜1 小時練聲 + 進修，轉出 1 句素材'];
+const MUST_ITEMS=['早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登','加班日｜先完成 P0 銷售資產 + P1 對外內容','加班日｜P2 高意願對話限時 20 分鐘，P3 聲音維持 15 分鐘'];
 
 const PRIORITIES=[
 {id:'p1',text:'定 4 週專業用聲基本功 offer'},
@@ -836,6 +845,8 @@ const contentWeekIdx=Math.min(Math.floor(diffDays/7),WEEK_PLANS.length-1);
 const weekNum=Math.min(diffDays/7|0,11);
 const dk=today.toISOString().slice(0,10);
 const isOff=(dow===0||dow===6);
+const OVERTIME_START=new Date(2026,6,15);
+const isOvertimeMode=(!isOff&&today>=OVERTIME_START);
 
 /* ===== 優先事項 ===== */
 if(!S.pri)S.pri={};
@@ -864,20 +875,46 @@ function renderTodayStrategy(){
   }
   const ds=WEEKDAY_STRATEGY[dow];
   if(!ds){el.innerHTML='';return;}
+  if(isOvertimeMode){
+    titleEl.textContent='📋 加班版｜'+ds.name;
+    el.innerHTML=`<div class="day-strategy"><div class="day-strategy-title">加班日只保住最小主線</div><div class="day-strategy-item">• 週一、週二沒做的進度不補，只記錄事實。</div><div class="day-strategy-item">• 今天只做一個銷售資產、一則內容、一個高意願對話。</div><div class="day-strategy-item">• 非主線最多挑 0–1 件，超過就移到待辦。</div><div class="day-strategy-item">• 晚上加班後不開新坑，避免把明天體力借光。</div></div>`;
+    return;
+  }
   titleEl.textContent='📋 '+ds.name;
   el.innerHTML=`<div class="day-strategy"><div class="day-strategy-title">${ds.name}</div>${ds.items.map(it=>`<div class="day-strategy-item">• ${it}</div>`).join('')}</div>`;
 }
 renderTodayStrategy();
 
+function renderOvertimePlan(){
+  const el=document.getElementById('overtimePlan');
+  if(isOff){
+    el.innerHTML='<div class="method-box"><div class="method-step"><strong>週末：</strong>不補進度。最多 15 分鐘排下個工作日第一件事。</div></div>';
+    return;
+  }
+  if(!isOvertimeMode){
+    el.innerHTML='<div class="method-box"><div class="method-step"><strong>7/15（三）起啟用：</strong>明天開始進入加班版，不再用完整四小時工作日要求自己。</div><div class="method-step"><strong>今天只做：</strong>整理明天第一件事，其他放待辦。</div></div>';
+    return;
+  }
+  el.innerHTML='<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：銷售資產只推一格。優先做「銷售講座 30 分鐘結構」或「報名流程下一步」。</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：寫 / 發一則 Threads。週一週二不補發，直接從今天的主題開始。</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：處理一個高意願對話。空服員面試健檢可以回，但只回方案與下一步，不做免費診斷。</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：聲音維持。只做暖嗓 / 練聲，不做長篇進修。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不要因為週一週二沒做，就把明天做成報復性工作日。</div></div>';
+}
+renderOvertimePlan();
+
 /* ===== 今日工作項目 ===== */
 if(!S.t3||S.t3.d!==dk){
   const dayPlan=WEEKDAY_STRATEGY[dow]||{name:'週末｜休息',main1:'休息日',main2:'休息日',main3:'休息日'};
-  S.t3={d:dk,items:[
+  const overtimeItems=[
+    {label:'product',lt:'P0 銷售資產',text:'45 分鐘：銷售講座 30 分鐘結構 / 報名流程，只推一格',detail:'加班日第一優先，完成這個就先止血',done:false},
+    {label:'create',lt:'P1 對外內容',text:'30 分鐘：寫 / 發一則 Threads，不補週一週二',detail:'讓市場持續看見你，不追求完美長文',done:false},
+    {label:'revenue',lt:'P2 高意願對話',text:'20 分鐘：回覆 1 位高意願對象，空服員健檢只給方案與下一步',detail:'不做免費診斷，不延伸聊天',done:false},
+    {label:'voice',lt:'P3 聲音維持',text:'15 分鐘：暖嗓 / 練聲維持，不做長篇進修',detail:'保住專業基本功，不把體力用乾',done:false}
+  ];
+  const normalItems=[
     {label:'product',lt:'招生主線 ①',text:isOff?'休息日':dayPlan.main1,detail:isOff?'週六日不工作':'09:00-10:00，推進銷售資產',done:false},
     {label:'create',lt:'招生主線 ②',text:isOff?'休息日':dayPlan.main2,detail:isOff?'週六日不工作':'10:10-11:10，完成一個對外創作',done:false},
     {label:'revenue',lt:'招生主線 ③',text:isOff?'休息日':(dayPlan.main3||'處理高意願名單'),detail:isOff?'週六日不工作':'11:20-12:20，名單跟進',done:false},
     {label:'voice',lt:'練聲 + 進修',text:isOff?'休息日':'練聲 + 進修 1 小時，至少轉出一句素材',detail:isOff?'週六日不工作':'14:00-15:00，SOVT / 共鳴 / 咬字 / 示範素材',done:false}
-  ]};save(SK,S);
+  ];
+  S.t3={d:dk,items:isOvertimeMode?overtimeItems:normalItems};save(SK,S);
 }
 
 function renderT3(){
