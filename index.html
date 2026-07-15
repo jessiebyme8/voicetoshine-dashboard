@@ -187,6 +187,14 @@ body.auth-locked{overflow:hidden}
 .talk-step{padding:10px 0;border-bottom:1px solid #ece8df;font-size:16px;color:#666;line-height:1.6}
 .talk-step:last-child{border-bottom:none}
 .talk-time{display:inline-block;min-width:62px;color:#8b6f47;font-weight:700}
+.launch-item{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #ece8df;align-items:start}
+.launch-item:last-child{border-bottom:none}
+.launch-date{color:#8b6f47;font-size:16px;font-weight:700;white-space:nowrap}
+.launch-title{font-size:17px;font-weight:700;color:#333;margin-bottom:2px}
+.launch-desc{font-size:15px;color:#777;line-height:1.65}
+.launch-item.key{background:#f8f1e6;border:0;border-radius:10px;padding:12px;margin:7px 0}
+.email-subject{font-size:16px;font-weight:700;color:#333}
+@media(max-width:560px){.launch-item{grid-template-columns:1fr;gap:3px}.launch-date{white-space:normal}}
 </style>
 </head>
 <body class="auth-locked">
@@ -307,7 +315,7 @@ body.auth-locked{overflow:hidden}
       </div>
       <div class="sales-box">
         <div class="paid-free-label">🎥 銷售講座（免費說明會）</div>
-        讓人「選對路徑」：問題分型、訓練地圖、三種產品差異、適合／不適合對象、案例、價格與報名方式。
+        讓人「改變信念」：聲音撐不起專業，不是天生音色或內容不夠，而是缺少練習 → 錄音 → 回饋 → 修正的專業用聲迴圈。講座只銷售 4 週初階。
       </div>
       <div class="paid-box">
         <div class="paid-free-label">💰 付費（課程內）</div>
@@ -315,7 +323,7 @@ body.auth-locked{overflow:hidden}
       </div>
     </div>
     <div style="font-size:15px;color:#888;margin-top:10px;line-height:1.7">
-      <strong>鐵律：</strong>免費內容回答「我有沒有這個問題？」；銷售講座回答「我該走哪一條訓練路徑？」；付費課程才回答「我的聲音要怎麼練、怎麼修正、怎麼練到會？」
+      <strong>鐵律：</strong>免費內容讓人發現問題；銷售講座推倒錯誤信念，證明 4 週初階是合理的第一步；付費課程才進行個人診斷、修正與反覆帶練。
     </div>
   </div>
   <div class="section" id="sparkInContent" style="display:none">
@@ -514,33 +522,74 @@ body.auth-locked{overflow:hidden}
     <div class="section-title">💰 產品階梯</div>
     <div id="ladderList"></div>
     <div class="price-note">
-      <strong>成交路徑：</strong>Threads / Email / LINE → 免費資源 → 長青銷售講座 → 銷售頁 / 付款。初階不靠免費一對一成交；有人問課，先貼銷售講座。
+      <strong>成交路徑：</strong>Threads / Email / LINE → 免費資源 → 8 月直播銷售講座 → 講座後 Email → 銷售頁 / 付款。9 月把兩場直播驗證過的內容做成長青版；初階不靠免費一對一成交。
     </div>
   </div>
   <div class="section">
-    <div class="section-title">🎥 長青銷售講座｜有人問課就貼這支</div>
+    <div class="section-title">🎥 銷售講座｜8 月直播驗證，9 月轉長青</div>
     <div class="strategy-box" style="margin-top:0">
-      <div class="strategy-head" style="font-size:20px">《從聲音基本功到真實場景：專業用聲訓練路線說明會》</div>
-      <div><strong>任務：</strong>不是免費教完發聲技巧，而是讓對方看懂自己的問題、你的方法、三層產品差異，最後知道該報哪一門課。</div>
-      <div style="margin-top:8px"><span class="line-pill">25–35 分鐘</span><span class="line-pill">預錄長青版</span><span class="line-pill">唯一 CTA：看課程頁 / 報名初階</span></div>
+      <div class="strategy-head" style="font-size:20px">《讓你的聲音，撐得起專業定價》</div>
+      <div><strong>副標：</strong>給已經在賣課的個人品牌講師：找出直播課聲音虛、趕、沒重點，講到後半段失去份量的真正原因，建立可重複的專業用聲系統。</div>
+      <div style="margin-top:8px"><strong>開場 Hook：</strong>你的課程很專業，但鏡頭前的聲音，有把你的價格說出來嗎？</div>
+      <div style="margin-top:8px"><span class="line-pill">50 分鐘直播版</span><span class="line-pill">只賣 4 週初階</span><span class="line-pill">唯一 CTA：立即報名</span></div>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">講座結構</div>
-      <div class="talk-step"><span class="talk-time">0–3 分</span><strong>你是不是適合的人：</strong>真實用聲場景＋四個常見警訊。</div>
-      <div class="talk-step"><span class="talk-time">3–7 分</span><strong>問題不是聲音難聽：</strong>而是聲音影響體力、自信、專業信任與內容產出。</div>
-      <div class="talk-step"><span class="talk-time">7–11 分</span><strong>為什麼只看預錄課常卡住：</strong>人很難客觀聽出自己的優先問題，練習需要回饋與修正。</div>
-      <div class="talk-step"><span class="talk-time">11–16 分</span><strong>完整訓練地圖：</strong>基本功 → 真實場景 → 重大曝光，不示範完整練習流程。</div>
-      <div class="talk-step"><span class="talk-time">16–24 分</span><strong>三種產品怎麼選：</strong>初階、實戰室、VIP 的成果、對象、交付與限制。</div>
-      <div class="talk-step"><span class="talk-time">24–29 分</span><strong>案例：</strong>原本場景 → 關鍵問題 → 接受的訓練 → 可觀察改變。</div>
-      <div class="talk-step"><span class="talk-time">29–35 分</span><strong>FAQ＋CTA：</strong>適合 / 不適合、上課方式、回饋邊界、價格、開課時間與報名連結。</div>
+      <div class="strategy-head">Big Domino｜講座要讓人相信的一件事</div>
+      <div>如果已經在賣課的講師相信：聲音撐不起專業，不是因為天生音色不好，也不是內容不夠，而是缺少「練習、錄音、回饋、修正、帶回下一場課」的專業用聲訓練，那麼四週基本功營就是合理的第一步。</div>
+      <div class="price-note"><strong>新機會｜專業用聲回饋迴圈：</strong>開口前準備 → 說自己的課程內容 → 錄下 60 秒 → 得到專業回饋 → 帶回下一場直播課。</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">三個秘密｜依序推倒錯誤信念</div>
+      <div class="talk-step"><span class="talk-time">秘密 1</span><strong>方法信念：</strong>不是再學更多內容、買麥克風或看發聲影片；要先判斷自己最優先的問題是用力、速度、清晰度或句尾，再得到回饋。</div>
+      <div class="talk-step"><span class="talk-time">秘密 2</span><strong>內在信念：</strong>不是天生聲音不好，也不是不適合鏡頭；目標不是變成主播，而是讓自己的聲音穩定、清楚、有重點。</div>
+      <div class="talk-step"><span class="talk-time">秘密 3</span><strong>時間信念：</strong>不用另外背練習稿，也不用每天練一小時；直接用下一場課程內容，讓暖嗓 10 分鐘與每週 60 秒錄音成為備課的一部分。</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">50 分鐘直播流程</div>
+      <div class="talk-step"><span class="talk-time">0–4 分</span><strong>客群篩選：</strong>點出直播課虛、趕、累、不穩四個警訊，讓正在賣課的講師認出自己。</div>
+      <div class="talk-step"><span class="talk-time">4–10 分</span><strong>覺醒故事：</strong>你從教師、備課與長期用聲經驗中，發現「內容準備好，不等於聲音準備好」。</div>
+      <div class="talk-step"><span class="talk-time">10–14 分</span><strong>Big Domino：</strong>說清楚問題不是音色，而是缺少可重複的訓練與回饋。</div>
+      <div class="talk-step"><span class="talk-time">14–29 分</span><strong>三個秘密：</strong>依序推倒方法、天生條件與時間不足三個錯誤信念。</div>
+      <div class="talk-step"><span class="talk-time">29–34 分</span><strong>簡短自我觀察：</strong>讓聽眾辨認一項警訊；不做個人診斷或完整練習。</div>
+      <div class="talk-step"><span class="talk-time">34–39 分</span><strong>一個案例：</strong>原本場景 → 關鍵問題 → 接受的回饋 → 可觀察改變。</div>
+      <div class="talk-step"><span class="talk-time">39–42 分</span><strong>新機會：</strong>揭示「專業用聲回饋迴圈」。</div>
+      <div class="talk-step"><span class="talk-time">42–48 分</span><strong>Offer Stack：</strong>4 週課程成果、每週交付、60 秒錄音回饋、適合與不適合、早鳥／原價。</div>
+      <div class="talk-step"><span class="talk-time">48–50 分</span><strong>唯一 CTA：</strong>前往課程頁並完成付款，不同時介紹進階與 VIP。</div>
     </div>
     <div class="paid-free-box">
-      <div class="free-box"><div class="paid-free-label">講座可以給</div>問題辨識、聲音訓練地圖、一個簡短自我觀察、案例、選課建議、課程交付與限制。</div>
+      <div class="free-box"><div class="paid-free-label">講座可以給</div>問題辨識、四個警訊、信念轉換、專業用聲回饋迴圈、一個案例、課程交付與限制。</div>
       <div class="paid-box"><div class="paid-free-label">講座不能給</div>完整暖嗓流程、逐步練習處方、個人錄音診斷、逐句修正、完整場景排練、課後作業回饋。</div>
     </div>
     <div class="strategy-box">
-      <div class="strategy-head">有人問課的固定回覆</div>
-      <div>「可以，我整理了一支《專業用聲訓練路線說明會》，裡面會說明哪些聲音問題適合訓練、初階／實戰班／VIP 的差別、上課與回饋方式，也能幫你判斷自己適合哪一種。你先看這支：［講座連結］。看完如果還有你的個別情況沒有回答，再把問題傳給我。」</div>
+      <div class="strategy-head">📆 銷售講座與開課時間線</div>
+      <div class="launch-item"><div class="launch-date">7/15–7/31</div><div><div class="launch-title">驗證三個錯誤信念</div><div class="launch-desc">用 Threads 與 Email 測試：方法信念、天生條件、沒有時間；記錄收藏、分享、回信與私訊原話。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">8/3</div><div><div class="launch-title">講座報名頁上線</div><div class="launch-desc">主標、三個秘密、適合對象、8/19 日期、報名表單與提醒信全部可用。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">8/19</div><div><div class="launch-title">第一場直播銷售講座</div><div class="launch-desc">使用 50 分鐘版本；會後立刻記錄離場點、問題與未成交原因。目標：至少 3 位付費。</div></div></div>
+      <div class="launch-item"><div class="launch-date">8/20–8/25</div><div><div class="launch-title">第一輪 Email 成交序列</div><div class="launch-desc">重播 → 方法信念 → 起源故事 → 案例 → 時間異議 → 適合對象 → 截止提醒。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">9/2</div><div><div class="launch-title">第二場直播銷售講座</div><div class="launch-desc">沿用同一套架構，只修改第一場最常見的一個異議。累積目標：至少 8 位付費。</div></div></div>
+      <div class="launch-item"><div class="launch-date">9/3–9/8</div><div><div class="launch-title">第二輪 Email＋早鳥截止</div><div class="launch-desc">沿用驗證過的序列；9/8 早鳥 NT$6,800 截止，之後恢復原價 NT$8,800。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">9/16</div><div><div class="launch-title">30–35 分鐘長青版上線</div><div class="launch-desc">只保留兩場直播證實有效的故事、三個秘密、案例與 CTA；之後有人問課就貼這支。</div></div></div>
+      <div class="launch-item"><div class="launch-date">9/17–9/23</div><div><div class="launch-title">案例／FAQ／適合對象 Email</div><div class="launch-desc">處理最後猶豫，不新增承諾、不提供免費個人診斷。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">9/27</div><div><div class="launch-title">原價報名截止</div><div class="launch-desc">至少 15 人成班；內部目標 18–20 人，上限 24 人。</div></div></div>
+      <div class="launch-item"><div class="launch-date">9/28–10/3</div><div><div class="launch-title">新生 onboarding</div><div class="launch-desc">寄上課說明、完成課前 60 秒原始錄音、確認回饋規則與上課工具。</div></div></div>
+      <div class="launch-item key"><div class="launch-date">10/4</div><div><div class="launch-title">第一梯 4 週營隊開課</div><div class="launch-desc">正式開始「專業用聲基本功」。</div></div></div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">✉️ 講座後 Email 成交序列</div>
+      <div class="talk-step"><span class="talk-time">D0</span><span class="email-subject">不是聲音不好聽，是專業交付沒有被訓練</span><br>CTA：觀看講座重播。</div>
+      <div class="talk-step"><span class="talk-time">D1</span><span class="email-subject">看過很多發聲影片，為什麼開課時還是用不上？</span><br>CTA：查看 4 週課程。</div>
+      <div class="talk-step"><span class="talk-time">D2</span><span class="email-subject">我教了十年才發現：備課完成，不代表聲音準備完成</span><br>CTA：查看 4 週課程。</div>
+      <div class="talk-step"><span class="talk-time">D3</span><span class="email-subject">她不是沒有內容，鏡頭前卻比文字少了份量</span><br>CTA：閱讀案例與課程內容。</div>
+      <div class="talk-step"><span class="talk-time">D4</span><span class="email-subject">已經忙著招生備課，還需要另外練聲音嗎？</span><br>CTA：查看訓練與時間安排。</div>
+      <div class="talk-step"><span class="talk-time">D5</span><span class="email-subject">這堂課不適合只想讓聲音更好聽的人</span><br>CTA：確認適合對象並報名。</div>
+      <div class="talk-step"><span class="talk-time">截止日</span><span class="email-subject">早鳥今晚截止</span><br>CTA：完成付款。</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">📊 決策門檻</div>
+      <div class="talk-step"><span class="talk-time">8/19 後</span>第一場直播至少 3 位付費；若未達標，先問未購者原因，不急著重做整份講座。</div>
+      <div class="talk-step"><span class="talk-time">9/8 後</span>兩場直播累積至少 8 位付費；只修正最多人提出的同一個異議。</div>
+      <div class="talk-step"><span class="talk-time">9/27</span>至少 15 人成班；未達門檻就依真實名單狀況決定是否延期，不用折價換人數。</div>
+      <div class="price-note"><strong>未成交訪談只問六件事：</strong>不夠急、成果不清楚、回饋感不足、沒有時間、價格疑慮，還是覺得自己不適合？</div>
     </div>
   </div>
   <div class="section">
@@ -618,8 +667,9 @@ body.auth-locked{overflow:hidden}
     <div class="guardrail">個人練習表使用問題類型模板，只客製優先問題、練習順序與暫停事項，不從零寫 24 份。</div>
     <div class="guardrail">同儕只觀察穩定、清晰、用力感與自然度，不互相診斷聲帶、呼吸或共鳴機制。</div>
     <div class="guardrail">進階一次只開一條場景線，不同時做三套招生頁與三套課程。</div>
-    <div class="guardrail">銷售講座只幫客戶理解問題與選課，不提供個人診斷，不把完整課程免費教完。</div>
-    <div class="guardrail">有人問課先貼長青講座；看完仍有未回答的個別問題，再回覆 FAQ，不用免費一對一成交。</div>
+    <div class="guardrail">銷售講座只銷售 4 週初階，不同時介紹實戰室與 VIP；不提供個人診斷，不把完整課程免費教完。</div>
+    <div class="guardrail">8 月先做兩場同架構直播驗證，9/16 才把有效內容轉成長青版。</div>
+    <div class="guardrail">有人問課先貼銷售講座；看完仍有未回答的個別問題，再回覆 FAQ，不用免費一對一成交。</div>
     <div class="guardrail">所有 Before / After、Spotlight 與公開案例均需取得學員書面授權。</div>
   </div>
   <div class="section">
@@ -672,6 +722,7 @@ body.auth-locked{overflow:hidden}
 
 const DAYS_ZH=['週日','週一','週二','週三','週四','週五','週六'];
 const START_DATE=new Date('2026-07-03');
+const PLAN_START_DATE=new Date('2026-07-15');
 const SK='vts11',LK='vts7_log',SPK='vts7_sparks',TPK='vts_threads';
 const AUTH_HASH='e86ecb7618899bf31711ec8b0d06033557ffee0757e7d1d78d6c7a3cb55b5836';
 const AUTH_KEY='vts_auth_ok';
@@ -730,7 +781,7 @@ const WEEK_PLANS=[
 {label:'W8',theme:'身體就是你的樂器',days:[{day:'週一',platform:'threads',type:'立場文',topicId:8},{day:'週二',platform:'threads',type:'痛點文',topicId:20},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'上台前喉嚨鎖住？不是心理素質差，是神經系統在保護你'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【銷講時聲音會抖？讓神經系統冷靜下來】'},{day:'週四',platform:'threads',type:'故事文',topicId:29},{day:'週五',platform:'threads',type:'立場文',topicId:9}]}
 ];
 
-const CTAS=['想知道你的聲音撐不撐得住你的專業？留言「健檢」，領取專業聲音自檢表','想知道初階、實戰班與 VIP 的差別？看《專業用聲訓練路線說明會》→ 連結在自介','我每週二寄一封信，聊聲音怎麼影響體力、信任與專業輸出 → 連結在自介','加入 LINE@ → 領取「聲音魅力啟動包」，並觀看完整訓練路線說明會'];
+const CTAS=['想知道你的聲音撐不撐得住你的專業？留言「健檢」，領取專業聲音自檢表','你的課程很專業，但鏡頭前的聲音，有把你的價格說出來嗎？報名《讓你的聲音，撐得起專業定價》→ 連結在自介','我每週二寄一封信，聊聲音怎麼影響體力、信任與專業輸出 → 連結在自介','加入 LINE@ → 領取「聲音魅力啟動包」，並收到銷售講座通知'];
 
 const BLOCKS=[
 {time:'08:00-09:00',name:'起床 + 開機儀式',desc:'早上暖嗓 10 分鐘、冥想、早餐聽樊登，不碰工作訊息',type:'life'},
@@ -749,10 +800,10 @@ const MUST_ITEMS=['早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登','加班
 
 const PRIORITIES=[
 {id:'p1',text:'定 4 週專業用聲基本功 offer'},
-{id:'p2',text:'做報名流程'},
-{id:'p3',text:'錄製長青銷售講座'},
+{id:'p2',text:'完成 8/3 銷講報名頁與報名流程'},
+{id:'p3',text:'完成 8/19 直播銷講：Big Domino、三個秘密與案例'},
 {id:'p4',text:'做名單磁鐵'},
-{id:'p5',text:'寫 Email / LINE 培養序列'},
+{id:'p5',text:'寫講座後 7 封 Email 成交序列'},
 {id:'p6',text:'整理高意願名單'},
 {id:'p7',text:'整理學員案例'},
 {id:'p8',text:'每日創作內容'},
@@ -761,31 +812,32 @@ const PRIORITIES=[
 
 const LADDER=[
 {level:'免費入口',name:'個人品牌講師聲音自檢表 / 聲音魅力啟動包',price:'免費',status:'讓已經在賣課的個人品牌講師，辨認聲音是否撐得起課程與專業定價',focus:true},
-{level:'培養',name:'Email / LINE 培養序列',price:'免費',status:'用痛點、案例與立場建立信任，全部導向長青講座',focus:true},
-{level:'銷售事件',name:'專業用聲訓練路線說明會',price:'免費觀看',status:'說明產品路徑、適合對象、交付、價格與選課方式；不做完整教學',focus:true},
+{level:'培養',name:'Email / LINE 培養序列',price:'免費',status:'用痛點、案例與立場建立信任；8 月導向直播銷講，9 月導向長青版',focus:true},
+{level:'銷售事件',name:'《讓你的聲音，撐得起專業定價》',price:'免費觀看',status:'推倒三個錯誤信念，只銷售 4 週「專業用聲基本功」；不做完整教學',focus:true},
 {level:'10 月主推',name:'4 週「專業用聲基本功」',price:'早鳥 NT$6,800 / 原價 NT$8,800',status:'15 人開班、內部目標 18–20 人、24 人上限；隨機 4–5 人團練＋每週 60 秒錄音回饋',focus:true},
 {level:'後續進階',name:'4 週「真實場景聲音實戰室」',price:'校友 NT$12,800 / 一般 NT$15,800',status:'8–10 人；完成一個真實工作場景中的高價值片段',focus:false},
 {level:'高階專案',name:'VIP 重大場景聲音改造',price:'NT$32,800 起',status:'重大演講、錄課、提案或曝光；依範圍報價',focus:false}
 ];
 
 const PHASES=[
-{name:'Phase 1：定 Offer + 銷售基礎建設',revenue:'4 週班 offer 定案 + 銷售頁上線 + 報名流程可用',weeks:[
-  {title:'定 4 週基本功 offer + 銷售頁骨架',del:'offer 文案 / 銷售頁主標+痛點+方案 / FAQ',days:7},
-  {title:'報名流程 + 長青銷售講座',del:'表單+付款 / 25–35 分鐘講座大綱+案例+CTA',days:7}]},
-{name:'Phase 2：名單磁鐵 + 培養序列',revenue:'名單磁鐵上線 + 培養序列完成 + 名單 30 人',weeks:[
-  {title:'名單磁鐵最小可用版',del:'自檢表 / 領取頁 / 領取流程',days:7},
-  {title:'Email/LINE 培養序列',del:'5-7 則培養訊息 + CTA 指向銷講或 4 週班',days:7}]},
-{name:'Phase 3：案例整理 + 高意願跟進',revenue:'3 個 before/after 案例 + 高意願名單追蹤',weeks:[
-  {title:'學員案例整理',del:'3 個 before/after + 授權 + 銷售頁案例區',days:7},
-  {title:'高意願名單系統化跟進',del:'A/B/C 分級 + 每日 2-3 人跟進',days:7}]},
-{name:'Phase 4：銷售講座 + 招生衝刺',revenue:'長青講座上線 + 4 週班至少 15 人、內部目標 18–20 人、上限 24 人',weeks:[
-  {title:'講座上線 + 每日創作 + 招生衝刺',del:'所有問課者導向講座 / Email+LINE+Threads / 高意願名單跟進',days:49}]}
+{name:'Phase 1｜7/15–8/2 銷講核心與報名基礎',revenue:'Big Domino + 三個秘密 + Offer + 報名流程定案',weeks:[
+  {title:'定銷講核心：Big Domino、三個秘密與覺醒故事',del:'50 分鐘直播骨架 / 1 個案例 / Offer Stack',days:10},
+  {title:'完成報名頁、付款與提醒流程',del:'主標+三個秘密+日期 / 表單 / 付款 / 提醒信',days:9}]},
+{name:'Phase 2｜8/3–8/18 報名與預熱',revenue:'8/19 首場直播報名頁上線 + 完成彩排',weeks:[
+  {title:'報名頁上線＋Threads／Email／LINE 導流',del:'8/19 報名連結 / 預熱內容 / 名單紀錄',days:9},
+  {title:'完成 50 分鐘直播版＋彩排',del:'講座稿 / 投影片 / 案例 / CTA / 會前提醒',days:7}]},
+{name:'Phase 3｜8/19–9/15 直播驗證與 Email 成交',revenue:'第一場至少 3 位；兩場累積至少 8 位付費',weeks:[
+  {title:'8/19 第一場直播＋第一輪 Email',del:'直播數據 / 未成交原因 / 7 封 Email / 至少 3 位付費',days:14},
+  {title:'9/2 第二場直播＋第二輪 Email',del:'只修 1 個主要異議 / 9/8 早鳥截止 / 累積至少 8 位',days:14}]},
+{name:'Phase 4｜9/16–10/3 長青、關單與開課準備',revenue:'9/27 至少 15 人成班；10/4 正式開課',weeks:[
+  {title:'9/16 長青版上線＋案例／FAQ 收單',del:'30–35 分鐘長青版 / Email / 高意願名單跟進',days:12},
+  {title:'9/28–10/3 新生 onboarding',del:'課前說明 / 60 秒原始錄音 / 工具與回饋規則',days:6}]}
 ];
 
 const WEEKDAY_STRATEGY={
 1:{name:'週一｜定主線 + 銷售頁 + 立場文',items:['定本週唯一主線','寫 4 週基礎班 offer','寫銷售頁一個區塊','發一則立場文'],main1:'定本週唯一主線。寫 4 週基礎班 offer。寫銷售頁一個區塊',main2:'發一則立場文，讓市場知道你反對什麼 / 支持什麼',main3:'推進 offer / 銷售頁 / 報名流程其中一項'},
 2:{name:'週二｜名單磁鐵 + 培養訊息',items:['製作名單磁鐵','整理領取流程','寫一則 Email / LINE 培養訊息','改成一則痛點文'],main1:'製作名單磁鐵。整理領取流程',main2:'寫一則 Email / LINE 培養訊息。改成一則痛點文',main3:'推進名單磁鐵或培養序列'},
-3:{name:'週三｜銷講 + 案例 + 故事文',items:['策劃銷講大綱','補銷講案例、FAQ、課程介紹','整理一位學員 before / after','發一則故事文或銷講預熱文'],main1:'策劃銷講大綱。補銷講案例、FAQ、課程介紹',main2:'整理一位學員 before/after。發一則故事文或銷講預熱文',main3:'推進銷講或案例整理'},
+3:{name:'週三｜銷講 + Email + 故事文',items:['推進 Big Domino 或三個秘密','補覺醒故事、案例、Offer 或 CTA','寫一封講座後 Email','發一則故事文或銷講預熱文'],main1:'推進 Big Domino、三個秘密、覺醒故事、案例或 Offer 其中一段',main2:'寫一封講座後 Email。發一則故事文或銷講預熱文',main3:'推進 8/19 直播銷講或 Email 成交序列'},
 4:{name:'週四｜高意願名單 + 對話洞察',items:['整理高意願名單','標記 A / B / C 級','傳訊息給 2-3 位高意願名單','把對話洞察整理成一則內容素材'],main1:'整理高意願名單。標記 A / B / C 級',main2:'傳訊息給 2-3 位高意願名單',main3:'把對話洞察整理成一則內容素材'},
 5:{name:'週五｜PDCA + 修資產 + 排下週',items:['做本週 PDCA','看新增名單、回覆數、銷講報名數、內容互動','只修一個最卡的資產','排下週一第一件事'],main1:'做本週 PDCA。看新增名單、回覆數、銷講報名數、內容互動',main2:'只修一個最卡的資產',main3:'排下週一第一件事'}
 };
@@ -824,14 +876,15 @@ const today=new Date(),dow=today.getDay();
 const dateStr=`${today.getFullYear()} 年 ${today.getMonth()+1} 月 ${today.getDate()} 日 ${DAYS_ZH[dow]}`;
 document.getElementById('todayDate').textContent=dateStr;
 const diffDays=Math.max(0,Math.floor((today-START_DATE)/86400000));
+const planDiffDays=Math.max(0,Math.floor((today-PLAN_START_DATE)/86400000));
 document.getElementById('dayCount').textContent=`全職聲音教練 Day ${diffDays+1}`;
 const weekdayNum=(dow>=1&&dow<=5)?dow:0;
 
 /* ===== Phase 計算 ===== */
 let cum=0,pIdx=0,wIdx=0,dayInW=1;
-outer:for(let p=0;p<PHASES.length;p++){for(let w=0;w<PHASES[p].weeks.length;w++){if(diffDays<cum+PHASES[p].weeks[w].days){pIdx=p;wIdx=w;dayInW=diffDays-cum+1;break outer;}cum+=PHASES[p].weeks[w].days;}}
+outer:for(let p=0;p<PHASES.length;p++){for(let w=0;w<PHASES[p].weeks.length;w++){if(planDiffDays<cum+PHASES[p].weeks[w].days){pIdx=p;wIdx=w;dayInW=planDiffDays-cum+1;break outer;}cum+=PHASES[p].weeks[w].days;}}
 const ph=PHASES[pIdx],wk=ph.weeks[wIdx];
-document.getElementById('phaseTag').textContent='10 月開「4 週專業用聲基本功」';
+document.getElementById('phaseTag').textContent='10/4 開「4 週專業用聲基本功」';
 document.getElementById('missionLabel').textContent=ph.name;
 document.getElementById('missionTitle').textContent=S.mt||wk.title;
 document.getElementById('missionRev').textContent='里程碑：'+ph.revenue;
@@ -895,7 +948,7 @@ function renderOvertimePlan(){
     el.innerHTML='<div class="method-box"><div class="method-step"><strong>7/15（三）起啟用：</strong>明天開始進入加班版，不再用完整四小時工作日要求自己。</div><div class="method-step"><strong>今天只做：</strong>整理明天第一件事，其他放待辦。</div></div>';
     return;
   }
-  el.innerHTML='<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：銷售資產只推一格。優先做「銷售講座 30 分鐘結構」或「報名流程下一步」。</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：寫 / 發一則 Threads。週一週二不補發，直接從今天的主題開始。</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：處理一個高意願對話。空服員面試健檢可以回，但只回方案與下一步，不做免費診斷。</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：聲音維持。只做暖嗓 / 練聲，不做長篇進修。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不要因為週一週二沒做，就把明天做成報復性工作日。</div></div>';
+  el.innerHTML='<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：銷售資產只推一格。優先做「8/19 直播銷講 50 分鐘骨架」或「8/3 報名流程下一步」。</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：寫 / 發一則 Threads。週一週二不補發，直接從今天的主題開始。</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：處理一個高意願對話。空服員面試健檢可以回，但只回方案與下一步，不做免費診斷。</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：聲音維持。只做暖嗓 / 練聲，不做長篇進修。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不要因為週一週二沒做，就把明天做成報復性工作日。</div></div>';
 }
 renderOvertimePlan();
 
@@ -903,7 +956,7 @@ renderOvertimePlan();
 if(!S.t3||S.t3.d!==dk){
   const dayPlan=WEEKDAY_STRATEGY[dow]||{name:'週末｜休息',main1:'休息日',main2:'休息日',main3:'休息日'};
   const overtimeItems=[
-    {label:'product',lt:'P0 銷售資產',text:'45 分鐘：銷售講座 30 分鐘結構 / 報名流程，只推一格',detail:'加班日第一優先，完成這個就先止血',done:false},
+    {label:'product',lt:'P0 銷售資產',text:'45 分鐘：8/19 直播銷講 50 分鐘骨架 / 8/3 報名流程，只推一格',detail:'加班日第一優先，完成這個就先止血',done:false},
     {label:'create',lt:'P1 對外內容',text:'30 分鐘：寫 / 發一則 Threads，不補週一週二',detail:'讓市場持續看見你，不追求完美長文',done:false},
     {label:'revenue',lt:'P2 高意願對話',text:'20 分鐘：回覆 1 位高意願對象，空服員健檢只給方案與下一步',detail:'不做免費診斷，不延伸聊天',done:false},
     {label:'voice',lt:'P3 聲音維持',text:'15 分鐘：暖嗓 / 練聲維持，不做長篇進修',detail:'保住專業基本功，不把體力用乾',done:false}
