@@ -242,12 +242,16 @@ body.auth-locked{overflow:hidden}
     <div class="section-title">🎯 總目標</div>
     <div class="mission-box">
       <div class="mission-week" id="missionLabel"></div>
-      <div class="mission-title" id="missionTitle" contenteditable="true"></div>
+      <div class="mission-title" id="missionTitle"></div>
       <div class="mission-rev" id="missionRev"></div>
       <div class="mission-del" id="missionDel"></div>
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-label" id="progressLbl"></div>
     </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🗓️ 本週自動作戰卡</div>
+    <div id="autoWeekPlan"></div>
   </div>
   <div class="section">
     <div class="section-title">⚡ 最高優先事項</div>
@@ -836,68 +840,68 @@ setupAuth();
 const TOPICS={1:{type:'立場文',title:'聲音不是天生的，是你從來沒有人教你',opening:'「你一定聽過這句話：『他聲音好好聽，天生的吧。』我以前也這樣以為。直到我學了聲樂、當了十年老師、訓練了上百個人的聲音之後，我發現——聲音根本不是天生的，是沒有人教你怎麼用。」'},2:{type:'立場文',title:'內容很好但沒人聽？問題不在你的腦袋，在你的聲音',opening:'「你有沒有遇過一種人：專業能力很強，一開口你卻想滑手機？不是他講得不好，是他的聲音沒有打開你大腦的『注意力大門』。」'},3:{type:'立場文',title:'我不教「好聽的聲音」，我教「讓人願意掏錢的聲音」',opening:'「好聽的聲音能當主播，但不一定能讓客戶買單。我教的不是怎麼讓聲音好聽，而是怎麼讓你的聲音建立信任、傳遞價值。」'},4:{type:'立場文',title:'買了線上課還是不會用？因為聲音不是知識，是身體記憶',opening:'「我的學員 Mike 跟我說，他之前買過三堂聲音線上課，看完覺得『好像懂了』，一上台還是老樣子。因為聲音訓練不是背公式，是讓你的身體記住一個新的發聲方式。」'},5:{type:'立場文',title:'你的聲音就是你的第二張臉',opening:'「我的學員 Pola 說過一句話：『聲音就是第二張臉。』現在有多少場景是別人「只聽到你、看不到你」的？」'},6:{type:'立場文',title:'台灣沒有人在教「聲音品牌」，所以我決定自己來',opening:'「在美國，Roger Love 幫 Tony Robbins 打造聲音，一堂課收六位數美金。在台灣？沒有人把聲音訓練跟個人品牌連在一起。所以我決定自己做這件事。」'},7:{type:'立場文',title:'「你聲音很好聽」是最沒用的稱讚',opening:'「每次有人跟我說『老師你聲音好好聽』，我都笑笑帶過。因為好聽是最表面的事。」'},8:{type:'立場文',title:'說話不是用喉嚨，是用身體',opening:'「如果我告訴你，你說話沙啞、講久會累，問題根本不在你的喉嚨，你信嗎？你的身體就是一把樂器。」'},9:{type:'立場文',title:'對話感不是講慢一點，是心裡有人',opening:'「很多人被說『你講話像在念稿』，就拼命放慢語速。結果變成——慢慢地念稿。對話感的關鍵不是速度，是你心裡有沒有一個人。」'},10:{type:'立場文',title:'鏡頭前的你，需要多 20% 的能量',opening:'「你有沒有看過自己錄的影片，覺得『怎麼看起來這麼沒精神』？這是因為鏡頭會吃掉你的能量。」'},11:{type:'立場文',title:'聲音訓練的目的不是追求完美，是移除阻礙',opening:'「很多人來找我，第一句話都是：『老師，我想要聲音變好聽。』我都會先問他：『你覺得你現在的聲音怎麼了？』」'},12:{type:'立場文',title:'一人公司最被低估的武器：你的聲音',opening:'「你花了錢拍形象照、請設計師做品牌視覺、學文案寫作。但你有沒有想過，當客戶第一次聽到你的聲音，他對你的印象，有超過一半是你的聲音決定的？」'},13:{type:'痛點文',title:'明明準備很充分，一開口就被當空氣',opening:'「簡報做了三天，數據查了五遍，甚至彩排了兩次。結果上場講不到三分鐘，你看到台下的人開始低頭滑手機。」'},14:{type:'痛點文',title:'每次錄影都要重錄十幾遍，你累的不是嘴巴，是自信',opening:'「打開鏡頭，錄了一遍覺得不行，再錄一遍，又不行，刪掉重來。不是你的內容有問題，是你每次聽到自己的聲音，就覺得『不像我想要的那個樣子』。」'},15:{type:'痛點文',title:'你的學員很多，但轉介紹很少——問題可能出在你的聲音',opening:'「課上完學員都說好，但很少有人主動幫你推薦。沒有聲音辨識度，就沒有記憶點；沒有記憶點，就沒有轉介紹。」'},16:{type:'痛點文',title:'講了一整天課，隔天聲音就沙啞——你不是天生嗓子弱',opening:'「我的學員心慧是國中老師，她跟我說她的同事幾乎每個人都有聲帶問題。十年教書下來，嗓子壞掉好像是標配。但真的是這樣嗎？」'},17:{type:'痛點文',title:'線上會議開到一半，你發現沒人在聽你說話',opening:'「你在線上會議分享提案，講到一半發現——對面的人在打字、鏡頭關了三個。不是你講得太爛，是線上會議只剩聲音這一個通道。」'},18:{type:'痛點文',title:'你很會寫，但一開口就不像「那個人」',opening:'「你的文章寫得犀利又溫暖。結果第一次直播，留言區出現：『跟我想像的不一樣欸。』」'},19:{type:'痛點文',title:'為什麼你的 Podcast 數據一直起不來',opening:'「你研究了一堆 Podcast 經營攻略，數據還是上不去。大部分聽眾在前 30 秒就決定要不要聽下去。」'},20:{type:'痛點文',title:'銷講的時候很緊張，聲音會抖——越想控制越抖',opening:'「你站上台，準備開口的那一秒，喉嚨突然鎖住了。這不是你心理素質差，是你的神經系統啟動了保護機制。」'},21:{type:'痛點文',title:'你學了很多表達技巧，但上台還是像在「演」',opening:'「你看了很多表達課的影片，學了重音、停頓、抑揚頓挫。上台一用，朋友說：『你今天怎麼怪怪的？』」'},22:{type:'痛點文',title:'「我的聲音很難聽」——你可能從來沒聽過自己真正的聲音',opening:'「你聽自己的錄音會覺得：『這不是我的聲音吧？好難聽。』你平常聽到的自己的聲音，其實是假的。」'},23:{type:'故事文',title:'音樂劇系畢業的我，第一次站上講台差點哭出來',opening:'「我是音樂劇系畢業的，大家都覺得我一定很會說話。結果我第一次站上國中講台，聲音抖到不行，學生在底下完全不理我。」'},24:{type:'故事文',title:'我在國中教了十年，教會我一件事：再好的內容，包裝不對就是垃圾',opening:'「國中生是全世界最殘忍的聽眾。你的課講得好不好，不用看評鑑，看他們的眼神就知道。」'},25:{type:'故事文',title:'我的學員被同事說「聲音像鯊魚」，她聽完哭了',opening:'「Pola 跟我說，有一次同事形容她的聲音『像鯊魚一樣有攻擊性』。她回家聽了自己的錄音，發現真的很尖、很急。」'},26:{type:'故事文',title:'離開教職的前一天，我問自己：聲音這件事，真的值得我賭上一切嗎',opening:'「2026 年 7 月，我正式離開了待了十年的教職。交出辭呈那天，我坐在車裡發了很久的呆。」'},27:{type:'故事文',title:'他買了三堂線上課都沒用，最後在我的陪跑營裡第一次聽到變化',opening:'「Mike 是一個非常忙的企業主，他跟我說他買過三堂聲音線上課。看完了嗎？看完了。有用嗎？他搖搖頭。」'},28:{type:'故事文',title:'心慧要離開教職去開自己的工作室，她說：「我不想再用喉嚨硬撐了」',opening:'「心慧是國中老師，教了好幾年。她來找我的原因是她的同事一個接一個聲帶出問題。」'},29:{type:'故事文',title:'致中說：「你的課不只是聲音課，是讓我重新認識自己的課」',opening:'「致中是企業講師，他本來覺得自己的表達能力應該算不錯了。上完八週之後，他說：『我以前以為我在表達，但其實我只是在說。』」'},30:{type:'故事文',title:'Emma 跟我說：「我本來只是想學聲音，沒想到整個人都變了」',opening:'「Emma 報名的時候就是想學怎麼讓聲音好一點。八週結束她說：『以前我很怕被注意到，現在我覺得被聽到是一件很舒服的事。』」'},31:{type:'成果展示',title:'第一週 vs 第八週：同一段自我介紹，聲音差距大到學員自己不敢相信',opening:'「結業那天，我讓每個學員重聽自己第一週錄的自我介紹。教室裡安靜了三秒，然後有人笑出來、有人眼眶紅了。」'},32:{type:'成果展示',title:'八週之後，Pola 開始用真實的聲音在做短影音了',opening:'「八週前，Pola 連在公司開會都盡量不說話。現在她每天在 IG 更新短影音，用自己的聲音。」'},33:{type:'成果展示',title:'學員回饋：「一對一的時候 Jessie 講了一句話，我整個聲音就打開了」',opening:'「Pola 跟我說，八週課程裡對她衝擊最大的，不是團體課的理論，是一對一諮詢的那 30 分鐘。」'},34:{type:'成果展示',title:'全班六個人，每個人進步的方向都不一樣——這才是小班制的意義',opening:'「第一梯六個學員，同樣的課程，每個人需要調整的地方完全不同。這就是為什麼我堅持小班制。」'}};
 
 const WEEK_PLANS=[
-{label:'W1｜7/15–7/19',start:'2026-07-15',end:'2026-07-19',theme:'方法信念｜問題不只是知道得太少',days:[
+{label:'W1｜7/15–7/19',start:'2026-07-15',end:'2026-07-19',theme:'方法信念｜問題不只是知道得太少',education:'讓講師理解：問題不是方法太少，而是沒有人指出當下最該先修的問題。',sales:'完成 Big Domino、三個秘密與覺醒故事 A4；先不做 PPT。',lead:'記錄受眾對「買設備／看影片仍無法改善」的留言、回信與私訊原話。',cta:'請對方回覆目前最常出現的警訊，不急著賣課。',metric:'取得至少 5 則目標講師的真實原話。',days:[
   {day:'週三',platform:'email',type:'Jessie 故事',title:'我進音樂系後才發現：努力很多，不代表知道自己該先修什麼',opening:'我曾經以為，只要比別人練更久，就能補上所有差距。後來我才知道，最珍貴的不是更多方法，而是有人能指出：你現在最該先修哪一個問題。'},
   {day:'週四',platform:'threads',type:'場景痛點',title:'買了更好的麥克風，為什麼直播課的聲音還是虛、趕、沒重點？',opening:'設備可以放大聲音，卻不能替你判斷：現在拖累專業感的究竟是用力、速度、清晰度，還是句尾。'},
   {day:'週五',platform:'threads',type:'信念教育',title:'你缺的可能不是下一支發聲影片，而是第一次被正確地聽見',opening:'聲音訓練最難的不是找不到方法，而是你聽不出自己當下最該改什麼。沒有判斷，收藏再多影片也很難帶回下一場課。'}]},
-{label:'W2｜7/20–7/26',start:'2026-07-20',end:'2026-07-26',theme:'天生信念｜聲音不是天生定型',days:[
+{label:'W2｜7/20–7/26',start:'2026-07-20',end:'2026-07-26',theme:'天生信念｜聲音不是天生定型',education:'推倒「我的聲音天生不適合鏡頭」；目標不是主播腔，而是穩、清楚、有重點。',sales:'完成四週營單一成果、適合／不適合與每週回饋方式。',lead:'蒐集受眾描述自己聲音時使用的天生論與自我否定原話。',cta:'邀請回覆「你最常怎麼形容自己的聲音？」',metric:'找到 1 個最常重複的天生信念句型。',days:[
   {day:'週一',platform:'threads',type:'信念教育',title:'我不是從小被稱讚有天分的人',opening:'高中以前，我不是音樂科班。進音樂系後，我和從小受訓的同學有巨大落差；也正因如此，我比很多天賦型選手更知道「練不會」是什麼感覺。'},
   {day:'週二',platform:'threads',type:'場景痛點',title:'「我的聲音天生就很虛」可能只是你對自己最久的一個誤判',opening:'四週營不是把你改造成主播，而是幫原本的聲音，在付費授課時更穩、清楚、有重點。'},
   {day:'週三',platform:'email',type:'Jessie 故事',title:'主修老師說我很難走原本的路，卻讓我找到更適合自己的聲音',opening:'那次回饋很挫折，卻也讓我從單一的聲樂路線，看見音樂劇與表演的可能。好的回饋不是否定你，而是幫你換一條能前進的路。'},
   {day:'週四',platform:'threads',type:'案例／證據',title:'她不是內容不夠，而是鏡頭前一直聽起來像在背稿',opening:'真正的改變不是突然多出一副好嗓音，而是她開始聽得出自己的用力、速度與句尾，並知道下一次怎麼修。'},
   {day:'週五',platform:'threads',type:'方法地圖',title:'聲音能不能改變，先看你有沒有走完這五步',opening:'準備、說自己的內容、錄下 60 秒、得到回饋、帶回下一場課。這五步，比追求一個理想音色更接近真實改變。'}]},
-{label:'W3｜7/27–8/2',start:'2026-07-27',end:'2026-08-02',theme:'時間信念｜把訓練變成備課',days:[
+{label:'W3｜7/27–8/2',start:'2026-07-27',end:'2026-08-02',theme:'時間信念｜把訓練變成備課',education:'讓講師相信不必另寫練習稿或每天多練一小時，真實課程內容就是練習素材。',sales:'完成 8/3 講座報名頁、表單、提醒信與講座通知入口。',lead:'把回覆者依「有課程／有授課場景／願意錄音」標記高意願。',cta:'登記 8/19 講座通知。',metric:'8/3 前報名流程可完整走一次。',days:[
   {day:'週一',platform:'threads',type:'信念教育',title:'真正能長期執行的練習，不該每天再多占一小時',opening:'我現在一天規劃四小時工作，不是因為事情少，而是我越來越相信：真正有用的系統，應該放進原本的工作，不是無限增加任務。'},
   {day:'週二',platform:'threads',type:'場景痛點',title:'你已經忙著招生、備課，還需要另外準備一份練聲稿嗎？',opening:'不用。直接拿下週要講的課程內容，錄同一段 60 秒，就能同時完成備課、自我觀察與聲音訓練。'},
   {day:'週三',platform:'email',type:'Jessie 故事',title:'離開重複教學循環後，我重新設計了自己的工作方式',opening:'我不是離開教職後才開始珍惜時間。正是過去長期重複授課的經驗，讓我更確定：專業系統應該讓人穩定輸出，而不是一直消耗自己。'},
   {day:'週四',platform:'threads',type:'方法地圖',title:'開口前十分鐘，不是養生儀式，是授課準備',opening:'你會對稿、測簡報、確認連線；聲音也值得有一套固定的開機流程。'},
   {day:'週五',platform:'threads',type:'信念教育',title:'練聲音最省時間的方法：不要練一段永遠用不到的稿',opening:'直接用你的課程開場、案例或核心觀念。練完不是放回抽屜，而是帶進下一場直播課。'}]},
-{label:'W4｜8/3–8/9',start:'2026-08-03',end:'2026-08-09',theme:'看見損失｜備課完成不等於聲音準備完成',days:[
+{label:'W4｜8/3–8/9',start:'2026-08-03',end:'2026-08-09',theme:'看見損失｜備課完成不等於聲音準備完成',education:'讓講師辨認虛、趕、清晰度與句尾四個可聽見警訊，以及它們如何折損專業交付。',sales:'講座報名頁上線；完成導流文、報名名單與提醒流程。',lead:'每天記錄講座報名來源與最常被點中的警訊。',cta:'報名 8/19《讓你的聲音，撐得起專業定價》。',metric:'確認哪一個警訊帶來最多報名或回覆。',days:[
   {day:'週一',platform:'threads',type:'信念教育',title:'我教了十年才發現：備課完成，不代表聲音準備完成',opening:'教案、投影片與活動都準備好了，不代表你一開口就已經進入穩定、清楚、有重點的狀態。'},
   {day:'週二',platform:'threads',type:'場景痛點',title:'你的直播課有這四個可聽見的警訊嗎？',opening:'聲音虛、越講越趕、關鍵字不清楚、句尾一直掉。這不是在批評音色，而是在檢查專業交付。'},
   {day:'週三',platform:'email',type:'Jessie 故事',title:'十年教學現場，讓我重新理解「講得好」這件事',opening:'真正的教學不是把內容說完，而是讓學生願意跟上、聽得懂重點，也感受到老師穩定地在帶領。'},
   {day:'週四',platform:'threads',type:'案例／證據',title:'文字很有觀點，鏡頭前卻少了份量：問題可能出在哪裡？',opening:'先不急著說她不夠自信。我們先聽速度、用力感、清晰度與句尾，才知道下一步該修什麼。'},
   {day:'週五',platform:'threads',type:'講座邀請',title:'你的課程很專業，但鏡頭前的聲音，有把你的價格說出來嗎？',opening:'8/19《讓你的聲音，撐得起專業定價》會帶你辨認四個警訊，並看見聲音訓練真正缺少的那一環。'}]},
-{label:'W5｜8/10–8/18',start:'2026-08-10',end:'2026-08-18',theme:'新方法｜專業用聲回饋迴圈',days:[
+{label:'W5｜8/10–8/18',start:'2026-08-10',end:'2026-08-18',theme:'新方法｜專業用聲回饋迴圈',education:'讓觀眾看見免費影片缺少判斷、回饋與下一次修正，四週營補上這個迴圈。',sales:'完成 50 分鐘直播稿、案例、Offer Stack、CTA 與至少一次完整彩排。',lead:'整理報名者問題，優先收集成果、回饋方式與時間異議。',cta:'報名 8/19 講座；只放一個行動。',metric:'8/18 前完成彩排並收集至少 10 個講座問題。',days:[
   {day:'週一',platform:'threads',type:'信念教育',title:'看過很多發聲影片，為什麼開課時還是用不上？',opening:'因為影片可以給方法，卻很難判斷你此刻最優先的問題，也無法聽見你下一次有沒有真的修正。'},
   {day:'週二',platform:'threads',type:'Jessie 故事',title:'一句具體回饋，比我再苦練一年更重要',opening:'主修老師沒有只叫我更努力，而是看見我在音樂劇與表演上的可能。回饋真正的價值，是改變練習方向。'},
   {day:'週三',platform:'email',type:'方法地圖',title:'聲音課和預錄影片之間，真正少的是哪一環？',opening:'開口前準備、說真實課程內容、錄下 60 秒、得到回饋，再帶回下一場課。這就是專業用聲回饋迴圈。'},
   {day:'週四',platform:'threads',type:'案例／證據',title:'她不是多學了一個技巧，而是終於知道下一次該怎麼改',opening:'案例要看的不是聲音突然變多好聽，而是她能否辨認問題、理解回饋，並在下一次錄音做出可觀察改變。'},
   {day:'週五',platform:'threads',type:'講座邀請',title:'8/19 免費直播｜讓你的聲音，撐得起專業定價',opening:'這場不會帶完整暖嗓流程，也不做免費個人診斷；我會幫你重新理解，為什麼知道很多方法仍然用不上。'}]},
-{label:'W6｜8/19–8/25',start:'2026-08-19',end:'2026-08-25',theme:'第一場講座｜讓四週營成為合理第一步',days:[
+{label:'W6｜8/19–8/25',start:'2026-08-19',end:'2026-08-25',theme:'第一場講座｜讓四週營成為合理第一步',education:'從「聲音不好聽」改寫成「專業交付沒有被訓練」，讓四週基本功成為合理第一步。',sales:'舉辦 8/19 直播，啟動 D0–D5 Email 成交序列並記錄離場點。',lead:'將名單分成購買、看完未購、未觀看；只問未購者一個主要原因。',cta:'觀看回放或查看四週營；購買者立即退出序列。',metric:'第一場後至少 3 人付款。',days:[
   {day:'週三',platform:'email',type:'直播／回放',title:'不是聲音不好聽，是專業交付沒有被訓練',opening:'今天的直播會把問題從「音色不好」重新定義成「缺少可重複的練習與回饋」。'},
   {day:'週四',platform:'threads',type:'信念教育',title:'聲音訓練不是再懂一個方法，而是把回饋帶回下一場課',opening:'如果你在直播裡認出自己的警訊，下一步不是收藏更多影片，而是建立可反覆執行的訓練。'},
   {day:'週五',platform:'threads',type:'時間異議',title:'已經忙著招生備課，還需要另外練聲音嗎？',opening:'四週營直接使用你的付費課程內容；每週 60 秒錄音，本身就是授課準備。'},
   {day:'週一',platform:'threads',type:'案例／證據',title:'她不是沒有內容，鏡頭前卻比文字少了份量',opening:'我們沒有先要求她更有自信，而是先找出一個可聽見的問題，再用同一段內容比較修正前後。'},
   {day:'週二',platform:'threads',type:'適合／不適合',title:'這堂課不適合只想讓聲音「更好聽」的人',opening:'它適合已經在授課、願意錄下真實內容、接受回饋並帶回下一場課的人。'}]},
-{label:'W7｜8/26–9/1',start:'2026-08-26',end:'2026-09-01',theme:'未購異議｜只修阻擋最多的一件事',days:[
+{label:'W7｜8/26–9/1',start:'2026-08-26',end:'2026-09-01',theme:'未購異議｜只修阻擋最多的一件事',education:'只處理阻擋最多的成果、回饋、時間、價格或適合度，不增加更多知識。',sales:'依未購資料只修第二場講座的一個段落，不重做整套。',lead:'完成六類未購原因統計並標記 A／B／C 高意願名單。',cta:'報名 9/2 第二場直播。',metric:'找出占比最高的一個未購原因。',days:[
   {day:'週三',platform:'email',type:'未購調查',title:'看完講座後，哪一件事最讓你無法決定？',opening:'問題不急、成果不清楚、回饋不足、時間、價格，還是不確定自己適不適合？我只想知道最接近你的那一項。'},
   {day:'週四',platform:'threads',type:'FAQ',title:'四週後到底會留下什麼？',opening:'一套自己的開口前 10 分鐘準備流程，以及同一段 60 秒課程內容可被導聽、比較的前後作品。'},
   {day:'週五',platform:'threads',type:'回饋說明',title:'每週 60 秒錄音，Jessie 到底會怎麼回饋？',opening:'一次只抓一個最優先問題，避免你同時改五件事，最後每一件都帶不回真實授課。'},
   {day:'週一',platform:'threads',type:'時間異議',title:'四週營會不會變成忙碌講師的另一份作業？',opening:'如果練習不能直接服務下一場課，它就不該被放進這個產品。'},
   {day:'週二',platform:'threads',type:'講座邀請',title:'9/2 第二場｜我只會修正第一場最多人的那一個問題',opening:'架構不重做、秘密不增加；第二場只把阻擋最多人的異議說得更清楚。'}]},
-{label:'W8｜9/2–9/6',start:'2026-09-02',end:'2026-09-06',theme:'第二場講座｜案例、交付與早鳥決定',days:[
+{label:'W8｜9/2–9/6',start:'2026-09-02',end:'2026-09-06',theme:'第二場講座｜案例、交付與早鳥決定',education:'用案例、每週交付與課程邊界降低風險，讓觀眾依適合度做決定。',sales:'舉辦 9/2 第二場、寄第二輪 Email；9/6 早鳥真實截止，不延長。',lead:'購買者退出；未購者依主要異議進入對應 FAQ。',cta:'9/6 前完成早鳥報名，之後恢復原價。',metric:'兩場累積至少 8 人付款。',days:[
   {day:'週三',platform:'email',type:'直播',title:'今晚第二場｜不是再教更多，而是把最大疑問說清楚',opening:'兩場講座使用同一套核心，只修正第一場聽眾最常提出的那一個阻力。'},
   {day:'週四',platform:'threads',type:'案例／證據',title:'一個案例要怎麼證明回饋真的有用？',opening:'場景、問題、收到的回饋、下一次做出的改變。不是只放一段沒有導聽的 Before／After。'},
   {day:'週五',platform:'threads',type:'交付說明',title:'你報名的不是四週知識，而是四次練習與修正的循環',opening:'每週拿真實內容練、錄 60 秒、得到一個優先回饋，再帶回工作。'},
   {day:'週六',platform:'email',type:'早鳥截止',title:'早鳥今晚截止｜10 月第一期專業用聲基本功',opening:'9/6 截止後恢復原價，不延長早鳥。請依成果、投入方式與適合度做決定。'}]},
-{label:'W9｜9/7–9/16',start:'2026-09-07',end:'2026-09-16',theme:'原價價值｜把有效內容做成長青版',days:[
+{label:'W9｜9/7–9/16',start:'2026-09-07',end:'2026-09-16',theme:'原價價值｜把有效內容做成長青版',education:'說清楚四週營與預錄課的差異，不靠贈品或延長早鳥催促。',sales:'把兩場直播驗證有效的內容剪成 30–35 分鐘長青版並於 9/16 上線。',lead:'追蹤看完長青版後仍有問題的人，只回覆 FAQ、不做免費診斷。',cta:'觀看長青講座並以原價報名。',metric:'長青版只保留有效故事、三個秘密、案例與 CTA。',days:[
   {day:'週一',platform:'threads',type:'信念教育',title:'早鳥結束後，我不想用更多贈品逼你報名',opening:'真正要判斷的是：這個問題是否正在影響你的授課，以及練習、錄音、回饋、修正是不是你缺的那一環。'},
   {day:'週二',platform:'threads',type:'方法地圖',title:'四週基本功和預錄發聲課，差別不在影片數量',opening:'差別在你說的是自己的內容、有人聽見當下問題，而且下一週必須帶著回饋再做一次。'},
   {day:'週三',platform:'email',type:'Jessie 故事',title:'我不是靠天分走到這裡，而是一次次被回饋後重新練習',opening:'從非科班、音樂系落差、音樂劇訓練到教學現場，我真正相信的從來不是速成，而是有方向的反覆練習。'},
   {day:'週四',platform:'threads',type:'案例／證據',title:'Before／After 不是播放完就算證明，你要先知道自己在聽什麼',opening:'穩定、清晰、用力感、速度還是句尾？沒有導聽，外行人很難知道差異來自哪裡。'},
   {day:'週五',platform:'threads',type:'長青邀請',title:'9/16 長青版上線｜把兩場直播真正有效的內容留下來',opening:'只保留被證實能幫助講師認出問題、理解回饋迴圈並做出決定的部分。'}]},
-{label:'W10｜9/17–9/23',start:'2026-09-17',end:'2026-09-23',theme:'自我篩選｜案例、FAQ、適合與不適合',days:[
+{label:'W10｜9/17–9/23',start:'2026-09-17',end:'2026-09-23',theme:'自我篩選｜案例、FAQ、適合與不適合',education:'讓潛在學員清楚理解成果、投入、錄音、回饋邊界與不適合情況。',sales:'完成三個書面案例、FAQ、適合／不適合與付款前資訊。',lead:'只跟進看過講座且符合 ICP 的高意願名單。',cta:'確認資格後以原價報名。',metric:'所有高意願者都能回答「我會得到什麼、要投入什麼」。',days:[
   {day:'週四',platform:'threads',type:'適合對象',title:'什麼樣的講師最適合四週基本功？',opening:'你已經有付費課程、每週需要直播或實體授課，也願意拿真實內容錄下來接受回饋。'},
   {day:'週五',platform:'threads',type:'不適合對象',title:'如果你只想讓音色更好聽，這堂課可能不適合你',opening:'這堂課不追求主播腔，也不承諾四週改完所有問題；它建立的是可重複的專業用聲基本功。'},
   {day:'週一',platform:'threads',type:'案例／證據',title:'同一套課，為什麼每個人得到的回饋不同？',opening:'因為有人先修用力感，有人先修速度，有人先修清晰度或句尾。課程固定，優先問題不同。'},
   {day:'週二',platform:'threads',type:'FAQ',title:'每週要投入多少時間？沒交錄音會怎樣？',opening:'先把投入方式、回饋期限與團體課邊界說清楚，讓你在付款前就知道這是不是適合自己的學習方式。'},
   {day:'週三',platform:'email',type:'完整篩選',title:'報名前，請先確認這五件事',opening:'成果、每週投入、錄音方式、回饋邊界、適合與不適合。信任不是催出來的，是資訊足夠後做出的選擇。'}]},
-{label:'W11｜9/24–9/27',start:'2026-09-24',end:'2026-09-27',theme:'最後決定｜真實期限，不製造假稀缺',days:[
+{label:'W11｜9/24–9/27',start:'2026-09-24',end:'2026-09-27',theme:'最後決定｜真實期限，不製造假稀缺',education:'讓觀眾看見延後處理的真實代價，同時保留不適合者不報名的空間。',sales:'完成最後 FAQ、名額與期限通知；9/27 準時關單。',lead:'只處理最後未回答問題，不新增承諾、不臨時折價。',cta:'9/27 前完成報名；截止後不收單。',metric:'至少 15 人成班，內部目標 18–20 人。',days:[
   {day:'週四',platform:'threads',type:'決策文',title:'如果你再等三個月，下一場課最可能還是怎麼開始？',opening:'不是恐嚇你失去收入，而是誠實看見：沒有新的練習與回饋，原本的聲音使用方式通常不會自己改變。'},
   {day:'週五',platform:'threads',type:'最終 FAQ',title:'報名前最後確認：成果、回饋、人數與課程邊界',opening:'四週建立基本功，不保證完全改造；每週只改一個優先問題；9/27 是這一期的真實截止。'},
   {day:'週日',platform:'email',type:'報名截止',title:'今晚截止｜10 月第一期專業用聲基本功',opening:'如果這套訓練方式適合你，今晚完成報名；如果不適合，也不需要因為期限勉強加入。'}]},
-{label:'W12｜9/28–10/4',start:'2026-09-28',end:'2026-10-04',theme:'專業交付｜新生準備與開課幕後',days:[
+{label:'W12｜9/28–10/4',start:'2026-09-28',end:'2026-10-04',theme:'專業交付｜新生準備與開課幕後',education:'用開課幕後展示你如何定義好回饋與專業交付，不再招生。',sales:'完成 onboarding、課前 60 秒錄音、工具、契約與回饋規則；10/4 開課。',lead:'確認每位新生已完成入學資訊與原始錄音。',cta:'只做新生提醒與開課溝通，不再銷售。',metric:'10/3 前所有新生完成課前準備。',days:[
   {day:'週一',platform:'threads',type:'幕後',title:'報名截止後，我先請每位學員錄下最原始的 60 秒',opening:'不是要公開比較誰好誰差，而是先建立一個能被導聽、比較與修正的起點。'},
   {day:'週二',platform:'threads',type:'教學理念',title:'為什麼每週只改一個問題？',opening:'一次改太多，學員很容易只記得很多知識，卻沒有任何一個動作能穩定帶回下一場課。'},
   {day:'週三',platform:'email',type:'新生提醒',title:'開課前，請準備一段你真的會用到的課程內容',opening:'不用另寫練習稿。帶一段未來四週內會授課、直播或錄製的真實內容進來。'},
@@ -1016,17 +1020,49 @@ document.getElementById('missionDel').textContent='交付物：'+wk.del;
 const pct=Math.min(100,Math.round((dayInW/wk.days)*100));
 document.getElementById('progressFill').style.width=pct+'%';
 document.getElementById('progressLbl').textContent=weekdayNum?`今日 ${weekdayNum} / 5 天（${DAYS_ZH[dow]}）`:'週末休息';
-document.getElementById('missionTitle').addEventListener('blur',function(){S.mt=this.textContent;save(SK,S);});
 
 const localDateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const contentDateKey=localDateKey(today);
 let contentWeekIdx=WEEK_PLANS.findIndex(w=>contentDateKey>=w.start&&contentDateKey<=w.end);
 if(contentWeekIdx<0)contentWeekIdx=contentDateKey<WEEK_PLANS[0].start?0:WEEK_PLANS.length-1;
+const currentWeekPlan=WEEK_PLANS[contentWeekIdx];
+const scheduledToday=currentWeekPlan.days.filter(d=>d.day===DAYS_ZH[dow]);
+const primaryContent=scheduledToday[0]||null;
+const AUTO_PLAN_VERSION='content-action-auto-v1';
+document.getElementById('missionLabel').textContent=`${ph.name}｜${currentWeekPlan.label}`;
+document.getElementById('missionTitle').textContent=currentWeekPlan.theme;
+document.getElementById('missionRev').textContent='週五檢查點：'+currentWeekPlan.metric;
+document.getElementById('missionDel').textContent='本週 P0：'+currentWeekPlan.sales;
+if((dow===0||dow===6)&&scheduledToday.length)document.getElementById('progressLbl').textContent=`真實截止日｜只完成 ${scheduledToday[0].type}`;
 const weekNum=Math.min(diffDays/7|0,11);
 const dk=contentDateKey;
 const isOff=(dow===0||dow===6);
+const isCampaignWorkday=!isOff||scheduledToday.length>0;
 const OVERTIME_START=new Date(2026,6,15);
 const isOvertimeMode=(!isOff&&today>=OVERTIME_START);
+
+function renderAutoWeekPlan(){
+  const el=document.getElementById('autoWeekPlan');
+  const schedule=currentWeekPlan.days.map(p=>`<div class="course-week"><strong>${esc(p.day)}｜${esc(p.type)}</strong>　${esc(p.title)}</div>`).join('');
+  el.innerHTML=`
+    <div class="brand-core" style="margin-bottom:10px">
+      <div class="brand-core-label">${esc(currentWeekPlan.label)}</div>
+      <div class="brand-core-title" style="font-size:21px">${esc(currentWeekPlan.theme)}</div>
+      <div class="brand-core-copy">${esc(currentWeekPlan.education)}</div>
+    </div>
+    <div class="content-grid">
+      <div class="content-card"><strong>本週 P0｜銷售行動</strong>${esc(currentWeekPlan.sales)}</div>
+      <div class="content-card"><strong>本週 P1｜內容教育</strong>${esc(currentWeekPlan.education)}</div>
+      <div class="content-card"><strong>本週 P2｜名單行動</strong>${esc(currentWeekPlan.lead)}</div>
+      <div class="content-card"><strong>本週唯一 CTA</strong>${esc(currentWeekPlan.cta)}</div>
+      <div class="content-card"><strong>週五檢查點</strong>${esc(currentWeekPlan.metric)}</div>
+    </div>
+    <details class="strategy-details">
+      <summary>展開本週自動排程（${currentWeekPlan.days.length} 份）</summary>
+      <div class="strategy-details-body">${schedule}</div>
+    </details>`;
+}
+renderAutoWeekPlan();
 
 /* ===== 優先事項 ===== */
 if(!S.pri)S.pri={};
@@ -1048,53 +1084,61 @@ renderPriorities();
 function renderTodayStrategy(){
   const el=document.getElementById('todayStrategy');
   const titleEl=document.getElementById('todayStrategyTitle');
-  if(isOff){
+  if(!isCampaignWorkday){
     titleEl.textContent='📋 週末休息';
-    el.innerHTML='<div class="day-strategy"><div class="day-strategy-title">週六日不工作</div>保留體力，下週一再出發。</div>';
+    el.innerHTML=`<div class="day-strategy"><div class="day-strategy-title">週六日不補進度</div><div class="day-strategy-item">• 本週主軸仍是：${esc(currentWeekPlan.theme)}</div><div class="day-strategy-item">• 今天只休息；下個工作日再依自動排程開始。</div></div>`;
     return;
   }
-  const ds=WEEKDAY_STRATEGY[dow];
-  if(!ds){el.innerHTML='';return;}
-  if(isOvertimeMode){
-    titleEl.textContent='📋 加班版｜'+ds.name;
-    el.innerHTML=`<div class="day-strategy"><div class="day-strategy-title">加班日只保住最小主線</div><div class="day-strategy-item">• 週一、週二沒做的進度不補，只記錄事實。</div><div class="day-strategy-item">• 今天只做一個銷售資產、一則內容、一個高意願對話。</div><div class="day-strategy-item">• 非主線最多挑 0–1 件，超過就移到待辦。</div><div class="day-strategy-item">• 晚上加班後不開新坑，避免把明天體力借光。</div></div>`;
-    return;
-  }
-  titleEl.textContent='📋 '+ds.name;
-  el.innerHTML=`<div class="day-strategy"><div class="day-strategy-title">${ds.name}</div>${ds.items.map(it=>`<div class="day-strategy-item">• ${it}</div>`).join('')}</div>`;
+  const contentLine=primaryContent?`${primaryContent.platform.toUpperCase()}｜${primaryContent.type}｜${primaryContent.title}`:'今天不另發內容，推進本週銷售資產。';
+  titleEl.textContent=`📋 今日自動策略｜${currentWeekPlan.label}`;
+  el.innerHTML=`<div class="day-strategy">
+    <div class="day-strategy-title">今日必須讓觀眾前進的信念</div>
+    <div class="day-strategy-item">• ${esc(currentWeekPlan.education)}</div>
+    <div class="day-strategy-item"><strong>P0 銷售：</strong>${esc(currentWeekPlan.sales)}</div>
+    <div class="day-strategy-item"><strong>P1 內容：</strong>${esc(contentLine)}</div>
+    ${primaryContent&&primaryContent.opening?`<div class="day-strategy-item" style="color:#777">開頭：${esc(primaryContent.opening)}</div>`:''}
+    <div class="day-strategy-item"><strong>P2 名單：</strong>${esc(currentWeekPlan.lead)}</div>
+    <div class="day-strategy-item"><strong>唯一 CTA：</strong>${esc(currentWeekPlan.cta)}</div>
+    <div class="day-strategy-item"><strong>今天不做：</strong>不補過期貼文、不開新平台、不改超過一個銷售資產。</div>
+  </div>`;
 }
 renderTodayStrategy();
 
 function renderOvertimePlan(){
   const el=document.getElementById('overtimePlan');
-  if(isOff){
+  if(!isCampaignWorkday){
     el.innerHTML='<div class="method-box"><div class="method-step"><strong>週末：</strong>不補進度。最多 15 分鐘排下個工作日第一件事。</div></div>';
+    return;
+  }
+  if(isOff&&scheduledToday.length){
+    el.innerHTML=`<div class="method-box"><div class="method-step"><strong>截止日最小行動：</strong>${esc(primaryContent.title)}</div><div class="method-step"><strong>完成後停止工作：</strong>不趁截止日追加貼文、贈品或免費診斷。</div></div>`;
     return;
   }
   if(!isOvertimeMode){
     el.innerHTML='<div class="method-box"><div class="method-step"><strong>7/15（三）起啟用：</strong>明天開始進入加班版，不再用完整四小時工作日要求自己。</div><div class="method-step"><strong>今天只做：</strong>整理明天第一件事，其他放待辦。</div></div>';
     return;
   }
-  el.innerHTML='<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：銷售資產只推一格。優先做「8/19 直播銷講 50 分鐘骨架」或「8/3 報名流程下一步」。</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：寫 / 發一則 Threads。週一週二不補發，直接從今天的主題開始。</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：處理一個高意願對話。空服員面試健檢可以回，但只回方案與下一步，不做免費診斷。</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：聲音維持。只做暖嗓 / 練聲，不做長篇進修。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不要因為週一週二沒做，就把明天做成報復性工作日。</div></div>';
+  const contentTask=primaryContent?`${primaryContent.platform.toUpperCase()}｜${primaryContent.title}`:'今天不另發文，整理下一份內容開頭。';
+  el.innerHTML=`<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：${esc(currentWeekPlan.sales)}</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：${esc(contentTask)}</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：${esc(currentWeekPlan.lead)}</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：暖嗓／練聲維持，留下一句可用素材。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不補過期進度，也不開新題。</div></div>`;
 }
 renderOvertimePlan();
 
 /* ===== 今日工作項目 ===== */
-if(!S.t3||S.t3.d!==dk){
-  const dayPlan=WEEKDAY_STRATEGY[dow]||{name:'週末｜休息',main1:'休息日',main2:'休息日',main3:'休息日'};
+if(!S.t3||S.t3.d!==dk||S.t3.v!==AUTO_PLAN_VERSION){
+  const contentTask=primaryContent?`${primaryContent.platform.toUpperCase()}｜${primaryContent.type}：${primaryContent.title}`:'今天不另發內容；整理下一份貼文開頭。';
   const overtimeItems=[
-    {label:'product',lt:'P0 銷售資產',text:'45 分鐘：8/19 直播銷講 50 分鐘骨架 / 8/3 報名流程，只推一格',detail:'加班日第一優先，完成這個就先止血',done:false},
-    {label:'create',lt:'P1 對外內容',text:'30 分鐘：寫 / 發一則 Threads，不補週一週二',detail:'讓市場持續看見你，不追求完美長文',done:false},
-    {label:'revenue',lt:'P2 高意願對話',text:'20 分鐘：回覆 1 位高意願對象，空服員健檢只給方案與下一步',detail:'不做免費診斷，不延伸聊天',done:false},
+    {label:'product',lt:'P0 銷售資產',text:'45 分鐘：'+currentWeekPlan.sales,detail:'本週唯一銷售行動，只推進一格',done:false},
+    {label:'create',lt:'P1 對外內容',text:'30 分鐘：'+contentTask,detail:'教育任務：'+currentWeekPlan.education,done:false},
+    {label:'revenue',lt:'P2 高意願對話',text:'20 分鐘：'+currentWeekPlan.lead,detail:'本週唯一 CTA：'+currentWeekPlan.cta,done:false},
     {label:'voice',lt:'P3 聲音維持',text:'15 分鐘：暖嗓 / 練聲維持，不做長篇進修',detail:'保住專業基本功，不把體力用乾',done:false}
   ];
   const normalItems=[
-    {label:'product',lt:'招生主線 ①',text:isOff?'休息日':dayPlan.main1,detail:isOff?'週六日不工作':'09:00-10:00，推進銷售資產',done:false},
-    {label:'create',lt:'招生主線 ②',text:isOff?'休息日':dayPlan.main2,detail:isOff?'週六日不工作':'10:10-11:10，完成一個對外創作',done:false},
-    {label:'revenue',lt:'招生主線 ③',text:isOff?'休息日':(dayPlan.main3||'處理高意願名單'),detail:isOff?'週六日不工作':'11:20-12:20，名單跟進',done:false},
-    {label:'voice',lt:'練聲 + 進修',text:isOff?'休息日':'練聲 + 進修 1 小時，至少轉出一句素材',detail:isOff?'週六日不工作':'14:00-15:00，SOVT / 共鳴 / 咬字 / 示範素材',done:false}
+    {label:'product',lt:'P0 本週銷售行動',text:isCampaignWorkday?currentWeekPlan.sales:'休息日',detail:isCampaignWorkday?'09:00-10:00，只推進本週行動一格':'週六日不補進度',done:false},
+    {label:'create',lt:'P1 今日教育內容',text:isCampaignWorkday?contentTask:'休息日',detail:isCampaignWorkday?'10:10-11:10｜'+currentWeekPlan.education:'週六日不發新內容',done:false},
+    {label:'revenue',lt:'P2 名單與信任',text:isCampaignWorkday?currentWeekPlan.lead:'休息日',detail:isCampaignWorkday?'11:20-12:20｜'+currentWeekPlan.cta:'週六日不追名單',done:false},
+    {label:'voice',lt:'P3 練聲 + 素材',text:isCampaignWorkday?'練聲 + 進修 1 小時，留下 1 句可用素材':'休息日',detail:isCampaignWorkday?'14:00-15:00，素材要連回本週信念':'週六日不工作',done:false}
   ];
-  S.t3={d:dk,items:isOvertimeMode?overtimeItems:normalItems};save(SK,S);
+  S.t3={d:dk,v:AUTO_PLAN_VERSION,week:currentWeekPlan.label,items:isOvertimeMode?overtimeItems:normalItems};save(SK,S);
 }
 
 function renderT3(){
@@ -1109,7 +1153,12 @@ function renderT3(){
 }
 renderT3();
 
-if(!S.md||S.md.d!==dk){S.md={d:dk,items:MUST_ITEMS.map(t=>({t,done:false}))};save(SK,S);}
+const autoMustItems=[
+  '早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登',
+  '內容｜今天只服務本週信念：'+currentWeekPlan.theme,
+  '成交｜所有內容只放本週 CTA：'+currentWeekPlan.cta
+];
+if(!S.md||S.md.d!==dk||S.md.v!==AUTO_PLAN_VERSION){S.md={d:dk,v:AUTO_PLAN_VERSION,items:autoMustItems.map(t=>({t,done:false}))};save(SK,S);}
 function renderMust(){
   const el=document.getElementById('mustDo');el.innerHTML='';
   S.md.items.forEach((it,i)=>{
@@ -1145,7 +1194,7 @@ renderMiscTodos();
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
 function saveLog(){
   const existing=logs.findIndex(l=>l.date===dk);
-  const entry={date:dk,mission:S.mt||wk.title,phase:ph.name,items:S.t3.items.map(i=>({text:i.lt+': '+i.text,done:i.done})),mustDo:S.md.items.map(i=>({text:i.t,done:i.done})),misc:S.td[dk].map(i=>({text:'雜事：'+i.text,done:i.done})),savedAt:new Date().toLocaleTimeString('zh-TW')};
+  const entry={date:dk,mission:currentWeekPlan.theme,phase:`${ph.name}｜${currentWeekPlan.label}`,items:S.t3.items.map(i=>({text:i.lt+': '+i.text,done:i.done})),mustDo:S.md.items.map(i=>({text:i.t,done:i.done})),misc:S.td[dk].map(i=>({text:'雜事：'+i.text,done:i.done})),savedAt:new Date().toLocaleTimeString('zh-TW')};
   if(existing>=0)logs[existing]=entry;else logs.push(entry);
   save(LK,logs);showToast('已儲存今日紀錄 ✓');renderLog();
 }
