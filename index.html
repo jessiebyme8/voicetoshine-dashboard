@@ -194,6 +194,20 @@ body.auth-locked{overflow:hidden}
 .launch-desc{font-size:15px;color:#777;line-height:1.65}
 .launch-item.key{background:#f8f1e6;border:0;border-radius:10px;padding:12px;margin:7px 0}
 .email-subject{font-size:16px;font-weight:700;color:#333}
+.brand-core{background:linear-gradient(135deg,#2d2d2d 0%,#4b4339 100%);color:#fff;border-radius:14px;padding:20px;margin-bottom:12px}
+.brand-core-label{font-size:14px;letter-spacing:1.5px;color:#e8d5b7;font-weight:700;text-transform:uppercase}
+.brand-core-title{font-size:24px;font-weight:750;line-height:1.45;margin:7px 0}
+.brand-core-copy{font-size:16px;color:#ddd;line-height:1.75}
+.content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.content-card{background:#faf9f6;border:1px solid #eee8de;border-radius:10px;padding:13px;font-size:15px;color:#666;line-height:1.65}
+.content-card strong{display:block;font-size:17px;color:#2d2d2d;margin-bottom:2px}
+.ratio-bar{height:7px;background:#eee8de;border-radius:999px;overflow:hidden;margin:8px 0}.ratio-fill{height:100%;background:#8b6f47;border-radius:999px}
+.brand-stack{counter-reset:brand-stack}.brand-stack-item{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #eee8df}.brand-stack-item:last-child{border-bottom:0}.brand-stack-item:before{counter-increment:brand-stack;content:counter(brand-stack);width:28px;height:28px;border-radius:50%;background:#e8d5b7;color:#6b4c2a;font-weight:700;display:flex;align-items:center;justify-content:center}.brand-stack-item strong{font-size:16px;color:#333}.brand-stack-item span{font-size:15px;color:#777}
+.story-row{display:grid;grid-template-columns:minmax(150px,.85fr) minmax(190px,1.15fr) minmax(220px,1.35fr);gap:12px;padding:11px 0;border-bottom:1px solid #eee8df;font-size:15px;line-height:1.55}.story-row:last-child{border-bottom:0}.story-source{font-weight:700;color:#333}.story-lesson{color:#6b4c2a}.story-topic{color:#777}
+.risk-box{background:#fff7ed;border:1px solid #f0d5ae;border-radius:10px;padding:14px;color:#7a5328;font-size:15px;line-height:1.7}
+.cadence-row{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #eee8df;font-size:15px}.cadence-row:last-child{border-bottom:0}.cadence-day{font-weight:700;color:#8b6f47}
+.strategy-details{background:#faf9f6;border:1px solid #eee8df;border-radius:10px;margin-top:10px;overflow:hidden}.strategy-details summary{cursor:pointer;padding:12px 14px;font-size:16px;font-weight:700;color:#333;list-style:none}.strategy-details summary::-webkit-details-marker{display:none}.strategy-details summary:after{content:'＋';float:right;color:#8b6f47}.strategy-details[open] summary:after{content:'－'}.strategy-details-body{padding:0 14px 14px}
+@media(max-width:700px){.story-row{grid-template-columns:1fr;gap:3px}.brand-core-title{font-size:21px}}
 @media(max-width:560px){.launch-item{grid-template-columns:1fr;gap:3px}.launch-date{white-space:normal}}
 </style>
 </head>
@@ -240,11 +254,12 @@ body.auth-locked{overflow:hidden}
     <div id="priorityList"></div>
   </div>
   <div class="section">
-    <div class="section-title">🎯 定位驗證任務｜先做這件事</div>
+    <div class="section-title">🎯 明天只做一件事｜內容指南 A4</div>
     <div class="method-box">
-      <div class="method-step"><strong>單一驗證句：</strong><br>我幫已經在賣課的個人品牌講師，建立「講得省力 → 說得專業 → 鏡頭前穩定輸出」的聲音表達系統。</div>
-      <div class="method-step"><strong>先驗證身份辨識：</strong><br>發一篇定位文，只計算「已經有付費課程，並透過個人品牌招生」的人是否主動回應。</div>
-      <div class="method-step"><strong>不要做：</strong>不再把創作者、顧問、教練、主管、教師、Podcast 並列在第一句；職業可以不同，對外身份統一是「正在賣課的個人品牌講師」。</div>
+      <div class="method-step"><strong>最上方品牌句：</strong><br>我用自己的生命證明：專業不是天生的，而是在練習、回饋與修正中，被訓練到讓人聽見。</div>
+      <div class="method-step"><strong>A4 必放五格：</strong><br>單一 ICP／品牌母題／Big Domino／三個錯誤信念／四週營單一成果。</div>
+      <div class="method-step"><strong>單一 ICP：</strong><br>已經有付費課程、每週需要線上直播或實體授課、一次說話超過 30 分鐘的個人品牌講師。</div>
+      <div class="method-step"><strong>不要做：</strong><br>先不做 PPT、不一次寫完 40 篇、不再把創作者、主管、Podcast 主持人並列進第一期招生文案。</div>
     </div>
   </div>
   <div class="section">
@@ -307,6 +322,30 @@ body.auth-locked{overflow:hidden}
     <div id="todayPost"></div>
   </div>
   <div class="section">
+    <div class="section-title">🧭 Jessie 內容策略總綱</div>
+    <div class="brand-core">
+      <div class="brand-core-label">品牌母題</div>
+      <div class="brand-core-title">我不是天生厲害的人。我相信專業可以透過練習、回饋與修正，被訓練到讓人聽見。</div>
+      <div class="brand-core-copy">你不是只教「好聽的聲音」。你從非科班起步，走過音樂、音樂劇、表演、教學、創業失敗與品牌重建；現在幫助已經有專業內容的講師，把專業穩定地交付出來。</div>
+    </div>
+    <div class="strategy-box" style="margin-top:0">
+      <div class="strategy-head">真正的定位</div>
+      <div>你不是天賦型聲音大師，而是一位比天賦型老師更理解「怎麼讓原本不會的人練會」的教練。你知道聽懂不等於做得到、努力不等於知道先修哪裡，也知道忙碌講師需要能放進工作裡的訓練。</div>
+      <div class="price-note"><strong>內容判斷句：</strong>客群固定，觀察聲音的角度變多。每篇都要幫講師前進一個信念，而不是只換一個聲音技巧。</div>
+    </div>
+    <div class="strategy-box">
+      <div class="strategy-head">品牌 → 方法 → 產品層級</div>
+      <div class="brand-stack">
+        <div class="brand-stack-item"><div><strong>品牌母題</strong><br><span>讓你的聲音，撐得起你的專業。</span></div></div>
+        <div class="brand-stack-item"><div><strong>核心信念</strong><br><span>專業不只要準備內容，也要準備聲音。</span></div></div>
+        <div class="brand-stack-item"><div><strong>新方法</strong><br><span>專業用聲回饋迴圈：準備 → 說課程內容 → 錄下 60 秒 → 回饋 → 修正 → 帶回下一場課。</span></div></div>
+        <div class="brand-stack-item"><div><strong>標誌性行為</strong><br><span>重要開口前，準備聲音 10 分鐘。這是回饋迴圈中的具體行為，不是整個品牌定位。</span></div></div>
+        <div class="brand-stack-item"><div><strong>練習證據</strong><br><span>同一段 60 秒課程內容，錄音、導聽、比較與修正。</span></div></div>
+        <div class="brand-stack-item"><div><strong>第一個產品</strong><br><span>4 週「專業用聲基本功」；銷售講座只賣這一個產品。</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
     <div class="section-title">📋 免費內容／銷售講座／付費課程</div>
     <div class="paid-free-box">
       <div class="free-box">
@@ -326,9 +365,62 @@ body.auth-locked{overflow:hidden}
       <strong>鐵律：</strong>免費內容讓人發現問題；銷售講座推倒錯誤信念，證明 4 週初階是合理的第一步；付費課程才進行個人診斷、修正與反覆帶練。
     </div>
   </div>
+  <div class="section">
+    <div class="section-title">📊 新版發文主題比例｜每月 20 份內容</div>
+    <div class="content-grid">
+      <div class="content-card"><strong>30%｜信念教育／立場</strong>6 份。推倒方法、天生條件與時間不足三個錯誤信念。<div class="ratio-bar"><div class="ratio-fill" style="width:100%"></div></div></div>
+      <div class="content-card"><strong>25%｜講師場景痛點</strong>5 份。讓講師看見聲音虛、趕、沒重點、句尾不穩帶來的專業折損。<div class="ratio-bar"><div class="ratio-fill" style="width:83%"></div></div></div>
+      <div class="content-card"><strong>20%｜Jessie 故事</strong>4 份。證明你為什麼理解訓練、教學、挫折與重建。<div class="ratio-bar"><div class="ratio-fill" style="width:67%"></div></div></div>
+      <div class="content-card"><strong>15%｜案例／證據</strong>3 份。展示學員如何練、得到什麼回饋，以及可觀察的改變。<div class="ratio-bar"><div class="ratio-fill" style="width:50%"></div></div></div>
+      <div class="content-card"><strong>10%｜方法地圖／微體驗</strong>2 份。讓人看見方法與自我觀察，不免費提供完整診斷或處方。<div class="ratio-bar"><div class="ratio-fill" style="width:33%"></div></div></div>
+    </div>
+    <div class="price-note"><strong>舊版保留作為參考：</strong>立場 35%／痛點 30%／故事 25%／成果 10%。新版加入「教育任務」，讓每篇內容知道要把觀眾帶到哪個信念。</div>
+  </div>
+  <div class="section">
+    <div class="section-title">🪞 Jessie 自我介紹故事庫</div>
+    <div class="story-row"><div class="story-source">非科班考進音樂系</div><div class="story-lesson">聲音能力不是只有天分</div><div class="story-topic">題目：「我不是從小被稱讚有天分的人」</div></div>
+    <div class="story-row"><div class="story-source">進音樂系後落後同學</div><div class="story-lesson">努力不等於知道該先修什麼</div><div class="story-topic">題目：「最挫折的不是不會，是不知道差距在哪」</div></div>
+    <div class="story-row"><div class="story-source">老師看見表演天分</div><div class="story-lesson">一個具體回饋能改變訓練方向</div><div class="story-topic">題目：「一句具體回饋，比我再苦練一年更重要」</div></div>
+    <div class="story-row"><div class="story-source">音樂劇、舞蹈與表演訓練</div><div class="story-lesson">聲音牽涉身體、意圖與場景，不只音色</div><div class="story-topic">題目：「我在表藝所才知道：會唱歌不等於會表達」</div></div>
+    <div class="story-row"><div class="story-source">十年教學與國中現場</div><div class="story-lesson">好內容不等於好交付</div><div class="story-topic">題目：「備課完成，不代表聲音準備完成」</div></div>
+    <div class="story-row"><div class="story-source">工作室百人規模後失敗</div><div class="story-lesson">沒有系統，只靠努力會付出代價</div><div class="story-topic">題目：「我以前以為努力就能撐起一個事業」；控制在總內容 5% 內，避免吸來只看創業八卦的人。</div></div>
+    <div class="story-row"><div class="story-source">2025 重啟個人品牌</div><div class="story-lesson">你理解講師如何透過內容建立信任</div><div class="story-topic">題目：「我以前連文字都不被看好，後來卻靠內容被看見」</div></div>
+    <div class="story-row"><div class="story-source">現在一天工作 4 小時</div><div class="story-lesson">能長期執行的練習要融入工作，不增加負擔</div><div class="story-topic">題目：「真正能長期執行的練習，不該每天再多占一小時」</div></div>
+    <details class="strategy-details">
+      <summary>故事文固定五段骨架</summary>
+      <div class="strategy-details-body">
+        <div class="course-week">1. 我以前在哪個真實場景卡住。</div>
+        <div class="course-week">2. 我當時怎麼誤判問題。</div>
+        <div class="course-week">3. 哪一個回饋或觀察讓我改變方向。</div>
+        <div class="course-week">4. 這件事如何對應講師現在的工作。</div>
+        <div class="course-week">5. 留下一個自我檢查或下一步。</div>
+        <div class="price-note"><strong>可直接套用的示範：</strong><br>我進音樂系後，才發現自己和科班同學的差距有多大。那時候我以為，只要比別人練更久就能追上。後來我才知道，真正拉開差距的不是練習時間，而是有沒有人指出：我現在最該修的是哪一個問題。很多講師的聲音也是如此。你不是不努力，而是沒有人告訴你，現在拖累專業感的是速度、用力感、清晰度，還是句尾。所以聲音訓練的第一步，不是再收藏一支影片，而是先被正確地聽見。</div>
+      </div>
+    </details>
+    <div class="risk-box" style="margin-top:10px"><strong>自介資料統一：</strong>若實際是十年總教學、其中六年正式國中任教，統一寫成「累積十年教學經驗，其中六年正式任教於國中音樂與表演藝術現場」。<br><strong>健康故事：</strong>可以寫壓力、失眠與界線，但不要宣稱「心理壓力造成腫瘤」。戀愛、社團與旅行可增加親近感，目前不作為四週營主線。</div>
+  </div>
+  <div class="section">
+    <div class="section-title">🧪 科學與信任風險提醒</div>
+    <div class="risk-box">「神經系統在保護你」「鏡頭會吃掉能量」「壓力造成腫瘤」、百分比與絕對因果，都不能只因為適合當 Hook 就直接當結論。未完成聲音科學查證前，改寫為個人觀察或待驗證假設；沙啞與疾病內容要提醒排除病理性原因，不把訓練寫成治療。</div>
+  </div>
   <div class="section" id="sparkInContent" style="display:none">
     <div class="section-title">💡 閱讀靈感庫（未使用）</div>
     <div id="sparkListContent"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">🗺️ 7/15–10/4 教育與銷售鋪陳</div>
+    <div class="launch-item"><div class="launch-date">7/15–7/19</div><div><div class="launch-title">方法信念｜問題不只是方法太少</div><div class="launch-desc">用音樂系能力落差與四個警訊，測試「買設備、背熟內容、看更多影片」是否仍是主要誤判。CTA：留言／回信說出目前警訊。</div></div></div>
+    <div class="launch-item"><div class="launch-date">7/20–7/26</div><div><div class="launch-title">天生信念｜聲音不是天生定型</div><div class="launch-desc">用非科班考進音樂系與重新找到表演方向，推倒「我的聲音天生不適合鏡頭」。CTA：蒐集受眾原話。</div></div></div>
+    <div class="launch-item"><div class="launch-date">7/27–8/2</div><div><div class="launch-title">時間信念｜訓練不必每天多花一小時</div><div class="launch-desc">用四小時工作生活與真實課程內容練 60 秒，說明練習可以成為備課的一部分。CTA：登記講座通知。</div></div></div>
+    <div class="launch-item key"><div class="launch-date">8/3–8/9</div><div><div class="launch-title">看見損失｜備課完成不等於聲音準備完成</div><div class="launch-desc">十年教學覺醒＋虛、趕、清晰度、句尾四警訊。CTA：報名 8/19 銷售講座。</div></div></div>
+    <div class="launch-item"><div class="launch-date">8/10–8/18</div><div><div class="launch-title">看見新方法｜免費影片缺少判斷與回饋</div><div class="launch-desc">用主修老師改變訓練方向與一個學員案例，介紹專業用聲回饋迴圈。CTA：報名 8/19 講座。</div></div></div>
+    <div class="launch-item key"><div class="launch-date">8/19–8/25</div><div><div class="launch-title">第一場講座＋第一輪成交</div><div class="launch-desc">講座精華、回放、十年覺醒故事與時間異議。CTA：查看四週營。</div></div></div>
+    <div class="launch-item"><div class="launch-date">8/26–9/1</div><div><div class="launch-title">只修最多人的一個異議</div><div class="launch-desc">依未購買原因只處理成果、回饋、時間、價格或適合度其中一項。CTA：報名 9/2 第二場。</div></div></div>
+    <div class="launch-item key"><div class="launch-date">9/2–9/6</div><div><div class="launch-title">第二場講座＋早鳥截止</div><div class="launch-desc">用案例與交付方式降低風險；9/6 前 CTA 為早鳥，之後不延長、改談原價價值。</div></div></div>
+    <div class="launch-item"><div class="launch-date">9/7–9/16</div><div><div class="launch-title">原價價值＋長青講座</div><div class="launch-desc">方法地圖、完整案例、為何不是預錄發聲課。CTA：9/16 長青講座。</div></div></div>
+    <div class="launch-item"><div class="launch-date">9/17–9/23</div><div><div class="launch-title">案例、FAQ、適合與不適合</div><div class="launch-desc">幫觀眾自我篩選，說清楚每週投入與回饋方式。CTA：原價報名。</div></div></div>
+    <div class="launch-item key"><div class="launch-date">9/24–9/27</div><div><div class="launch-title">最後決定</div><div class="launch-desc">延後處理的代價、最常見疑問、真實名額與期限。CTA：9/27 報名截止。</div></div></div>
+    <div class="launch-item"><div class="launch-date">9/28–10/4</div><div><div class="launch-title">專業交付與開課幕後</div><div class="launch-desc">課前 60 秒錄音、回饋準備與開課標準；不再招生。</div></div></div>
   </div>
   <div class="section">
     <div class="section-title">📅 本週發文</div>
@@ -337,68 +429,41 @@ body.auth-locked{overflow:hidden}
     <div class="edit-hint">點標題可編輯｜點展開看開頭三句</div>
   </div>
   <div class="section">
-    <div class="section-title">⚡ 最省力發文系統</div>
-    <div style="font-size:17px;font-weight:600;color:#8b6f47;margin-bottom:10px">一週花不到 2 小時搞定所有平台</div>
-    <div class="sys-flow">
-      <div class="sys-flow-step">
-        <span class="sys-freq">每天</span>
-        <div class="sys-detail">
-          <strong>Threads = 你的實驗室（5 min）</strong>
-          <div class="sys-checklist">
-            <div class="sys-check-item"><span class="sys-check-num">1</span>備忘錄記一段 150-200 字的觀察</div>
-            <div class="sys-check-item"><span class="sys-check-num">2</span>丟 AI 取標題</div>
-            <div class="sys-check-item"><span class="sys-check-num">3</span>發 Threads</div>
-            <div class="sys-check-item"><span class="sys-check-num">4</span>同一篇直接貼 FB（複製貼上）</div>
-          </div>
-        </div>
-      </div>
-      <div class="sys-arrow">↓</div>
-      <div class="sys-flow-step">
-        <span class="sys-freq weekly">每週</span>
-        <div class="sys-detail">
-          <strong>電子報 = 重複利用最好的那篇（30 min）</strong>
-          <div class="sys-checklist">
-            <div class="sys-check-item"><span class="sys-check-num">1</span>看這週 5 篇哪篇互動最高</div>
-            <div class="sys-check-item"><span class="sys-check-num">2</span>擴寫成 500-800 字 email（加故事＋立場＋CTA）</div>
-            <div class="sys-check-item"><span class="sys-check-num">3</span>寄出</div>
-          </div>
-        </div>
-      </div>
-      <div class="sys-arrow">↓</div>
-      <div class="sys-flow-step">
-        <span class="sys-freq biweekly">每兩週</span>
-        <div class="sys-detail">
-          <strong>IG = 只放驗證過的內容（45 min）</strong>
-          <div class="sys-checklist">
-            <div class="sys-check-item"><span class="sys-check-num">1</span>挑互動前 2 名的 Threads</div>
-            <div class="sys-check-item"><span class="sys-check-num">2</span>一篇 → ig-carousel-writer 做輪播</div>
-            <div class="sys-check-item"><span class="sys-check-num">3</span>一篇 → reels-script-writer 寫腳本，錄 Reels</div>
-          </div>
-        </div>
-      </div>
+    <div class="section-title">⚡ 符合每日 4 小時的內容系統</div>
+    <div class="content-grid">
+      <div class="content-card"><strong>09:00–10:00｜銷售資產</strong>銷講、報名頁、Offer 或 Email 成交序列，只推進一格。</div>
+      <div class="content-card"><strong>10:10–11:10｜唯一對外內容</strong>完成當天的一則 Threads 或一封 Email，不同時開新平台。</div>
+      <div class="content-card"><strong>11:20–12:20｜高意願與素材</strong>回覆高意願名單、整理案例與記錄客戶原話。</div>
+      <div class="content-card"><strong>14:00–15:00｜練聲與進修</strong>維持示範能力，留下至少一句可轉成內容的觀察。</div>
     </div>
-    <div style="background:#faf9f6;border-radius:10px;padding:14px;font-size:16px;color:#555;line-height:1.7">
-      <strong style="color:#2d2d2d">一週總耗時：</strong>每日 5 min × 5 天 = 25 min + 每週 30 min = <strong style="color:#9b4d4d">約 55 分鐘</strong>。隔週加 45 min 做 IG。<br>
-      <strong style="color:#2d2d2d">核心原則：</strong>Threads 先發驗證 → 有流量才搬去 IG/Email。IG 不是實驗室，是展示櫃。
+    <div class="strategy-box">
+      <div class="strategy-head">每週內容功能固定</div>
+      <div class="cadence-row"><div class="cadence-day">週一</div><div>信念／立場：推倒一個錯誤信念。</div></div>
+      <div class="cadence-row"><div class="cadence-day">週二</div><div>講師場景：讓目標客戶認出自己正在付出的代價。</div></div>
+      <div class="cadence-row"><div class="cadence-day">週三</div><div>Email：擴寫勝出題或 Jessie 故事，補完整教育邏輯。</div></div>
+      <div class="cadence-row"><div class="cadence-day">週四</div><div>學員案例／回饋幕後：場景 → 問題 → 回饋 → 可觀察改變。</div></div>
+      <div class="cadence-row"><div class="cadence-day">週五</div><div>方法地圖、自我觀察或當期唯一 CTA；順便看本週數據。</div></div>
+      <div class="cadence-row"><div class="cadence-day">週六</div><div>空白日。若做 IG，只改寫本週勝出內容，不開新題。</div></div>
     </div>
+    <div class="price-note"><strong>平台鐵律：</strong>Threads 先驗題 → Email 深化 → IG／Reels 只二創勝出題。IG 不是另一條主線，也不另算新內容。</div>
   </div>
 
   <div class="section">
     <div class="section-title">🔥 Signature Behavior</div>
     <div class="sig-box">
       <div class="sig-title">開口前暖嗓 10 分鐘</div>
-      <div class="sig-sub">所有文章不管講什麼，最後都繞回這句話</div>
-      <div class="sig-point"><strong>只有你在推。</strong> 台灣沒人在社群系統性推「專業人士的暖嗓 SOP」。你的學員已經在講各自的暖嗓 SOP 了。</div>
+      <div class="sig-sub">是「專業用聲回饋迴圈」中的標誌性行為，不是整個品牌定位</div>
+      <div class="sig-point"><strong>可記憶、可示範。</strong> 把暖嗓從養生話題改寫成講師的重要開口前準備。</div>
       <div class="sig-point"><strong>直接連到所有產品。</strong> 暖嗓需要 SOVT、哼鳴、共鳴、咬字、句尾穩定——課程所有技巧都能變成開口前的準備流程。</div>
       <div class="sig-point"><strong>連到財富/影響力面。</strong> 不是養生，是專業準備。「你上台前會對稿，但你有暖嗓嗎？」</div>
-      <div class="sig-point"><strong>可以無限延伸。</strong> 像啟樺用「讀 paper」延伸到書店、筆記、休息。</div>
+      <div class="sig-point"><strong>內容使用比例。</strong> 每週最多一篇直接談暖嗓，其餘從長時間用聲、冷開口、第一段暖機、句尾與鏡頭前場景延伸。</div>
       <div class="sig-hooks">
         <div style="font-size:16px;color:#e8d5b7;font-weight:600;margin-bottom:6px">延伸選題靈感：</div>
         <div class="sig-hook">「我今天講座前的 10 分鐘暖嗓做了什麼」</div>
         <div class="sig-hook">「在高鐵上怎麼無聲暖嗓」</div>
         <div class="sig-hook">「吃完麻辣鍋隔天開會前的暖嗓急救」</div>
-        <div class="sig-hook">「90% 的講師直接上台硬講——第三個小時聲音就垮了」</div>
-        <div class="sig-hook">「連歌手上台前都要暖嗓，你憑什麼覺得你不用？」</div>
+        <div class="sig-hook">「為什麼很多講師把上課第一段拿來暖機？」</div>
+        <div class="sig-hook">「歌手上台前會準備聲音，講師為什麼也值得有自己的流程？」</div>
         <div class="sig-hook">「一杯咖啡 vs 開口前暖嗓 10 分鐘——哪個真的讓你開會更穩？」</div>
       </div>
     </div>
@@ -567,7 +632,7 @@ body.auth-locked{overflow:hidden}
       <div class="launch-item key"><div class="launch-date">8/19</div><div><div class="launch-title">第一場直播銷售講座</div><div class="launch-desc">使用 50 分鐘版本；會後立刻記錄離場點、問題與未成交原因。目標：至少 3 位付費。</div></div></div>
       <div class="launch-item"><div class="launch-date">8/20–8/25</div><div><div class="launch-title">第一輪 Email 成交序列</div><div class="launch-desc">重播 → 方法信念 → 起源故事 → 案例 → 時間異議 → 適合對象 → 截止提醒。</div></div></div>
       <div class="launch-item key"><div class="launch-date">9/2</div><div><div class="launch-title">第二場直播銷售講座</div><div class="launch-desc">沿用同一套架構，只修改第一場最常見的一個異議。累積目標：至少 8 位付費。</div></div></div>
-      <div class="launch-item"><div class="launch-date">9/3–9/8</div><div><div class="launch-title">第二輪 Email＋早鳥截止</div><div class="launch-desc">沿用驗證過的序列；9/8 早鳥 NT$6,800 截止，之後恢復原價 NT$8,800。</div></div></div>
+      <div class="launch-item"><div class="launch-date">9/3–9/6</div><div><div class="launch-title">第二輪 Email＋早鳥截止</div><div class="launch-desc">沿用驗證過的序列；9/6 早鳥 NT$6,800 截止，之後恢復原價 NT$8,800，不延長早鳥。</div></div></div>
       <div class="launch-item key"><div class="launch-date">9/16</div><div><div class="launch-title">30–35 分鐘長青版上線</div><div class="launch-desc">只保留兩場直播證實有效的故事、三個秘密、案例與 CTA；之後有人問課就貼這支。</div></div></div>
       <div class="launch-item"><div class="launch-date">9/17–9/23</div><div><div class="launch-title">案例／FAQ／適合對象 Email</div><div class="launch-desc">處理最後猶豫，不新增承諾、不提供免費個人診斷。</div></div></div>
       <div class="launch-item key"><div class="launch-date">9/27</div><div><div class="launch-title">原價報名截止</div><div class="launch-desc">至少 15 人成班；內部目標 18–20 人，上限 24 人。</div></div></div>
@@ -587,7 +652,7 @@ body.auth-locked{overflow:hidden}
     <div class="strategy-box">
       <div class="strategy-head">📊 決策門檻</div>
       <div class="talk-step"><span class="talk-time">8/19 後</span>第一場直播至少 3 位付費；若未達標，先問未購者原因，不急著重做整份講座。</div>
-      <div class="talk-step"><span class="talk-time">9/8 後</span>兩場直播累積至少 8 位付費；只修正最多人提出的同一個異議。</div>
+      <div class="talk-step"><span class="talk-time">9/6 後</span>兩場直播累積至少 8 位付費；只修正最多人提出的同一個異議，之後改談原價價值。</div>
       <div class="talk-step"><span class="talk-time">9/27</span>至少 15 人成班；未達門檻就依真實名單狀況決定是否延期，不用折價換人數。</div>
       <div class="price-note"><strong>未成交訪談只問六件事：</strong>不夠急、成果不清楚、回饋感不足、沒有時間、價格疑慮，還是覺得自己不適合？</div>
     </div>
@@ -771,14 +836,73 @@ setupAuth();
 const TOPICS={1:{type:'立場文',title:'聲音不是天生的，是你從來沒有人教你',opening:'「你一定聽過這句話：『他聲音好好聽，天生的吧。』我以前也這樣以為。直到我學了聲樂、當了十年老師、訓練了上百個人的聲音之後，我發現——聲音根本不是天生的，是沒有人教你怎麼用。」'},2:{type:'立場文',title:'內容很好但沒人聽？問題不在你的腦袋，在你的聲音',opening:'「你有沒有遇過一種人：專業能力很強，一開口你卻想滑手機？不是他講得不好，是他的聲音沒有打開你大腦的『注意力大門』。」'},3:{type:'立場文',title:'我不教「好聽的聲音」，我教「讓人願意掏錢的聲音」',opening:'「好聽的聲音能當主播，但不一定能讓客戶買單。我教的不是怎麼讓聲音好聽，而是怎麼讓你的聲音建立信任、傳遞價值。」'},4:{type:'立場文',title:'買了線上課還是不會用？因為聲音不是知識，是身體記憶',opening:'「我的學員 Mike 跟我說，他之前買過三堂聲音線上課，看完覺得『好像懂了』，一上台還是老樣子。因為聲音訓練不是背公式，是讓你的身體記住一個新的發聲方式。」'},5:{type:'立場文',title:'你的聲音就是你的第二張臉',opening:'「我的學員 Pola 說過一句話：『聲音就是第二張臉。』現在有多少場景是別人「只聽到你、看不到你」的？」'},6:{type:'立場文',title:'台灣沒有人在教「聲音品牌」，所以我決定自己來',opening:'「在美國，Roger Love 幫 Tony Robbins 打造聲音，一堂課收六位數美金。在台灣？沒有人把聲音訓練跟個人品牌連在一起。所以我決定自己做這件事。」'},7:{type:'立場文',title:'「你聲音很好聽」是最沒用的稱讚',opening:'「每次有人跟我說『老師你聲音好好聽』，我都笑笑帶過。因為好聽是最表面的事。」'},8:{type:'立場文',title:'說話不是用喉嚨，是用身體',opening:'「如果我告訴你，你說話沙啞、講久會累，問題根本不在你的喉嚨，你信嗎？你的身體就是一把樂器。」'},9:{type:'立場文',title:'對話感不是講慢一點，是心裡有人',opening:'「很多人被說『你講話像在念稿』，就拼命放慢語速。結果變成——慢慢地念稿。對話感的關鍵不是速度，是你心裡有沒有一個人。」'},10:{type:'立場文',title:'鏡頭前的你，需要多 20% 的能量',opening:'「你有沒有看過自己錄的影片，覺得『怎麼看起來這麼沒精神』？這是因為鏡頭會吃掉你的能量。」'},11:{type:'立場文',title:'聲音訓練的目的不是追求完美，是移除阻礙',opening:'「很多人來找我，第一句話都是：『老師，我想要聲音變好聽。』我都會先問他：『你覺得你現在的聲音怎麼了？』」'},12:{type:'立場文',title:'一人公司最被低估的武器：你的聲音',opening:'「你花了錢拍形象照、請設計師做品牌視覺、學文案寫作。但你有沒有想過，當客戶第一次聽到你的聲音，他對你的印象，有超過一半是你的聲音決定的？」'},13:{type:'痛點文',title:'明明準備很充分，一開口就被當空氣',opening:'「簡報做了三天，數據查了五遍，甚至彩排了兩次。結果上場講不到三分鐘，你看到台下的人開始低頭滑手機。」'},14:{type:'痛點文',title:'每次錄影都要重錄十幾遍，你累的不是嘴巴，是自信',opening:'「打開鏡頭，錄了一遍覺得不行，再錄一遍，又不行，刪掉重來。不是你的內容有問題，是你每次聽到自己的聲音，就覺得『不像我想要的那個樣子』。」'},15:{type:'痛點文',title:'你的學員很多，但轉介紹很少——問題可能出在你的聲音',opening:'「課上完學員都說好，但很少有人主動幫你推薦。沒有聲音辨識度，就沒有記憶點；沒有記憶點，就沒有轉介紹。」'},16:{type:'痛點文',title:'講了一整天課，隔天聲音就沙啞——你不是天生嗓子弱',opening:'「我的學員心慧是國中老師，她跟我說她的同事幾乎每個人都有聲帶問題。十年教書下來，嗓子壞掉好像是標配。但真的是這樣嗎？」'},17:{type:'痛點文',title:'線上會議開到一半，你發現沒人在聽你說話',opening:'「你在線上會議分享提案，講到一半發現——對面的人在打字、鏡頭關了三個。不是你講得太爛，是線上會議只剩聲音這一個通道。」'},18:{type:'痛點文',title:'你很會寫，但一開口就不像「那個人」',opening:'「你的文章寫得犀利又溫暖。結果第一次直播，留言區出現：『跟我想像的不一樣欸。』」'},19:{type:'痛點文',title:'為什麼你的 Podcast 數據一直起不來',opening:'「你研究了一堆 Podcast 經營攻略，數據還是上不去。大部分聽眾在前 30 秒就決定要不要聽下去。」'},20:{type:'痛點文',title:'銷講的時候很緊張，聲音會抖——越想控制越抖',opening:'「你站上台，準備開口的那一秒，喉嚨突然鎖住了。這不是你心理素質差，是你的神經系統啟動了保護機制。」'},21:{type:'痛點文',title:'你學了很多表達技巧，但上台還是像在「演」',opening:'「你看了很多表達課的影片，學了重音、停頓、抑揚頓挫。上台一用，朋友說：『你今天怎麼怪怪的？』」'},22:{type:'痛點文',title:'「我的聲音很難聽」——你可能從來沒聽過自己真正的聲音',opening:'「你聽自己的錄音會覺得：『這不是我的聲音吧？好難聽。』你平常聽到的自己的聲音，其實是假的。」'},23:{type:'故事文',title:'音樂劇系畢業的我，第一次站上講台差點哭出來',opening:'「我是音樂劇系畢業的，大家都覺得我一定很會說話。結果我第一次站上國中講台，聲音抖到不行，學生在底下完全不理我。」'},24:{type:'故事文',title:'我在國中教了十年，教會我一件事：再好的內容，包裝不對就是垃圾',opening:'「國中生是全世界最殘忍的聽眾。你的課講得好不好，不用看評鑑，看他們的眼神就知道。」'},25:{type:'故事文',title:'我的學員被同事說「聲音像鯊魚」，她聽完哭了',opening:'「Pola 跟我說，有一次同事形容她的聲音『像鯊魚一樣有攻擊性』。她回家聽了自己的錄音，發現真的很尖、很急。」'},26:{type:'故事文',title:'離開教職的前一天，我問自己：聲音這件事，真的值得我賭上一切嗎',opening:'「2026 年 7 月，我正式離開了待了十年的教職。交出辭呈那天，我坐在車裡發了很久的呆。」'},27:{type:'故事文',title:'他買了三堂線上課都沒用，最後在我的陪跑營裡第一次聽到變化',opening:'「Mike 是一個非常忙的企業主，他跟我說他買過三堂聲音線上課。看完了嗎？看完了。有用嗎？他搖搖頭。」'},28:{type:'故事文',title:'心慧要離開教職去開自己的工作室，她說：「我不想再用喉嚨硬撐了」',opening:'「心慧是國中老師，教了好幾年。她來找我的原因是她的同事一個接一個聲帶出問題。」'},29:{type:'故事文',title:'致中說：「你的課不只是聲音課，是讓我重新認識自己的課」',opening:'「致中是企業講師，他本來覺得自己的表達能力應該算不錯了。上完八週之後，他說：『我以前以為我在表達，但其實我只是在說。』」'},30:{type:'故事文',title:'Emma 跟我說：「我本來只是想學聲音，沒想到整個人都變了」',opening:'「Emma 報名的時候就是想學怎麼讓聲音好一點。八週結束她說：『以前我很怕被注意到，現在我覺得被聽到是一件很舒服的事。』」'},31:{type:'成果展示',title:'第一週 vs 第八週：同一段自我介紹，聲音差距大到學員自己不敢相信',opening:'「結業那天，我讓每個學員重聽自己第一週錄的自我介紹。教室裡安靜了三秒，然後有人笑出來、有人眼眶紅了。」'},32:{type:'成果展示',title:'八週之後，Pola 開始用真實的聲音在做短影音了',opening:'「八週前，Pola 連在公司開會都盡量不說話。現在她每天在 IG 更新短影音，用自己的聲音。」'},33:{type:'成果展示',title:'學員回饋：「一對一的時候 Jessie 講了一句話，我整個聲音就打開了」',opening:'「Pola 跟我說，八週課程裡對她衝擊最大的，不是團體課的理論，是一對一諮詢的那 30 分鐘。」'},34:{type:'成果展示',title:'全班六個人，每個人進步的方向都不一樣——這才是小班制的意義',opening:'「第一梯六個學員，同樣的課程，每個人需要調整的地方完全不同。這就是為什麼我堅持小班制。」'}};
 
 const WEEK_PLANS=[
-{label:'W1',theme:'你的聲音不是天生的',days:[{day:'週一',platform:'threads',type:'立場文',topicId:1},{day:'週二',platform:'threads',type:'痛點文',topicId:22},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'為什麼你的專業很強，但開口就沒人聽？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【你真的認識自己的聲音嗎？】骨導 vs 空氣導'},{day:'週四',platform:'threads',type:'故事文',topicId:23},{day:'週五',platform:'threads',type:'立場文',topicId:12}]},
-{label:'W2',theme:'你的表達問題不在內容',days:[{day:'週一',platform:'threads',type:'立場文',topicId:2},{day:'週二',platform:'threads',type:'痛點文',topicId:13},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'我花了十年才學會：再好的內容，包裝不對就是垃圾'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【同樣是專家，為什麼他一開口你就想聽？】'},{day:'週四',platform:'threads',type:'故事文',topicId:27},{day:'週五',platform:'threads',type:'立場文',topicId:4}]},
-{label:'W3',theme:'聲音影響你的錢和機會',days:[{day:'週一',platform:'threads',type:'立場文',topicId:3},{day:'週二',platform:'threads',type:'痛點文',topicId:18},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'Roger Love 怎麼把聲音變成一門年收千萬的生意'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【文字人格 vs 聲音人格：你的品牌有裂縫嗎？】'},{day:'週四',platform:'threads',type:'故事文',topicId:25},{day:'週五',platform:'threads',type:'痛點文',topicId:15}]},
-{label:'W4',theme:'聲音可以改變，而且比你想的快',days:[{day:'週一',platform:'threads',type:'立場文',topicId:11},{day:'週二',platform:'threads',type:'痛點文',topicId:14},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'從不敢開口到日更短影音——Pola 的八週聲音日記'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【為什麼你錄影總要重來十遍？】'},{day:'週四',platform:'threads',type:'故事文',topicId:30},{day:'週五',platform:'threads',type:'成果展示',topicId:31}]},
-{label:'W5',theme:'你的聲音決定別人對你的第一印象',days:[{day:'週一',platform:'threads',type:'立場文',topicId:5},{day:'週二',platform:'threads',type:'痛點文',topicId:16},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'你的聲帶在求救——講師最常忽略的三個身體信號'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【講了一整天課就沙啞？方法錯了】'},{day:'週四',platform:'threads',type:'故事文',topicId:24},{day:'週五',platform:'threads',type:'成果展示',topicId:32}]},
-{label:'W6',theme:'為什麼你的品牌需要聲音',days:[{day:'週一',platform:'threads',type:'立場文',topicId:6},{day:'週二',platform:'threads',type:'痛點文',topicId:17},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'線上會議只剩聲音這一個通道，你準備好了嗎？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【台灣 vs 國外：聲音表達教練差在哪？】'},{day:'週四',platform:'threads',type:'故事文',topicId:26},{day:'週五',platform:'threads',type:'成果展示',topicId:33}]},
-{label:'W7',theme:'聲音是可以學的技能',days:[{day:'週一',platform:'threads',type:'立場文',topicId:7},{day:'週二',platform:'threads',type:'痛點文',topicId:19},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'Podcast 前 30 秒決定一切——你的聲音留住人了嗎？'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【你的 Podcast 數據上不去？問題不在主題】'},{day:'週四',platform:'threads',type:'故事文',topicId:28},{day:'週五',platform:'threads',type:'成果展示',topicId:34}]},
-{label:'W8',theme:'身體就是你的樂器',days:[{day:'週一',platform:'threads',type:'立場文',topicId:8},{day:'週二',platform:'threads',type:'痛點文',topicId:20},{day:'週二',platform:'email',type:'電子報',topicId:null,title:'上台前喉嚨鎖住？不是心理素質差，是神經系統在保護你'},{day:'週三',platform:'ig',type:'IG 輪播',topicId:null,title:'【銷講時聲音會抖？讓神經系統冷靜下來】'},{day:'週四',platform:'threads',type:'故事文',topicId:29},{day:'週五',platform:'threads',type:'立場文',topicId:9}]}
+{label:'W1｜7/15–7/19',start:'2026-07-15',end:'2026-07-19',theme:'方法信念｜問題不只是知道得太少',days:[
+  {day:'週三',platform:'email',type:'Jessie 故事',title:'我進音樂系後才發現：努力很多，不代表知道自己該先修什麼',opening:'我曾經以為，只要比別人練更久，就能補上所有差距。後來我才知道，最珍貴的不是更多方法，而是有人能指出：你現在最該先修哪一個問題。'},
+  {day:'週四',platform:'threads',type:'場景痛點',title:'買了更好的麥克風，為什麼直播課的聲音還是虛、趕、沒重點？',opening:'設備可以放大聲音，卻不能替你判斷：現在拖累專業感的究竟是用力、速度、清晰度，還是句尾。'},
+  {day:'週五',platform:'threads',type:'信念教育',title:'你缺的可能不是下一支發聲影片，而是第一次被正確地聽見',opening:'聲音訓練最難的不是找不到方法，而是你聽不出自己當下最該改什麼。沒有判斷，收藏再多影片也很難帶回下一場課。'}]},
+{label:'W2｜7/20–7/26',start:'2026-07-20',end:'2026-07-26',theme:'天生信念｜聲音不是天生定型',days:[
+  {day:'週一',platform:'threads',type:'信念教育',title:'我不是從小被稱讚有天分的人',opening:'高中以前，我不是音樂科班。進音樂系後，我和從小受訓的同學有巨大落差；也正因如此，我比很多天賦型選手更知道「練不會」是什麼感覺。'},
+  {day:'週二',platform:'threads',type:'場景痛點',title:'「我的聲音天生就很虛」可能只是你對自己最久的一個誤判',opening:'四週營不是把你改造成主播，而是幫原本的聲音，在付費授課時更穩、清楚、有重點。'},
+  {day:'週三',platform:'email',type:'Jessie 故事',title:'主修老師說我很難走原本的路，卻讓我找到更適合自己的聲音',opening:'那次回饋很挫折，卻也讓我從單一的聲樂路線，看見音樂劇與表演的可能。好的回饋不是否定你，而是幫你換一條能前進的路。'},
+  {day:'週四',platform:'threads',type:'案例／證據',title:'她不是內容不夠，而是鏡頭前一直聽起來像在背稿',opening:'真正的改變不是突然多出一副好嗓音，而是她開始聽得出自己的用力、速度與句尾，並知道下一次怎麼修。'},
+  {day:'週五',platform:'threads',type:'方法地圖',title:'聲音能不能改變，先看你有沒有走完這五步',opening:'準備、說自己的內容、錄下 60 秒、得到回饋、帶回下一場課。這五步，比追求一個理想音色更接近真實改變。'}]},
+{label:'W3｜7/27–8/2',start:'2026-07-27',end:'2026-08-02',theme:'時間信念｜把訓練變成備課',days:[
+  {day:'週一',platform:'threads',type:'信念教育',title:'真正能長期執行的練習，不該每天再多占一小時',opening:'我現在一天規劃四小時工作，不是因為事情少，而是我越來越相信：真正有用的系統，應該放進原本的工作，不是無限增加任務。'},
+  {day:'週二',platform:'threads',type:'場景痛點',title:'你已經忙著招生、備課，還需要另外準備一份練聲稿嗎？',opening:'不用。直接拿下週要講的課程內容，錄同一段 60 秒，就能同時完成備課、自我觀察與聲音訓練。'},
+  {day:'週三',platform:'email',type:'Jessie 故事',title:'離開重複教學循環後，我重新設計了自己的工作方式',opening:'我不是離開教職後才開始珍惜時間。正是過去長期重複授課的經驗，讓我更確定：專業系統應該讓人穩定輸出，而不是一直消耗自己。'},
+  {day:'週四',platform:'threads',type:'方法地圖',title:'開口前十分鐘，不是養生儀式，是授課準備',opening:'你會對稿、測簡報、確認連線；聲音也值得有一套固定的開機流程。'},
+  {day:'週五',platform:'threads',type:'信念教育',title:'練聲音最省時間的方法：不要練一段永遠用不到的稿',opening:'直接用你的課程開場、案例或核心觀念。練完不是放回抽屜，而是帶進下一場直播課。'}]},
+{label:'W4｜8/3–8/9',start:'2026-08-03',end:'2026-08-09',theme:'看見損失｜備課完成不等於聲音準備完成',days:[
+  {day:'週一',platform:'threads',type:'信念教育',title:'我教了十年才發現：備課完成，不代表聲音準備完成',opening:'教案、投影片與活動都準備好了，不代表你一開口就已經進入穩定、清楚、有重點的狀態。'},
+  {day:'週二',platform:'threads',type:'場景痛點',title:'你的直播課有這四個可聽見的警訊嗎？',opening:'聲音虛、越講越趕、關鍵字不清楚、句尾一直掉。這不是在批評音色，而是在檢查專業交付。'},
+  {day:'週三',platform:'email',type:'Jessie 故事',title:'十年教學現場，讓我重新理解「講得好」這件事',opening:'真正的教學不是把內容說完，而是讓學生願意跟上、聽得懂重點，也感受到老師穩定地在帶領。'},
+  {day:'週四',platform:'threads',type:'案例／證據',title:'文字很有觀點，鏡頭前卻少了份量：問題可能出在哪裡？',opening:'先不急著說她不夠自信。我們先聽速度、用力感、清晰度與句尾，才知道下一步該修什麼。'},
+  {day:'週五',platform:'threads',type:'講座邀請',title:'你的課程很專業，但鏡頭前的聲音，有把你的價格說出來嗎？',opening:'8/19《讓你的聲音，撐得起專業定價》會帶你辨認四個警訊，並看見聲音訓練真正缺少的那一環。'}]},
+{label:'W5｜8/10–8/18',start:'2026-08-10',end:'2026-08-18',theme:'新方法｜專業用聲回饋迴圈',days:[
+  {day:'週一',platform:'threads',type:'信念教育',title:'看過很多發聲影片，為什麼開課時還是用不上？',opening:'因為影片可以給方法，卻很難判斷你此刻最優先的問題，也無法聽見你下一次有沒有真的修正。'},
+  {day:'週二',platform:'threads',type:'Jessie 故事',title:'一句具體回饋，比我再苦練一年更重要',opening:'主修老師沒有只叫我更努力，而是看見我在音樂劇與表演上的可能。回饋真正的價值，是改變練習方向。'},
+  {day:'週三',platform:'email',type:'方法地圖',title:'聲音課和預錄影片之間，真正少的是哪一環？',opening:'開口前準備、說真實課程內容、錄下 60 秒、得到回饋，再帶回下一場課。這就是專業用聲回饋迴圈。'},
+  {day:'週四',platform:'threads',type:'案例／證據',title:'她不是多學了一個技巧，而是終於知道下一次該怎麼改',opening:'案例要看的不是聲音突然變多好聽，而是她能否辨認問題、理解回饋，並在下一次錄音做出可觀察改變。'},
+  {day:'週五',platform:'threads',type:'講座邀請',title:'8/19 免費直播｜讓你的聲音，撐得起專業定價',opening:'這場不會帶完整暖嗓流程，也不做免費個人診斷；我會幫你重新理解，為什麼知道很多方法仍然用不上。'}]},
+{label:'W6｜8/19–8/25',start:'2026-08-19',end:'2026-08-25',theme:'第一場講座｜讓四週營成為合理第一步',days:[
+  {day:'週三',platform:'email',type:'直播／回放',title:'不是聲音不好聽，是專業交付沒有被訓練',opening:'今天的直播會把問題從「音色不好」重新定義成「缺少可重複的練習與回饋」。'},
+  {day:'週四',platform:'threads',type:'信念教育',title:'聲音訓練不是再懂一個方法，而是把回饋帶回下一場課',opening:'如果你在直播裡認出自己的警訊，下一步不是收藏更多影片，而是建立可反覆執行的訓練。'},
+  {day:'週五',platform:'threads',type:'時間異議',title:'已經忙著招生備課，還需要另外練聲音嗎？',opening:'四週營直接使用你的付費課程內容；每週 60 秒錄音，本身就是授課準備。'},
+  {day:'週一',platform:'threads',type:'案例／證據',title:'她不是沒有內容，鏡頭前卻比文字少了份量',opening:'我們沒有先要求她更有自信，而是先找出一個可聽見的問題，再用同一段內容比較修正前後。'},
+  {day:'週二',platform:'threads',type:'適合／不適合',title:'這堂課不適合只想讓聲音「更好聽」的人',opening:'它適合已經在授課、願意錄下真實內容、接受回饋並帶回下一場課的人。'}]},
+{label:'W7｜8/26–9/1',start:'2026-08-26',end:'2026-09-01',theme:'未購異議｜只修阻擋最多的一件事',days:[
+  {day:'週三',platform:'email',type:'未購調查',title:'看完講座後，哪一件事最讓你無法決定？',opening:'問題不急、成果不清楚、回饋不足、時間、價格，還是不確定自己適不適合？我只想知道最接近你的那一項。'},
+  {day:'週四',platform:'threads',type:'FAQ',title:'四週後到底會留下什麼？',opening:'一套自己的開口前 10 分鐘準備流程，以及同一段 60 秒課程內容可被導聽、比較的前後作品。'},
+  {day:'週五',platform:'threads',type:'回饋說明',title:'每週 60 秒錄音，Jessie 到底會怎麼回饋？',opening:'一次只抓一個最優先問題，避免你同時改五件事，最後每一件都帶不回真實授課。'},
+  {day:'週一',platform:'threads',type:'時間異議',title:'四週營會不會變成忙碌講師的另一份作業？',opening:'如果練習不能直接服務下一場課，它就不該被放進這個產品。'},
+  {day:'週二',platform:'threads',type:'講座邀請',title:'9/2 第二場｜我只會修正第一場最多人的那一個問題',opening:'架構不重做、秘密不增加；第二場只把阻擋最多人的異議說得更清楚。'}]},
+{label:'W8｜9/2–9/6',start:'2026-09-02',end:'2026-09-06',theme:'第二場講座｜案例、交付與早鳥決定',days:[
+  {day:'週三',platform:'email',type:'直播',title:'今晚第二場｜不是再教更多，而是把最大疑問說清楚',opening:'兩場講座使用同一套核心，只修正第一場聽眾最常提出的那一個阻力。'},
+  {day:'週四',platform:'threads',type:'案例／證據',title:'一個案例要怎麼證明回饋真的有用？',opening:'場景、問題、收到的回饋、下一次做出的改變。不是只放一段沒有導聽的 Before／After。'},
+  {day:'週五',platform:'threads',type:'交付說明',title:'你報名的不是四週知識，而是四次練習與修正的循環',opening:'每週拿真實內容練、錄 60 秒、得到一個優先回饋，再帶回工作。'},
+  {day:'週六',platform:'email',type:'早鳥截止',title:'早鳥今晚截止｜10 月第一期專業用聲基本功',opening:'9/6 截止後恢復原價，不延長早鳥。請依成果、投入方式與適合度做決定。'}]},
+{label:'W9｜9/7–9/16',start:'2026-09-07',end:'2026-09-16',theme:'原價價值｜把有效內容做成長青版',days:[
+  {day:'週一',platform:'threads',type:'信念教育',title:'早鳥結束後，我不想用更多贈品逼你報名',opening:'真正要判斷的是：這個問題是否正在影響你的授課，以及練習、錄音、回饋、修正是不是你缺的那一環。'},
+  {day:'週二',platform:'threads',type:'方法地圖',title:'四週基本功和預錄發聲課，差別不在影片數量',opening:'差別在你說的是自己的內容、有人聽見當下問題，而且下一週必須帶著回饋再做一次。'},
+  {day:'週三',platform:'email',type:'Jessie 故事',title:'我不是靠天分走到這裡，而是一次次被回饋後重新練習',opening:'從非科班、音樂系落差、音樂劇訓練到教學現場，我真正相信的從來不是速成，而是有方向的反覆練習。'},
+  {day:'週四',platform:'threads',type:'案例／證據',title:'Before／After 不是播放完就算證明，你要先知道自己在聽什麼',opening:'穩定、清晰、用力感、速度還是句尾？沒有導聽，外行人很難知道差異來自哪裡。'},
+  {day:'週五',platform:'threads',type:'長青邀請',title:'9/16 長青版上線｜把兩場直播真正有效的內容留下來',opening:'只保留被證實能幫助講師認出問題、理解回饋迴圈並做出決定的部分。'}]},
+{label:'W10｜9/17–9/23',start:'2026-09-17',end:'2026-09-23',theme:'自我篩選｜案例、FAQ、適合與不適合',days:[
+  {day:'週四',platform:'threads',type:'適合對象',title:'什麼樣的講師最適合四週基本功？',opening:'你已經有付費課程、每週需要直播或實體授課，也願意拿真實內容錄下來接受回饋。'},
+  {day:'週五',platform:'threads',type:'不適合對象',title:'如果你只想讓音色更好聽，這堂課可能不適合你',opening:'這堂課不追求主播腔，也不承諾四週改完所有問題；它建立的是可重複的專業用聲基本功。'},
+  {day:'週一',platform:'threads',type:'案例／證據',title:'同一套課，為什麼每個人得到的回饋不同？',opening:'因為有人先修用力感，有人先修速度，有人先修清晰度或句尾。課程固定，優先問題不同。'},
+  {day:'週二',platform:'threads',type:'FAQ',title:'每週要投入多少時間？沒交錄音會怎樣？',opening:'先把投入方式、回饋期限與團體課邊界說清楚，讓你在付款前就知道這是不是適合自己的學習方式。'},
+  {day:'週三',platform:'email',type:'完整篩選',title:'報名前，請先確認這五件事',opening:'成果、每週投入、錄音方式、回饋邊界、適合與不適合。信任不是催出來的，是資訊足夠後做出的選擇。'}]},
+{label:'W11｜9/24–9/27',start:'2026-09-24',end:'2026-09-27',theme:'最後決定｜真實期限，不製造假稀缺',days:[
+  {day:'週四',platform:'threads',type:'決策文',title:'如果你再等三個月，下一場課最可能還是怎麼開始？',opening:'不是恐嚇你失去收入，而是誠實看見：沒有新的練習與回饋，原本的聲音使用方式通常不會自己改變。'},
+  {day:'週五',platform:'threads',type:'最終 FAQ',title:'報名前最後確認：成果、回饋、人數與課程邊界',opening:'四週建立基本功，不保證完全改造；每週只改一個優先問題；9/27 是這一期的真實截止。'},
+  {day:'週日',platform:'email',type:'報名截止',title:'今晚截止｜10 月第一期專業用聲基本功',opening:'如果這套訓練方式適合你，今晚完成報名；如果不適合，也不需要因為期限勉強加入。'}]},
+{label:'W12｜9/28–10/4',start:'2026-09-28',end:'2026-10-04',theme:'專業交付｜新生準備與開課幕後',days:[
+  {day:'週一',platform:'threads',type:'幕後',title:'報名截止後，我先請每位學員錄下最原始的 60 秒',opening:'不是要公開比較誰好誰差，而是先建立一個能被導聽、比較與修正的起點。'},
+  {day:'週二',platform:'threads',type:'教學理念',title:'為什麼每週只改一個問題？',opening:'一次改太多，學員很容易只記得很多知識，卻沒有任何一個動作能穩定帶回下一場課。'},
+  {day:'週三',platform:'email',type:'新生提醒',title:'開課前，請準備一段你真的會用到的課程內容',opening:'不用另寫練習稿。帶一段未來四週內會授課、直播或錄製的真實內容進來。'},
+  {day:'週四',platform:'threads',type:'回饋幕後',title:'一份好的聲音回饋，不是把所有問題一次講完',opening:'我會先找出最影響當下交付的一件事，說清楚聽見了什麼、為什麼先修它，以及下一次怎麼驗證。'},
+  {day:'週五',platform:'threads',type:'開課前夕',title:'10/4 開課：把專業用聲從概念變成一套自己的流程',opening:'接下來四週不追求變成另一個人，而是讓原本的聲音更穩定地撐起你的課程。'}]}
 ];
 
 const CTAS=['想知道你的聲音撐不撐得住你的專業？留言「健檢」，領取專業聲音自檢表','你的課程很專業，但鏡頭前的聲音，有把你的價格說出來嗎？報名《讓你的聲音，撐得起專業定價》→ 連結在自介','我每週二寄一封信，聊聲音怎麼影響體力、信任與專業輸出 → 連結在自介','加入 LINE@ → 領取「聲音魅力啟動包」，並收到銷售講座通知'];
@@ -828,7 +952,7 @@ const PHASES=[
   {title:'完成 50 分鐘直播版＋彩排',del:'講座稿 / 投影片 / 案例 / CTA / 會前提醒',days:7}]},
 {name:'Phase 3｜8/19–9/15 直播驗證與 Email 成交',revenue:'第一場至少 3 位；兩場累積至少 8 位付費',weeks:[
   {title:'8/19 第一場直播＋第一輪 Email',del:'直播數據 / 未成交原因 / 7 封 Email / 至少 3 位付費',days:14},
-  {title:'9/2 第二場直播＋第二輪 Email',del:'只修 1 個主要異議 / 9/8 早鳥截止 / 累積至少 8 位',days:14}]},
+  {title:'9/2 第二場直播＋第二輪 Email',del:'只修 1 個主要異議 / 9/6 早鳥截止 / 累積至少 8 位',days:14}]},
 {name:'Phase 4｜9/16–10/3 長青、關單與開課準備',revenue:'9/27 至少 15 人成班；10/4 正式開課',weeks:[
   {title:'9/16 長青版上線＋案例／FAQ 收單',del:'30–35 分鐘長青版 / Email / 高意願名單跟進',days:12},
   {title:'9/28–10/3 新生 onboarding',del:'課前說明 / 60 秒原始錄音 / 工具與回饋規則',days:6}]}
@@ -894,9 +1018,12 @@ document.getElementById('progressFill').style.width=pct+'%';
 document.getElementById('progressLbl').textContent=weekdayNum?`今日 ${weekdayNum} / 5 天（${DAYS_ZH[dow]}）`:'週末休息';
 document.getElementById('missionTitle').addEventListener('blur',function(){S.mt=this.textContent;save(SK,S);});
 
-const contentWeekIdx=Math.min(Math.floor(diffDays/7),WEEK_PLANS.length-1);
+const localDateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const contentDateKey=localDateKey(today);
+let contentWeekIdx=WEEK_PLANS.findIndex(w=>contentDateKey>=w.start&&contentDateKey<=w.end);
+if(contentWeekIdx<0)contentWeekIdx=contentDateKey<WEEK_PLANS[0].start?0:WEEK_PLANS.length-1;
 const weekNum=Math.min(diffDays/7|0,11);
-const dk=today.toISOString().slice(0,10);
+const dk=contentDateKey;
 const isOff=(dow===0||dow===6);
 const OVERTIME_START=new Date(2026,6,15);
 const isOvertimeMode=(!isOff&&today>=OVERTIME_START);
@@ -1026,12 +1153,12 @@ function saveLog(){
 let viewWeek=contentWeekIdx;
 function renderContent(){
   const tp=document.getElementById('todayPost');
-  if(isOff){tp.innerHTML='<div style="text-align:center;color:#999;font-size:18px;padding:14px">週六日不工作</div>';}
+  const wp=WEEK_PLANS[contentWeekIdx];const tdz=DAYS_ZH[dow];
+  const posts=wp?wp.days.filter(d=>d.day===tdz):[];
+  if(isOff&&!posts.length){tp.innerHTML='<div style="text-align:center;color:#999;font-size:18px;padding:14px">週末休息；只有真實截止日才排程寄信</div>';}
   else{
-    const wp=WEEK_PLANS[contentWeekIdx];const tdz=DAYS_ZH[dow];
-    const posts=wp?wp.days.filter(d=>d.day===tdz):[];
     if(!posts.length){tp.innerHTML='<div style="text-align:center;color:#999;font-size:18px;padding:14px">今天沒有排定發文</div>';}
-    else{tp.innerHTML=posts.map(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:'';return`<div class="post-card ${p.platform}"><span class="post-platform ${p.platform}">${p.platform.toUpperCase()}</span><span class="post-type">${p.type}</span>${p.topicId?`<span class="post-num">#${p.topicId}</span>`:''}<div class="post-title">${title}</div>${opening?`<div style="font-size:16px;color:#888;margin-top:6px;line-height:1.6">${opening}</div>`:''}</div>`;}).join('');}
+    else{tp.innerHTML=posts.map(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:(p.opening||'');return`<div class="post-card ${p.platform}"><span class="post-platform ${p.platform}">${p.platform.toUpperCase()}</span><span class="post-type">${p.type}</span>${p.topicId?`<span class="post-num">#${p.topicId}</span>`:''}<div class="post-title">${title}</div>${opening?`<div style="font-size:16px;color:#888;margin-top:6px;line-height:1.6">${opening}</div>`:''}</div>`;}).join('');}
   }
   const unusedSparks=sparks.filter(s=>!s.used);
   const sic=document.getElementById('sparkInContent');
@@ -1041,7 +1168,7 @@ function renderContent(){
   ws.querySelectorAll('.week-btn').forEach(b=>b.onclick=function(){viewWeek=+this.dataset.w;renderContent();});
   const wp2=document.getElementById('weekPosts');const plan=WEEK_PLANS[viewWeek];
   wp2.innerHTML=`<div style="font-size:18px;color:#8b6f47;margin-bottom:10px;font-weight:600">主軸：${plan.theme}</div>`;
-  plan.days.forEach(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:'';
+  plan.days.forEach(p=>{const t=p.topicId?TOPICS[p.topicId]:null;const title=t?t.title:(p.title||'');const opening=t?t.opening:(p.opening||'');
     wp2.innerHTML+=`<div class="post-card ${p.platform}"><span class="post-day">${p.day}</span><span class="post-platform ${p.platform}">${p.platform.toUpperCase()}</span><span class="post-type">${p.type}</span>${p.topicId?`<span class="post-num">#${p.topicId}</span>`:''}<div class="post-title" contenteditable="true">${title}</div>${opening?`<div class="expand-btn" onclick="this.parentElement.classList.toggle('expanded')">▸ 展開開頭三句</div><div class="post-opening">${opening}</div>`:''}</div>`;
   });
   document.getElementById('ctaList').innerHTML=CTAS.map((c,i)=>`<div class="cta-item"><strong>CTA ${i+1}:</strong> ${c}</div>`).join('');
