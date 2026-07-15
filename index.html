@@ -279,9 +279,14 @@ body.auth-locked{overflow:hidden}
     <div id="todayItems"></div>
   </div>
   <div class="section">
+    <div class="section-title">🎙️ 專業精進｜聲音教練基本功</div>
+    <div class="resource-note">這一區不是為了立刻產出內容，是精進你作為聲音教練的耳朵、示範、修正與處方能力。完整工作日做 60 分鐘；加班日做 15 分鐘保底。</div>
+    <div id="coachPractice"></div>
+  </div>
+  <div class="section">
     <div class="section-title">🔒 每日固定事項</div>
     <div class="must-row" id="mustDo"></div>
-    <div class="must-note">工作外：早上暖嗓 10 分鐘、冥想、早餐聽樊登。<br>完整工作日：3 小時招生主線 + 1 小時練聲進修。<br>加班日：只做 P0 銷售資產、P1 對外內容、P2 高意願對話、P3 聲音維持；完成 P0 + P1 就算合格。</div>
+    <div class="must-note">工作外：早上暖嗓 10 分鐘、冥想、早餐聽樊登。<br>完整工作日：3 小時招生主線 + 1 小時專業精進。<br>加班日：只做 P0 銷售資產、P1 對外內容、P2 高意願對話、P3 專業精進保底；完成 P0 + P1 就算合格。</div>
   </div>
   <div class="section">
     <div class="section-title">🗒️ 今日雜事待辦</div>
@@ -438,7 +443,7 @@ body.auth-locked{overflow:hidden}
       <div class="content-card"><strong>09:00–10:00｜銷售資產</strong>銷講、報名頁、Offer 或 Email 成交序列，只推進一格。</div>
       <div class="content-card"><strong>10:10–11:10｜唯一對外內容</strong>完成當天的一則 Threads 或一封 Email，不同時開新平台。</div>
       <div class="content-card"><strong>11:20–12:20｜高意願與素材</strong>回覆高意願名單、整理案例與記錄客戶原話。</div>
-      <div class="content-card"><strong>14:00–15:00｜練聲與進修</strong>維持示範能力，留下至少一句可轉成內容的觀察。</div>
+      <div class="content-card"><strong>14:00–15:00｜專業精進</strong>聲音教練基本功：聽辨、示範、修正與練習處方。</div>
     </div>
     <div class="strategy-box">
       <div class="strategy-head">每週內容功能固定</div>
@@ -491,7 +496,7 @@ body.auth-locked{overflow:hidden}
 <div class="tab-content" id="tab-reading">
   <div class="section">
     <div class="section-title">🎙️ 聲音區｜每日練聲與聲音表達進修</div>
-    <div class="resource-note">這一區只服務兩件事：讓你的示範能力更穩，讓你的課程例子更有國際和華語參照。每天最多選 1 個資源，轉成 1 句素材、1 個練聲菜單或 1 個課程例子。</div>
+    <div class="resource-note">這一區的第一順位是把你的聲音教練專業練深：聽辨更準、示範更穩、修正更具體。若當天還有餘力，再轉成 1 句素材、1 個練聲菜單或 1 個課程例子。</div>
     <div id="voiceResourceList"></div>
   </div>
   <div class="section">
@@ -920,11 +925,11 @@ const BLOCKS=[
 {time:'11:20-12:20',name:'招生主線 ③',desc:'處理高意願名單：整理名單、傳訊息、記錄回覆',type:'work'},
 {time:'12:20-12:30',name:'上午收尾',desc:'記錄完成狀態，準備午餐',type:'work'},
 {time:'12:30-14:00',name:'午餐 + 真休息',desc:'不處理工作、不想策略',type:'rest'},
-{time:'14:00-15:00',name:'練聲 + 進修 1 小時',desc:'SOVT / 共鳴 / 咬字 / 課程示範素材，至少轉出一句素材',type:'work'},
+{time:'14:00-15:00',name:'專業精進 1 小時',desc:'聲音教練基本功：聽辨、示範、修正與練習處方',type:'work'},
 {time:'22:00 之後',name:'停止工作',desc:'保留體力，明天才有戰鬥力',type:'rest'}
 ];
 
-const MUST_ITEMS=['早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登','加班日｜先完成 P0 銷售資產 + P1 對外內容','加班日｜P2 高意願對話限時 20 分鐘，P3 聲音維持 15 分鐘'];
+const MUST_ITEMS=['早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登','加班日｜先完成 P0 銷售資產 + P1 對外內容','加班日｜P2 高意願對話限時 20 分鐘，P3 專業精進保底 15 分鐘'];
 
 const PRIORITIES=[
 {id:'p1',text:'定 4 週專業用聲基本功 offer'},
@@ -935,8 +940,18 @@ const PRIORITIES=[
 {id:'p6',text:'整理高意願名單'},
 {id:'p7',text:'整理學員案例'},
 {id:'p8',text:'每日創作內容'},
-{id:'p9',text:'每日練聲 + 進修 1 小時'}
+{id:'p9',text:'每日專業精進：聲音教練基本功'}
 ];
+
+const COACH_PRACTICE={
+1:{theme:'咬字與清楚度',goal:'訓練你聽得出清楚度問題，並能把「講清楚」拆成可修正動作。',full:['10 分鐘｜技術暖身：SOVT、哼鳴、輕聲滑音','15 分鐘｜唇、舌、下巴靈活度：子音清楚，不咬死','15 分鐘｜句尾與連音：同一段 30 秒文字錄兩版','15 分鐘｜聽辨標記：圈出糊字、吃字、句尾散掉的位置','5 分鐘｜教練紀錄：這個練習適合哪一種學生'],lite:'錄 30 秒，圈出 3 個咬字不清或句尾糊的位置。'},
+2:{theme:'唱歌基本功',goal:'用唱歌訓練音準、連貫、共鳴與聲帶協調，不把自己轉去做歌唱老師。',full:['10 分鐘｜技術暖身：哼鳴、lip trill、輕聲滑音','15 分鐘｜音準與音階：小音量、穩定、不擠喉嚨','15 分鐘｜連貫與共鳴：唱一句，感受聲音往前與上下銜接','15 分鐘｜說唱轉換：唱一句再說同一句，聽差異','5 分鐘｜教練紀錄：今天唱歌訓練改善了哪一個說話問題'],lite:'唱一句、說同一句，聽音高穩定與共鳴位置差異。'},
+3:{theme:'不同聲音狀態',goal:'讓你同一句話能示範穩定、親和、有精神與專業有力，而不是只有一種聲音。',full:['10 分鐘｜技術暖身：氣息啟動與輕聲共鳴','15 分鐘｜穩定版：慢一點、句尾收住、音量不掉','15 分鐘｜親和版：語尾柔和但不虛，保留清楚度','15 分鐘｜專業有力版：重音、停頓、語氣篤定','5 分鐘｜教練紀錄：哪一版最適合講師、面試或直播場景'],lite:'同一句 20 秒開場白錄三版：穩定、親和、專業有力。'},
+4:{theme:'聽辨與診斷能力',goal:'訓練你先聽出主要問題，再決定修正順序，避免一次改太多。',full:['10 分鐘｜技術暖身：SOVT 或哼鳴，先校準自己的聲音','15 分鐘｜聽一段錄音：只標出 1 個最影響專業感的問題','15 分鐘｜問題分類：咬字、氣息、用力感、語速、句尾、音色','15 分鐘｜設計一個修正練習：只能開一個處方','5 分鐘｜教練紀錄：如果這是學生，我第一週會讓他練什麼'],lite:'聽一段 30 秒錄音，只選 1 個最該先修的問題。'},
+5:{theme:'整合示範與 Before / After',goal:'把一週練習整合成可聽見的改變，累積你的教練示範資料庫。',full:['10 分鐘｜技術暖身：選本週最有效的暖身','15 分鐘｜錄 Before：同一段 30 秒不修飾直接錄','15 分鐘｜套用本週一個修正重點','15 分鐘｜錄 After：比較穩定度、清楚度、用力感、句尾','5 分鐘｜教練紀錄：這個 before / after 可用來教哪一種學生'],lite:'錄同一段話 before / after，各 20 秒，只比較一個差異。'},
+0:{theme:'休息與耳朵保養',goal:'週末不補進度。保留耳朵與身體敏感度，也是專業訓練的一部分。',full:['不做正式訓練','只保留早上 10 分鐘暖嗓','如果想記錄，只寫一句本週最明顯的聲音觀察'],lite:'只做早上暖嗓，不補練。'},
+6:{theme:'休息與耳朵保養',goal:'週末不補進度。保留耳朵與身體敏感度，也是專業訓練的一部分。',full:['不做正式訓練','只保留早上 10 分鐘暖嗓','如果想記錄，只寫一句本週最明顯的聲音觀察'],lite:'只做早上暖嗓，不補練。'}
+};
 
 const LADDER=[
 {level:'免費入口',name:'個人品牌講師聲音自檢表 / 聲音魅力啟動包',price:'免費',status:'讓已經在賣課的個人品牌講師，辨認聲音是否撐得起課程與專業定價',focus:true},
@@ -1028,7 +1043,7 @@ if(contentWeekIdx<0)contentWeekIdx=contentDateKey<WEEK_PLANS[0].start?0:WEEK_PLA
 const currentWeekPlan=WEEK_PLANS[contentWeekIdx];
 const scheduledToday=currentWeekPlan.days.filter(d=>d.day===DAYS_ZH[dow]);
 const primaryContent=scheduledToday[0]||null;
-const AUTO_PLAN_VERSION='content-action-auto-v1';
+const AUTO_PLAN_VERSION='content-action-auto-v2';
 document.getElementById('missionLabel').textContent=`${ph.name}｜${currentWeekPlan.label}`;
 document.getElementById('missionTitle').textContent=currentWeekPlan.theme;
 document.getElementById('missionRev').textContent='週五檢查點：'+currentWeekPlan.metric;
@@ -1040,6 +1055,7 @@ const isOff=(dow===0||dow===6);
 const isCampaignWorkday=!isOff||scheduledToday.length>0;
 const OVERTIME_START=new Date(2026,6,15);
 const isOvertimeMode=(!isOff&&today>=OVERTIME_START);
+const todayPractice=COACH_PRACTICE[dow]||COACH_PRACTICE[1];
 
 function renderAutoWeekPlan(){
   const el=document.getElementById('autoWeekPlan');
@@ -1119,9 +1135,33 @@ function renderOvertimePlan(){
     return;
   }
   const contentTask=primaryContent?`${primaryContent.platform.toUpperCase()}｜${primaryContent.title}`:'今天不另發文，整理下一份內容開頭。';
-  el.innerHTML=`<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：${esc(currentWeekPlan.sales)}</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：${esc(contentTask)}</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：${esc(currentWeekPlan.lead)}</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：暖嗓／練聲維持，留下一句可用素材。</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不補過期進度，也不開新題。</div></div>`;
+  el.innerHTML=`<div class="method-box"><div class="method-step"><span class="method-num">P0</span> — 45 分鐘：${esc(currentWeekPlan.sales)}</div><div class="method-step"><span class="method-num">P1</span> — 30 分鐘：${esc(contentTask)}</div><div class="method-step"><span class="method-num">P2</span> — 20 分鐘：${esc(currentWeekPlan.lead)}</div><div class="method-step"><span class="method-num">P3</span> — 15 分鐘：${esc(todayPractice.lite)}</div><div class="price-note"><strong>停損線：</strong>完成 P0 + P1 就算今天合格；不補過期進度，也不開新題。</div></div>`;
 }
 renderOvertimePlan();
+
+function renderCoachPractice(){
+  const el=document.getElementById('coachPractice');
+  const fullSteps=todayPractice.full.map(s=>`<div class="course-week">${esc(s)}</div>`).join('');
+  el.innerHTML=`
+    <div class="brand-core" style="margin-bottom:10px">
+      <div class="brand-core-label">${esc(DAYS_ZH[dow])}｜今日專業主題</div>
+      <div class="brand-core-title" style="font-size:21px">${esc(todayPractice.theme)}</div>
+      <div class="brand-core-copy">${esc(todayPractice.goal)}</div>
+    </div>
+    <div class="content-grid" style="margin-bottom:12px">
+      <div class="content-card"><strong>聽得出問題</strong>辨認咬字、氣息、用力感、語速、句尾與音色。</div>
+      <div class="content-card"><strong>示範得出來</strong>同一句話能做出穩定、親和、有精神與專業有力。</div>
+      <div class="content-card"><strong>修正得了對方</strong>不是只說放鬆，而是給一個當場能改變的練習。</div>
+      <div class="content-card"><strong>設計練習處方</strong>依學生狀態決定先練什麼、每天多久、怎麼驗證。</div>
+    </div>
+    <div class="method-box">
+      <div class="method-step"><strong>完整 60 分鐘：</strong></div>
+      ${fullSteps}
+      <div class="price-note"><strong>加班日 15 分鐘保底：</strong>${esc(todayPractice.lite)}</div>
+      <div class="price-note"><strong>今天最後只記一行：</strong>我聽見什麼差異？這個練習未來可以幫哪一種學生？</div>
+    </div>`;
+}
+renderCoachPractice();
 
 /* ===== 今日工作項目 ===== */
 if(!S.t3||S.t3.d!==dk||S.t3.v!==AUTO_PLAN_VERSION){
@@ -1130,13 +1170,13 @@ if(!S.t3||S.t3.d!==dk||S.t3.v!==AUTO_PLAN_VERSION){
     {label:'product',lt:'P0 銷售資產',text:'45 分鐘：'+currentWeekPlan.sales,detail:'本週唯一銷售行動，只推進一格',done:false},
     {label:'create',lt:'P1 對外內容',text:'30 分鐘：'+contentTask,detail:'教育任務：'+currentWeekPlan.education,done:false},
     {label:'revenue',lt:'P2 高意願對話',text:'20 分鐘：'+currentWeekPlan.lead,detail:'本週唯一 CTA：'+currentWeekPlan.cta,done:false},
-    {label:'voice',lt:'P3 聲音維持',text:'15 分鐘：暖嗓 / 練聲維持，不做長篇進修',detail:'保住專業基本功，不把體力用乾',done:false}
+    {label:'voice',lt:'P3 專業精進',text:'15 分鐘：'+todayPractice.lite,detail:'保住聲音教練基本功，不把體力用乾',done:false}
   ];
   const normalItems=[
     {label:'product',lt:'P0 本週銷售行動',text:isCampaignWorkday?currentWeekPlan.sales:'休息日',detail:isCampaignWorkday?'09:00-10:00，只推進本週行動一格':'週六日不補進度',done:false},
     {label:'create',lt:'P1 今日教育內容',text:isCampaignWorkday?contentTask:'休息日',detail:isCampaignWorkday?'10:10-11:10｜'+currentWeekPlan.education:'週六日不發新內容',done:false},
     {label:'revenue',lt:'P2 名單與信任',text:isCampaignWorkday?currentWeekPlan.lead:'休息日',detail:isCampaignWorkday?'11:20-12:20｜'+currentWeekPlan.cta:'週六日不追名單',done:false},
-    {label:'voice',lt:'P3 練聲 + 素材',text:isCampaignWorkday?'練聲 + 進修 1 小時，留下 1 句可用素材':'休息日',detail:isCampaignWorkday?'14:00-15:00，素材要連回本週信念':'週六日不工作',done:false}
+    {label:'voice',lt:'P3 專業精進',text:isCampaignWorkday?'60 分鐘：'+todayPractice.theme:'休息日',detail:isCampaignWorkday?'14:00-15:00，練聲音教練的聽辨、示範、修正與處方':'週六日不工作',done:false}
   ];
   S.t3={d:dk,v:AUTO_PLAN_VERSION,week:currentWeekPlan.label,items:isOvertimeMode?overtimeItems:normalItems};save(SK,S);
 }
@@ -1156,7 +1196,8 @@ renderT3();
 const autoMustItems=[
   '早上｜暖嗓 10 分鐘 + 冥想 + 早餐聽樊登',
   '內容｜今天只服務本週信念：'+currentWeekPlan.theme,
-  '成交｜所有內容只放本週 CTA：'+currentWeekPlan.cta
+  '成交｜所有內容只放本週 CTA：'+currentWeekPlan.cta,
+  '專業｜'+todayPractice.theme+'：'+(isOvertimeMode?'15 分鐘保底':'60 分鐘完整練習')
 ];
 if(!S.md||S.md.d!==dk||S.md.v!==AUTO_PLAN_VERSION){S.md={d:dk,v:AUTO_PLAN_VERSION,items:autoMustItems.map(t=>({t,done:false}))};save(SK,S);}
 function renderMust(){
